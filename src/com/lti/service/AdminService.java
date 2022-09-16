@@ -8,7 +8,7 @@ import com.lti.bean.CourseCatalog;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
 
-public class AdminService {
+public class AdminService implements AdminServiceOperation {
 	
 	private ArrayList<Professor> professors;
 
