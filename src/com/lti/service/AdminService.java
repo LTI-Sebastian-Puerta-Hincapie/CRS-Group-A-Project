@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
 
@@ -28,6 +29,19 @@ public class AdminService {
 	}
 	
 	public void removeCourse(int id) {
+		
+	}
+	
+	public void updateCourse(Course course) {
+		
+	}
+	
+	public void checkAvailability(Course course) {
+		
+		
+	}
+	
+	public void viewCourses(Student student) {
 		
 	}
 }
