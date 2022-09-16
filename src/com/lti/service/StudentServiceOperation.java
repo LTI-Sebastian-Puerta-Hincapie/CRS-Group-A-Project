@@ -16,7 +16,7 @@ public interface StudentServiceOperation {
 	
 	public void addCourse(Student student, Course course);
 	
-	public void dropCourse(Student student, int id);
+	public void dropCourse(Student student, Course course);
 	
 	public void viewGrades(Student student);
 	
