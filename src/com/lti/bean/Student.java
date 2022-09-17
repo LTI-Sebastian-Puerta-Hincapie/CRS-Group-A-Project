@@ -1,6 +1,7 @@
 package com.lti.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //TODO define and declare all the properties and respective getter/setter
 public class Student {
@@ -8,7 +9,9 @@ public class Student {
 	private int id;
 	private String name;
 	private String major;
-	private ArrayList<Course> courses;
+	private List<Course> courses;
+	
+	public Student() {}
 	
 	public Student(int id, String name, String major) {
 		
@@ -63,7 +66,7 @@ public class Student {
 	/**
 	 * @return the courses
 	 */
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 

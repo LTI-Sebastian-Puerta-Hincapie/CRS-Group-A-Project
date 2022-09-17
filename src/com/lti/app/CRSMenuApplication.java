@@ -1,6 +1,13 @@
 package com.lti.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.lti.bean.Admin;
+import com.lti.bean.Course;
+import com.lti.bean.Professor;
+import com.lti.bean.Student;
 
 public class CRSMenuApplication {
 
@@ -12,15 +19,11 @@ public class CRSMenuApplication {
 		String username = "";
 		Scanner scan = new Scanner(System.in);
 		
-		// menus
-		CRSStudentMenu studentMenu = new CRSStudentMenu(scan);
-		CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan);
-		CRSAdminMenu adminMenu = new CRSAdminMenu(scan);
-		
 		System.out.println("******************Welcome to the CRS Application*************");
 		
 		// Main menu selection loop
 		while(true) {
+			
 			System.out.println("\nEnter selection: ");
 			System.out.println("1. Login");
 			System.out.println("2. Student Registration");
@@ -38,7 +41,12 @@ public class CRSMenuApplication {
 					username = scan.next();
 					
 					System.out.print("Enter Password: ");
-					String password = scan.next();
+					String password = scan.next();			
+					
+					// menus
+					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, username);
+					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, username);
+					CRSAdminMenu adminMenu = new CRSAdminMenu(scan, username);
 					
 					// TODO: login credential validation method here						
 					
@@ -55,16 +63,16 @@ public class CRSMenuApplication {
 						
 						Boolean role_back = false;
 						switch(role.toLowerCase()) {
-							case "student": 
-								System.out.println("\nWelcome Student " + "(" + username + ")");
+							case "student": 								
+								System.out.println("\nWelcome Student " + "(" + username.toUpperCase() + ")");
 								studentMenu.menu();
 								break;			
 							case "professor": 
-								System.out.println("\nWelcome Professor " + "(" + username + ")");
+								System.out.println("\nWelcome Professor " + "(" + username.toUpperCase() + ")");
 								professorMenu.menu();
 								break;		
 							case "admin": 
-								System.out.println("\nWelcome Admin" + "(" + username + ")");
+								System.out.println("\nWelcome Admin" + "(" + username.toUpperCase() + ")");
 								adminMenu.menu();
 								break;					
 							case "back":

@@ -9,6 +9,7 @@ public class Professor {
 	private String department;
 	private ArrayList<Course> courses;
 	
+	public Professor() {};
 	public Professor(int id, String name, String department) {
 		this.id = id;
 		this.name = name;

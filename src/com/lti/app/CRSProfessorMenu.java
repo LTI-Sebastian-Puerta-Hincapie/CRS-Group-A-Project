@@ -1,16 +1,53 @@
 package com.lti.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.lti.bean.Professor;
+import com.lti.bean.Student;
 
 public class CRSProfessorMenu {
 	
-	Scanner scan;
+	private Scanner scan;
+	private String username;
 	
-	public CRSProfessorMenu(Scanner scan) {
+	private Professor rubin = new Professor(100, "Rubin", "Biology");
+	private Professor axel = new Professor(200, "Axel", "Psychology");
+	private Professor nelson = new Professor(300, "Nelson", "Economics");
+	private int professorMaxId = 300;
+	private List<Professor> professors = new ArrayList<Professor>();
+	private Professor professor;
+	
+	public CRSProfessorMenu(Scanner scan, String username) {
+		
 		this.scan = scan;
+		this.username = username;
+		
+		professor = new Professor();
+		
+		professors.add(rubin);
+		professors.add(axel);
+		professors.add(nelson);
 	}
 	
 	public void menu() {
+		
+		// use existing professor or create new 
+		switch(username) {
+			case "thomas": 
+				professor = rubin;
+				break;
+			case "abigail":
+				professor = axel;
+				break;
+			case "tej":
+				professor = nelson;
+			default:
+				professor = new Professor(professorMaxId + 1, username, "undefined");				
+		}
+		
+		professors.add(professor);
 
 		// menu
 		while(true)

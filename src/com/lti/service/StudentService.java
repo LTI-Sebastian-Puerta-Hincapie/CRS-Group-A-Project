@@ -23,11 +23,11 @@ public class StudentService implements StudentServiceOperation {
 	}
 	
 	public void addCourse(Student student, Course course) {
-		addedCourses.put(student.getId(), course);
+//		addedCourses.put(student.getId(), course);
 	}
 	
 	public void dropCourse(Student student, Course course) {
-		addedCourses.remove(student.getId(), course);
+//		addedCourses.remove(student.getId(), course);
 	}
 	
 	public void viewGrades(Student student) {
