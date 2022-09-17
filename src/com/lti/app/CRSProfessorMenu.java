@@ -12,6 +12,7 @@ public class CRSProfessorMenu {
 	private Scanner scan;
 	private String username;
 	
+	// default data - initial in-memory data
 	private Professor rubin = new Professor(100, "Rubin", "Biology");
 	private Professor axel = new Professor(200, "Axel", "Psychology");
 	private Professor nelson = new Professor(300, "Nelson", "Economics");

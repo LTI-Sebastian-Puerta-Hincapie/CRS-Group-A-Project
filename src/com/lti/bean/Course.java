@@ -101,7 +101,5 @@ public class Course {
 	 */
 	public void setPrerequisites(String prerequisites) {
 		this.prerequisites = prerequisites;
-	}
-	
-	
+	}	
 }

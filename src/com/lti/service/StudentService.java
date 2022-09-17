@@ -11,11 +11,11 @@ import com.lti.bean.Student;
 // TODO define all services method based on the use case diagram
 public class StudentService implements StudentServiceOperation {
 	
-	private Map<Integer, Course> addedCourses;
+	private Map<Student, Course> addedCourses;
 	
 	public StudentService() {
 		
-		addedCourses = new HashMap<Integer,Course>();
+		addedCourses = new HashMap<Student,Course>();
 	}
 	
 	public void registerForCourse(Student student, Course course, Boolean register) {
@@ -23,13 +23,16 @@ public class StudentService implements StudentServiceOperation {
 	}
 	
 	public void addCourse(Student student, Course course) {
-//		addedCourses.put(student.getId(), course);
+		
+		student.addCourse(course);
+		addedCourses.put(student, course);
 	}
 	
 	public void dropCourse(Student student, Course course) {
-//		addedCourses.remove(student.getId(), course);
+		
+		addedCourses.remove(student.getId(), course);
 	}
-	
+
 	public void viewGrades(Student student) {
 		
 	}

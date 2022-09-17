@@ -1,13 +1,6 @@
 package com.lti.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import com.lti.bean.Admin;
-import com.lti.bean.Course;
-import com.lti.bean.Professor;
-import com.lti.bean.Student;
 
 public class CRSMenuApplication {
 

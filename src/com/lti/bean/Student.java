@@ -76,4 +76,8 @@ public class Student {
 	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
 	}
+	
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
 }
