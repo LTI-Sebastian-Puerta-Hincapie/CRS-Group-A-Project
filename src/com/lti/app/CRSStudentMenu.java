@@ -89,6 +89,7 @@ public class CRSStudentMenu {
 					System.out.println("Registering for course...");		
 					break;
 				case "add course":
+					
 					System.out.println("\nAvailable courses:");
 					
 					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
@@ -108,13 +109,13 @@ public class CRSStudentMenu {
 								courses.get(i).getPrerequisites(),
 								Integer.toString(courses.get(i).getCredits()));
 					}
-					System.out.print("\nSelect course by Id -> ");
+					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();
 					
 					service.addCourse(student, courses.get(course_id_selected));
 					System.out.println("\n-- Course has been added --");
 					
-					System.out.println("\nCourses added:");
+					System.out.println("\nCourses in your cart:");
 					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
@@ -133,9 +134,49 @@ public class CRSStudentMenu {
 					}
 					break;
 				case "drop course":
-					//TODO: complete functionality
-					service.dropCourse(student, null);
-					System.out.println("Dropping course");
+					
+					System.out.println("\nCourses in your cart:");
+					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+							"ID",
+							"NAME", 
+							"PROFESSOR", 
+							"DEPARTMENT", 
+							"PREREQUISITE",
+							"CREDITS");
+					for(Course course : student.getCourses()) {
+						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+								course.getId(), 
+								course.getName(), 
+								course.getProfessor(),
+								course.getDepartment(), 
+								course.getPrerequisites(), 
+								course.getCredits());
+					}
+					
+					System.out.print("\nSelect course to drop by Id -> ");
+					course_id_selected = scan.nextInt();
+					
+					service.dropCourse(student, courses.get(course_id_selected));
+					System.out.println("\n-- Course has been dropped --");
+					
+					System.out.println("\nCourses in your cart:");
+					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+							"ID",
+							"NAME", 
+							"PROFESSOR", 
+							"DEPARTMENT", 
+							"PREREQUISITE",
+							"CREDITS");
+					for(Course course : student.getCourses()) {
+						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+								course.getId(), 
+								course.getName(), 
+								course.getProfessor(),
+								course.getDepartment(), 
+								course.getPrerequisites(), 
+								course.getCredits());
+					}
+					
 					break;
 				case "view grades":
 					//TODO: complete functionality

@@ -30,7 +30,8 @@ public class StudentService implements StudentServiceOperation {
 	
 	public void dropCourse(Student student, Course course) {
 		
-		addedCourses.remove(student.getId(), course);
+		student.dropCourse(course);
+		addedCourses.remove(student, course);
 	}
 
 	public void viewGrades(Student student) {

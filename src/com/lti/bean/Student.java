@@ -77,7 +77,14 @@ public class Student {
 		this.courses = courses;
 	}
 	
+	// ---------
 	public void addCourse(Course course) {
+		
 		this.courses.add(course);
+	}
+	
+	public void dropCourse(Course course) {
+		
+		this.courses.remove(course);
 	}
 }
