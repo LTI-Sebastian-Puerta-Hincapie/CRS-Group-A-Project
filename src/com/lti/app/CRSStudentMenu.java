@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.Payment;
 import com.lti.bean.Student;
 import com.lti.service.StudentService;
 import com.lti.service.StudentServiceOperation;
@@ -85,7 +86,7 @@ public class CRSStudentMenu {
 			switch(studentSelection.toLowerCase()) {
 				case "register for courses":
 					//TODO: complete functionality
-					service.registerForCourse(student, null, true);
+					service.registerForCourse(student, null);
 					System.out.println("Registering for course...");		
 					break;
 				case "add course":
@@ -181,12 +182,59 @@ public class CRSStudentMenu {
 				case "view grades":
 					//TODO: complete functionality
 					service.viewGrades(student);
-					System.out.println("Viewing grades...");
+//					System.out.println("Viewing grades...");
 					break;
 				case "pay fee":
-					//TODO: complete functionality
-					service.payFee(student);
-					System.out.println("Paying fee...");
+					
+					Payment payment = new Payment(student);
+					int totalNumberOfCredits = 0;
+					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);
+					for(Course course : student.getCourses()) {
+						
+						totalNumberOfCredits += course.getCredits();
+					}
+					System.out.println("Total number of courses added: " + student.getCourses().size());
+					System.out.println("Total number of credits: " + totalNumberOfCredits);
+					
+					double totalFee = payment.COST_PER_CREDIT * totalNumberOfCredits;
+					System.out.println("Total fee: " + totalFee);
+					
+					System.out.println("\nPayment Method:");
+					System.out.println("1. Credit");
+					System.out.println("2. Debit");
+					System.out.println("3. Direct Withdrawal");
+					System.out.println("4. Paypal");
+					System.out.println("5. Pay in person");
+					System.out.println("6. Back");
+					System.out.print("\n-> ");
+					
+					String paymentMethod = scan.nextLine();	
+					
+					switch(paymentMethod) {
+						case "credit": 
+							service.payFee(student, paymentMethod);
+							System.out.println("\n--Payment Complete--");
+							break;
+						case "debit": 
+							service.payFee(student, paymentMethod);
+							System.out.println("\n--Payment Complete--");
+							break;
+						case "direct withdrawal": 
+							service.payFee(student, paymentMethod);
+							System.out.println("\n--Payment Complete--");
+							break;
+						case "paypal": 
+							service.payFee(student, paymentMethod);
+							System.out.println("\n--Payment Complete--");
+							break;
+						case "pay in person": 
+							service.payFee(student, paymentMethod);
+							System.out.println("\n--Payment Complete--");
+							break;
+						case "back": break;
+						default:
+							System.out.println("No course have been added to your cart, please add a course");
+					}
 					break;
 				case "back":
 					student_back = true;
