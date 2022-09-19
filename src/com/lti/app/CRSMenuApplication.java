@@ -95,7 +95,6 @@ public class CRSMenuApplication {
 					break;
 				case "exit": 
 					exit = true;
-					System.out.println("Exiting...");
 					break;
 				default:
 					System.out.println("Please make another selection, option not found\n");
