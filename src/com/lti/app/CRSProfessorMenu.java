@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.bean.Course;
+import com.lti.service.ProfessorService;
 
 public class CRSProfessorMenu {
 	
@@ -68,10 +70,22 @@ public class CRSProfessorMenu {
 			
 			switch(professorSelection.toLowerCase()) {
 				case "add grades":
-					System.out.println("Adding grades...");
+					ProfessorService PRService = new ProfessorService();
+					Student newStudent = new Student(1, "Thomas", "Biology");
+					Course newCourse = new Course(100, "Biology", "Rubin", "Science", "Prerequisites", 3);
+					PRService.addGrades(newStudent, newCourse);
+					System.out.println("Enter grades");
+					Scanner input = new Scanner(System.in);
+					String grades = input.nextLine();
+					System.out.println( grades + " added to " + newStudent.getName());
 					break;
 				case "view enrolled students":
-					System.out.println("Viewing enrolled students...");
+					Student newStudent1 = new Student(1, "Thomas", "Biology");
+					Student newStudent2 = new Student(2, "Abigail", "Psychology");
+					Student newStudent3 = new Student(3, "Tej", "Economics");
+					System.out.println(newStudent1.getId() + " " + newStudent1.getName());
+					System.out.println(newStudent2.getId() + " " + newStudent2.getName());
+					System.out.println(newStudent3.getId() + " " + newStudent3.getName());
 					break;
 				case "back":
 					professor_back = true;
