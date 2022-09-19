@@ -2,6 +2,7 @@ package com.lti.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.lti.bean.Course;
@@ -84,10 +85,45 @@ public class CRSStudentMenu {
 			int course_id_selected = -1;
 			
 			switch(studentSelection.toLowerCase()) {
-				case "register for courses":
-					//TODO: complete functionality
-					service.registerForCourse(student, null);
-					System.out.println("Registering for course...");		
+				case "register for course":
+					
+					System.out.println("\nCourses in your cart:");
+					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+							"ID",
+							"NAME", 
+							"PROFESSOR", 
+							"DEPARTMENT", 
+							"PREREQUISITE",
+							"CREDITS");
+					for(Course course : student.getCourses()) {
+						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+								course.getId(), 
+								course.getName(), 
+								course.getProfessor(),
+								course.getDepartment(), 
+								course.getPrerequisites(), 
+								course.getCredits());
+					}
+					
+					System.out.print("\nRegister for a course, select by ID -> ");
+					int courseId = scan.nextInt();
+					
+					service.registerForCourse(student, student.getCourses().get(courseId));
+					System.out.println("\n-- You have registered for a course --");	
+					
+					System.out.println("\nCourses you have been registered for:");
+					System.out.format("%4s%16s%16s\n", 
+							"ID",
+							"NAME", 
+							"STATUS");
+					
+					for(Map.Entry<Course, Boolean> entry : student.getCourseRegistration().entrySet()) {
+						System.out.format("%4s%16s%16s\n", 
+								Integer.toString(entry.getKey().getId()), 
+								entry.getKey().getName(), 
+								entry.getValue() ? "Registered" : "Not Registered");
+					}
+					
 					break;
 				case "add course":
 					

@@ -2,6 +2,9 @@ package com.lti.app;
 
 import java.util.Scanner;
 
+import com.lti.bean.User;
+import com.lti.service.UserService;
+
 public class CRSMenuApplication {
 
 	/**
@@ -10,6 +13,8 @@ public class CRSMenuApplication {
 	public static void main(String[] args) {
 		
 		String username = "";
+		String password = "";
+		UserService userService = new UserService();
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("******************Welcome to the CRS Application*************");
@@ -27,6 +32,7 @@ public class CRSMenuApplication {
 			String selection = scan.nextLine();
 			
 			Boolean exit = false;
+			
 			switch(selection.toLowerCase()) {
 				case "login":
 					
@@ -34,7 +40,10 @@ public class CRSMenuApplication {
 					username = scan.next();
 					
 					System.out.print("Enter Password: ");
-					String password = scan.next();			
+					password = scan.next();		
+					
+					// validate login
+					userService.Login(username, password);
 					
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, username);
@@ -95,6 +104,8 @@ public class CRSMenuApplication {
 			
 			if(exit) break;    // exit out of main menu loop
 		}
+		
+		userService.Logout(username, password);
 		System.out.println("\nEnd of program");	
 	}
 }

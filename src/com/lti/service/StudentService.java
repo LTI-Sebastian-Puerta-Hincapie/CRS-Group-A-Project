@@ -21,7 +21,7 @@ public class StudentService implements StudentServiceOperation {
 	
 	public void registerForCourse(Student student, Course course) {
 		
-		
+		student.registerCourse(course);
 	}
 	
 	public void addCourse(Student student, Course course) {

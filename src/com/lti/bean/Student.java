@@ -1,7 +1,9 @@
 package com.lti.bean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //TODO define and declare all the properties and respective getter/setter
 public class Student {
@@ -10,6 +12,7 @@ public class Student {
 	private String name;
 	private String major;
 	private List<Course> courses;
+	private Map<Course, Boolean> courseRegistration;
 	
 	public Student() {}
 	
@@ -19,6 +22,19 @@ public class Student {
 		this.name = name;
 		this.major = major;
 		this.courses = new ArrayList<Course>();
+		this.courseRegistration = new HashMap<Course, Boolean>();
+	}
+
+	public Map<Course, Boolean> getCourseRegistration() {
+		return courseRegistration;
+	}
+
+	public void setCourseRegistration(Map<Course, Boolean> courseRegistration) {
+		this.courseRegistration = courseRegistration;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	/**
@@ -77,7 +93,7 @@ public class Student {
 		this.courses = courses;
 	}
 	
-	// ---------
+	// --------- Added on student side (will need to update)  ---------
 	public void addCourse(Course course) {
 		
 		this.courses.add(course);
@@ -85,6 +101,12 @@ public class Student {
 	
 	public void dropCourse(Course course) {
 		
+		this.courseRegistration.remove(course);
 		this.courses.remove(course);
+	}
+	
+	public void registerCourse(Course course) {
+		
+		this.courseRegistration.put(course, true);
 	}
 }
