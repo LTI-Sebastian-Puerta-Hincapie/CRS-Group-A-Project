@@ -9,6 +9,7 @@ import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 import com.lti.bean.Payment;
 import com.lti.bean.Student;
+import com.lti.bean.User;
 import com.lti.service.CourseCatalogOperation;
 import com.lti.service.CourseCatalogService;
 import com.lti.service.StudentService;
@@ -17,23 +18,23 @@ import com.lti.service.StudentServiceOperation;
 public class CRSStudentMenu {
 	
 	private Scanner scan;
-	private String username;
-	private CourseCatalogOperation courseService;
+	private User user;
+	private CourseCatalogOperation courseCatalogService;
 	private StudentServiceOperation studentService;
 	
-	public CRSStudentMenu(Scanner scan, String username) {
+	public CRSStudentMenu(Scanner scan, User user) {
 		
 		this.scan = scan;
-		this.username = username;
+		this.user = user;
 		
 		this.studentService = new StudentService();
-		this.courseService = new CourseCatalogService();
+		this.courseCatalogService = new CourseCatalogService();
 	}
 	
 	public void menu() {
 		
 		// create student instance
-		
+		Student student = studentService.getStudent(user.getId());
 		
 		// menu
 		while(true)
@@ -104,6 +105,9 @@ public class CRSStudentMenu {
 					break;
 				case "add course":
 					
+					// get all available courses
+					List<CourseCatalog> courseCatalog = courseCatalogService.ListOfAllCourses();
+					
 					System.out.println("\nCourse Catalog:");
 					System.out.format("%16s%16s%16s%16s%16s%16s%16s%16s\n", 
 							"ID",
@@ -114,7 +118,8 @@ public class CRSStudentMenu {
 							"CAPACITY",
 							"ENROLLED",
 							"SEMESTER");
-					for(CourseCatalog course : courseService.ListOfAllCourses()) {
+					
+					for(CourseCatalog course : courseCatalog) {
 						System.out.format("%16d%16d%16d%16s%16d%16d%16d%16s\n", 
 								course.getId(), 
 								course.getProfessorId(),
@@ -129,52 +134,30 @@ public class CRSStudentMenu {
 					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-//					service.addCourse(student, courses.get(course_id_selected));
+					studentService.addCourse(student, course_id_selected);
 					System.out.println("\n-- Course has been added --");
 					
-//					System.out.println("\nCourses added:");
-//					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
-//							"ID",
-//							"NAME", 
-//							"PROFESSORID", 
-//							"DEPARTMENTID", 
-//							"PREREQUISITE",
-//							"CREDITS",
-//							"CAPACITY",
-//							"ENROLLED",
-//							"SEMESTER");
-//					for(Course course : student.getCourses()) {
-//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-//								course.getId(), 
-//								course.getName(), 
-//								course.getProfessorId(),
-//								course.getDepartmentId(), 
-//								course.getPrerequisites(), 
-//								course.getCredits());
-//					}
+					System.out.println("\nCourses added:");
+					System.out.format("%16s%16s\n", 
+							"ID",
+							"NAME");
+					for(Course course : studentService.getStudentCourses(student.getId())) {
+						System.out.format("%16s%16s\n", 
+								course.getCourseId(), 
+								course.getCourseName());
+					}
 					break;
 				case "drop course":
 					
-					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
+					System.out.println("\nCourses added:");
+					System.out.format("%16s%16s\n", 
 							"ID",
-							"NAME", 
-							"PROFESSORID", 
-							"DEPARTMENTID", 
-							"PREREQUISITE",
-							"CREDITS",
-							"CAPACITY",
-							"ENROLLED",
-							"SEMESTER");
-//					for(Course course : student.getCourses()) {
-//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-//								course.getId(), 
-//								course.getName(), 
-//								course.getProfessorId(),
-//								course.getDepartmentId(), 
-//								course.getPrerequisites(), 
-//								course.getCredits());
-//					}
+							"NAME");
+					for(Course course : studentService.getStudentCourses(student.getId())) {
+						System.out.format("%16s%16s\n", 
+								course.getCourseId(), 
+								course.getCourseName());
+					}
 					
 					System.out.print("\nSelect course to drop by Id -> ");
 					course_id_selected = scan.nextInt();

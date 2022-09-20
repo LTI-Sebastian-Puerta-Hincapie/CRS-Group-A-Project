@@ -59,8 +59,8 @@ public class AdminService implements AdminServiceOperation {
 	
 	public void viewCourses(Student student) {
 		System.out.println("Listing course list for " + student.getName() + ":");
-		for(Course course : student.getCourses()) {
-//			System.out.println(course.getId() + ": " + course.getName());
-		}
+//		for(Course course : student.getCourses()) {
+////			System.out.println(course.getId() + ": " + course.getName());
+//		}
 	}
 }

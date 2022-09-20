@@ -8,32 +8,32 @@ import java.util.Map;
 import com.lti.bean.Course;
 import com.lti.bean.Payment;
 import com.lti.bean.Student;
+import com.lti.dao.StudentDAO;
+import com.lti.dao.StudentDAOImpl;
 
 // TODO define all services method based on the use case diagram
 public class StudentService implements StudentServiceOperation {
 	
-	private Map<Student, Course> addedCourses;
+	private StudentDAO studentDao;
 	
 	public StudentService() {
 		
-		addedCourses = new HashMap<Student,Course>();
+		studentDao = new StudentDAOImpl();
 	}
 	
 	public void registerForCourse(Student student, Course course) {
 		
-		student.registerCourse(course);
+		studentDao.registerForCourseDAO(student, course);
 	}
 	
-	public void addCourse(Student student, Course course) {
+	public void addCourse(Student student, int courseId) {
 		
-		student.addCourse(course);
-		addedCourses.put(student, course);
+		studentDao.addCourseDAO(student, courseId);
 	}
 	
 	public void dropCourse(Student student, Course course) {
 		
-		student.dropCourse(course);
-		addedCourses.remove(student, course);
+		studentDao.dropCourseDAO(student, course);
 	}
 
 	public void viewGrades(Student student) {
@@ -45,4 +45,18 @@ public class StudentService implements StudentServiceOperation {
 		
 		System.out.println("\nYou have opted to pay: " + paymentMethod);
 	}
+	
+	@Override
+	public Student getStudent(int studentId) {
+		
+		return studentDao.getStudentDAO(studentId);
+	}
+
+	@Override
+	public List<Course> getStudentCourses(int studentId) {
+
+		return studentDao.getStudentCoursesDAO(studentId);
+	}
+	
+	
 }

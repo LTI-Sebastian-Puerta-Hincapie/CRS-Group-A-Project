@@ -59,8 +59,8 @@ public class CRSMenuApplication {
 					password = scan.next();		
 					
 					// validate login
-					Boolean isLoggedIn = userService.Login(username, password);
-					if(isLoggedIn) {
+					User user = userService.Login(username, password);
+					if(user != null) {
 						System.out.println("\nYou have logged in");
 					}
 					else {
@@ -69,7 +69,7 @@ public class CRSMenuApplication {
 					}
 					
 					// menus
-					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, username);
+					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, username);
 					CRSAdminMenu adminMenu = new CRSAdminMenu(scan, username);
 					

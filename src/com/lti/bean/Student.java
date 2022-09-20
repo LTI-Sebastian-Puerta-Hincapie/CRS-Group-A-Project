@@ -14,8 +14,6 @@ public class Student {
 	private String email;
 	private String phone;
 	private String address;
-	private List<Course> courses;
-	private Map<Course, Boolean> courseRegistration;
 	
 	public Student() {}
 	
@@ -27,8 +25,6 @@ public class Student {
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
-		this.courses = new ArrayList<Course>();
-		this.courseRegistration = new HashMap<Course, Boolean>();
 	}
 	
 	
@@ -75,18 +71,6 @@ public class Student {
 		this.address = address;
 	}
 
-	public Map<Course, Boolean> getCourseRegistration() {
-		return courseRegistration;
-	}
-
-	public void setCourseRegistration(Map<Course, Boolean> courseRegistration) {
-		this.courseRegistration = courseRegistration;
-	}
-
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
-
 	/**
 	 * @return the major
 	 */
@@ -129,34 +113,4 @@ public class Student {
 		this.name = name;
 	}
 
-	/**
-	 * @return the courses
-	 */
-	public List<Course> getCourses() {
-		return courses;
-	}
-
-	/**
-	 * @param courses the courses to set
-	 */
-	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
-	}
-	
-	// --------- Added on student side (will need to update)  ---------
-	public void addCourse(Course course) {
-		
-		this.courses.add(course);
-	}
-	
-	public void dropCourse(Course course) {
-		
-		this.courseRegistration.remove(course);
-		this.courses.remove(course);
-	}
-	
-	public void registerCourse(Course course) {
-		
-		this.courseRegistration.put(course, true);
-	}
 }
