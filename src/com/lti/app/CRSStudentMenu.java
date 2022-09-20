@@ -32,6 +32,9 @@ public class CRSStudentMenu {
 	
 	public void menu() {
 		
+		// create student instance
+		
+		
 		// menu
 		while(true)
 		{
@@ -101,8 +104,8 @@ public class CRSStudentMenu {
 					break;
 				case "add course":
 					
-					System.out.println("\nAvailable courses:");
-					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
+					System.out.println("\nCourse Catalog:");
+					System.out.format("%16s%16s%16s%16s%16s%16s%16s%16s\n", 
 							"ID",
 							"PROFESSORID", 
 							"DEPARTMENTID", 
@@ -111,17 +114,17 @@ public class CRSStudentMenu {
 							"CAPACITY",
 							"ENROLLED",
 							"SEMESTER");
-//					for(Course course : courseService.ListOfAllCourses()) {
-//						System.out.format("%4s%16s%16s%16s%16s%16s%12s\n", 
-//								course.getId(),  
-//								course.getProfessorId(),
-//								course.getDepartmentId(), 
-//								course.getPrerequisites(), 
-//								course.getCredits(),
-//								course.getCapacity(),
-//								course.getEnrolled(),
-//								course.getSemester());
-//					}
+					for(CourseCatalog course : courseService.ListOfAllCourses()) {
+						System.out.format("%16d%16d%16d%16s%16d%16d%16d%16s\n", 
+								course.getId(), 
+								course.getProfessorId(),
+								course.getDepartmentId(), 
+								course.getPrerequisites(), 
+								course.getCredits(),
+								course.getCapacity(),
+								course.getEnrolled(),
+								course.getSemester());
+					}
 
 					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();
@@ -129,17 +132,17 @@ public class CRSStudentMenu {
 //					service.addCourse(student, courses.get(course_id_selected));
 					System.out.println("\n-- Course has been added --");
 					
-					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
-							"ID",
-							"NAME", 
-							"PROFESSORID", 
-							"DEPARTMENTID", 
-							"PREREQUISITE",
-							"CREDITS",
-							"CAPACITY",
-							"ENROLLED",
-							"SEMESTER");
+//					System.out.println("\nCourses added:");
+//					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
+//							"ID",
+//							"NAME", 
+//							"PROFESSORID", 
+//							"DEPARTMENTID", 
+//							"PREREQUISITE",
+//							"CREDITS",
+//							"CAPACITY",
+//							"ENROLLED",
+//							"SEMESTER");
 //					for(Course course : student.getCourses()) {
 //						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
 //								course.getId(), 

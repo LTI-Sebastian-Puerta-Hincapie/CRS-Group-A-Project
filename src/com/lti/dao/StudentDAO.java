@@ -21,4 +21,6 @@ public interface StudentDAO {
 	public void viewGradesDAO(Student student);
 	
 	public void payFeeDAO(Student student, String paymentMethod);
+	
+	public Student getStudentDAO(int studentId);
 }
