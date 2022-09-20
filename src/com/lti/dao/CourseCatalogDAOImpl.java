@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 
 public class CourseCatalogDAOImpl implements CourseCatalogDAO {
 	
@@ -26,9 +27,9 @@ public class CourseCatalogDAOImpl implements CourseCatalogDAO {
 	private PreparedStatement stmt = null;
 
 	@Override
-	public List<Course> ListOfAllCoursesDAO() {
+	public List<CourseCatalog> ListOfAllCoursesDAO() {
 		
-	   List<Course> courses = new ArrayList<Course>();
+	   List<CourseCatalog> courses = new ArrayList<CourseCatalog>();
 	   try {
 		   
 		  Class.forName("com.mysql.jdbc.Driver");			
@@ -37,7 +38,6 @@ public class CourseCatalogDAOImpl implements CourseCatalogDAO {
 	      ResultSet rs = stmt.executeQuery();
 	      while(rs.next()) {
 	    	  int id = rs.getInt("Id");
-	    	  String name = rs.getString("Name");
 	    	  int professorId = rs.getInt("ProfessorId");
 	    	  int departmentId = rs.getInt("DepartmentId");
 	    	  String prerequisite = rs.getString("Prerequisite");
@@ -47,7 +47,7 @@ public class CourseCatalogDAOImpl implements CourseCatalogDAO {
 	    	  String semester = rs.getString("Semester");
 	    	  
 	    	  
-	    	  Course course = new Course(id, name, professorId, 
+	    	  CourseCatalog course = new CourseCatalog(id, professorId, 
 	    			  departmentId, prerequisite, credits, capacity, enrolled, semester);
 	    	  courses.add(course);
 	      }

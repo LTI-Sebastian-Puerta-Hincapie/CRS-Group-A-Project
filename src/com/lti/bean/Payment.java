@@ -22,7 +22,7 @@ public class Payment {
 		int totalCredits = 0;
 		for(Course course : this.student.getCourses()) {
 			
-			totalCredits += course.getCredits();
+//			totalCredits += course.getCredits();
 		}
 		
 		fee = totalCredits * COST_PER_CREDIT;

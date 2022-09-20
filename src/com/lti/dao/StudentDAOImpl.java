@@ -12,7 +12,7 @@ public class StudentDAOImpl implements StudentDAO {
 	
 	// Queries
 	private static final String INSERT_STUDENT_COURSE = 
-			"INSERT INTO studentcourses (StudentId, CourseId, RegistrationStatus, Grade) "
+			"INSERT INTO registeredcourses (StudentId, CourseId, RegistrationStatus, Grade) "
 			+ "VALUES (?, ?, ?, ?)";
 
     // JDBC driver name and database URL
@@ -44,7 +44,7 @@ public class StudentDAOImpl implements StudentDAO {
 			  
 		      stmt = conn.prepareStatement(INSERT_STUDENT_COURSE);
 		      stmt.setInt(1,student.getId());
-		      stmt.setInt(2, course.getId());
+		      stmt.setInt(2, course.getCourseId());
 		      stmt.setInt(3, 0);
 		      stmt.setString(4, null);
 

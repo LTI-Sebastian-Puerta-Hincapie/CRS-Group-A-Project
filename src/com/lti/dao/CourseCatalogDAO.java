@@ -6,6 +6,7 @@ package com.lti.dao;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 
 /**
  * @author Sebastian
@@ -13,5 +14,5 @@ import com.lti.bean.Course;
  */
 public interface CourseCatalogDAO {
 	
-	public List<Course> ListOfAllCoursesDAO();
+	public List<CourseCatalog> ListOfAllCoursesDAO();
 }

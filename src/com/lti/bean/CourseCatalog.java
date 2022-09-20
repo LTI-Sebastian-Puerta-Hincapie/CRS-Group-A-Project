@@ -6,7 +6,28 @@ public class CourseCatalog {
 	
 	private ArrayList<Course> courses;
 	
-	// source of truth here
+	private int id;
+	private int professorId;
+	private int departmentId;
+	private String prerequisites;
+	private int credits;
+	private int capacity;
+	private int enrolled;
+	private String semester;
+	
+	
+	public CourseCatalog(int id, int professorId, int departmentId, 
+			String prerequisites, int credits, int capacity, int enrolled, String semester) {
+		
+		this.id = id;
+		this.professorId = professorId;
+		this.departmentId = departmentId;
+		this.prerequisites = prerequisites;
+		this.credits = credits;
+		this.capacity = capacity;
+		this.enrolled = enrolled;
+		this.semester = semester;
+	}
 	
 	public CourseCatalog() {
 		

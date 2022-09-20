@@ -104,7 +104,6 @@ public class CRSStudentMenu {
 					System.out.println("\nAvailable courses:");
 					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
-							"NAME", 
 							"PROFESSORID", 
 							"DEPARTMENTID", 
 							"PREREQUISITE",
@@ -112,18 +111,17 @@ public class CRSStudentMenu {
 							"CAPACITY",
 							"ENROLLED",
 							"SEMESTER");
-					for(Course course : courseService.ListOfAllCourses()) {
-						System.out.format("%4s%16s%16s%16s%16s%16s%16s%12s\n", 
-								course.getId(), 
-								course.getName(), 
-								course.getProfessorId(),
-								course.getDepartmentId(), 
-								course.getPrerequisites(), 
-								course.getCredits(),
-								course.getCapacity(),
-								course.getEnrolled(),
-								course.getSemester());
-					}
+//					for(Course course : courseService.ListOfAllCourses()) {
+//						System.out.format("%4s%16s%16s%16s%16s%16s%12s\n", 
+//								course.getId(),  
+//								course.getProfessorId(),
+//								course.getDepartmentId(), 
+//								course.getPrerequisites(), 
+//								course.getCredits(),
+//								course.getCapacity(),
+//								course.getEnrolled(),
+//								course.getSemester());
+//					}
 
 					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();

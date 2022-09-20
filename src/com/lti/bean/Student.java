@@ -11,18 +11,68 @@ public class Student {
 	private int id;
 	private String name;
 	private String major;
+	private String email;
+	private String phone;
+	private String address;
 	private List<Course> courses;
 	private Map<Course, Boolean> courseRegistration;
 	
 	public Student() {}
 	
-	public Student(int id, String name, String major) {
+	public Student(int id, String name, String major, String email, String phone, String address) {
 		
 		this.id = id;
 		this.name = name;
 		this.major = major;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
 		this.courses = new ArrayList<Course>();
 		this.courseRegistration = new HashMap<Course, Boolean>();
+	}
+	
+	
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Map<Course, Boolean> getCourseRegistration() {

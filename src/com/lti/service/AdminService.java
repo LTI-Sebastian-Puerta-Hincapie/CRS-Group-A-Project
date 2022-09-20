@@ -33,7 +33,7 @@ public class AdminService implements AdminServiceOperation {
 	}
 	
 	public void addCourse(Course course) {
-		this.courses.put(course.getId(), course);
+//		this.courses.put(course.getId(), course);
 	}
 	
 	public void removeCourse(int id) {
@@ -41,16 +41,16 @@ public class AdminService implements AdminServiceOperation {
 	}
 	
 	public void updateCourse(int id, String name, String professor, String department, String prerequisites, int credits) {
-		this.courses.get(id).setName(name);
+//		this.courses.get(id).setName(name);
 //		this.courses.get(id).setProfessor(professor);
 //		this.courses.get(id).setDepartment(department);
-		this.courses.get(id).setPrerequisites(prerequisites);
-		this.courses.get(id).setCredits(credits);
+//		this.courses.get(id).setPrerequisites(prerequisites);
+//		this.courses.get(id).setCredits(credits);
 	}
 	
 	public void checkAvailability(int id) {
 		if(courses.containsKey(id)) {
-			System.out.println("The course " + courses.get(id).getName() + " (" + courses.get(id).getId() + ") is available.");
+//			System.out.println("The course " + courses.get(id).getName() + " (" + courses.get(id).getId() + ") is available.");
 		}
 		else {
 			System.out.println("The course is not available");
@@ -60,7 +60,7 @@ public class AdminService implements AdminServiceOperation {
 	public void viewCourses(Student student) {
 		System.out.println("Listing course list for " + student.getName() + ":");
 		for(Course course : student.getCourses()) {
-			System.out.println(course.getId() + ": " + course.getName());
+//			System.out.println(course.getId() + ": " + course.getName());
 		}
 	}
 }

@@ -6,6 +6,7 @@ package com.lti.service;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 
 /**
  * @author Sebastian
@@ -13,5 +14,5 @@ import com.lti.bean.Course;
  */
 public interface CourseCatalogOperation {
 	
-	public List<Course> ListOfAllCourses();
+	public List<CourseCatalog> ListOfAllCourses();
 }

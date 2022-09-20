@@ -14,7 +14,7 @@ public class CRSAdminMenu {
 	private Scanner scan;
 	private String username;
 	
-	private Admin charlie = new Admin(1000, "Charlie");
+//	private Admin charlie = new Admin(1000, "Charlie");
 	private int adminMaxId = 1000;		
 	private List<Admin> admins = new ArrayList<Admin>();
 	private Admin admin;
@@ -27,7 +27,7 @@ public class CRSAdminMenu {
 		
 		admin = new Admin();
 		
-		admins.add(charlie);
+//		admins.add(charlie);
 		
 		service = new AdminService();
 	}
@@ -37,9 +37,9 @@ public class CRSAdminMenu {
 		// use existing admin or create new 
 		switch(username) {
 			case "charlie":
-				admin = charlie;
+//				admin = charlie;
 			default:
-				admin = new Admin(adminMaxId + 1, username);				
+//				admin = new Admin(adminMaxId + 1, username);				
 		}
 		
 		admins.add(admin);

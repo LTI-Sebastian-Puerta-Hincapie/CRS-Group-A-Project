@@ -2,160 +2,58 @@ package com.lti.bean;
 
 public class Course {
 	
-	private int id;
-	private String name;
-	private int professorId;
-	private int departmentId;
-	private String prerequisites;
-	private int credits;
-	private int capacity;
-	private int enrolled;
-	private String semester;
+	private int courseId;
+	private String courseName;
+	private String description;
 	
-	public Course(int id, String name, int professorId, int departmentId, 
-			String prerequisites, int credits, int capacity, int enrolled, String semester) {
+	public Course(int courseId, String courseName, String description) {
 		
-		this.id = id;
-		this.name = name;
-		this.professorId = professorId;
-		this.departmentId = departmentId;
-		this.prerequisites = prerequisites;
-		this.credits = credits;
-		this.capacity = capacity;
-		this.enrolled = 0;
-		this.semester = semester;
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
 	}
 
 	/**
-	 * @return the capacity
+	 * @return the courseId
 	 */
-	public int getCapacity() {
-		return capacity;
+	public int getCourseId() {
+		return courseId;
 	}
 
 	/**
-	 * @param capacity the capacity to set
+	 * @param courseId the courseId to set
 	 */
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	/**
-	 * @return the enrolled
+	 * @return the courseName
 	 */
-	public int getEnrolled() {
-		return enrolled;
+	public String getCourseName() {
+		return courseName;
 	}
 
 	/**
-	 * @param enrolled the enrolled to set
+	 * @param courseName the courseName to set
 	 */
-	public void setEnrolled(int enrolled) {
-		this.enrolled = enrolled;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	/**
-	 * @return the semester
+	 * @return the description
 	 */
-	public String getSemester() {
-		return semester;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * @param semester the semester to set
+	 * @param description the description to set
 	 */
-	public void setSemester(String semester) {
-		this.semester = semester;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-	/**
-	 * @param professorId the professorId to set
-	 */
-	public void setProfessorId(int professorId) {
-		this.professorId = professorId;
-	}
-
-	/**
-	 * @return the credits
-	 */
-	public int getCredits() {
-		return credits;
-	}
-
-	/**
-	 * @param credits the credits to set
-	 */
-	public void setCredits(int credits) {
-		this.credits = credits;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the professor
-	 */
-	public int getProfessorId() {
-		return professorId;
-	}
-
-	/**
-	 * @param professor the professor to set
-	 */
-	public void setProfessor(int professorId) {
-		this.professorId = professorId;
-	}
-
-	/**
-	 * @return the department
-	 */
-	public int getDepartmentId() {
-		return departmentId;
-	}
-
-	/**
-	 * @param department the department to set
-	 */
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
-	}
-
-	/**
-	 * @return the prerequisites
-	 */
-	public String getPrerequisites() {
-		return prerequisites;
-	}
-
-	/**
-	 * @param prerequisites the prerequisites to set
-	 */
-	public void setPrerequisites(String prerequisites) {
-		this.prerequisites = prerequisites;
-	}	
+	
+	
 }

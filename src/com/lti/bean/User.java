@@ -5,20 +5,14 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
-	private String email;
-	private String phone;
-	private String address;
-	private String role;
+	private int roleId;
 	
-	public User(int id, String username, String password, String email, String phone, String address, String role) {
+	public User(int id, String username, String password, int roleId) {
 		
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.role = role;
+		this.roleId = roleId;
 	}
 
 	/**
@@ -38,15 +32,15 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
-		return role;
+	public int getRoleId() {
+		return roleId;
 	}
 
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(int roleId) {
+		this.roleId = roleId;
 	}
 
 	/**
@@ -63,47 +57,6 @@ public class User {
 		return username;
 	}
 
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 	/**
 	 * @param username the username to set

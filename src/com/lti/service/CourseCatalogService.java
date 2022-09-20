@@ -3,6 +3,7 @@ package com.lti.service;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 import com.lti.dao.CourseCatalogDAO;
 import com.lti.dao.CourseCatalogDAOImpl;
 
@@ -21,7 +22,7 @@ public class CourseCatalogService implements CourseCatalogOperation {
 	}
 
 	@Override
-	public List<Course> ListOfAllCourses() {
+	public List<CourseCatalog> ListOfAllCourses() {
 		
 		return courseCatalogDao.ListOfAllCoursesDAO();
 	}
