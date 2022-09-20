@@ -22,7 +22,9 @@ public class UserService implements UserServiceOperation {
 		
 		Boolean isUserFound = false;
 		String result = userdao.LoginDAO(username);
-		isUserFound = result.equals(password) ? true : false;
+		
+		isUserFound = password.equals(result) ? true : false;
+
 		return isUserFound;
 	}
 	

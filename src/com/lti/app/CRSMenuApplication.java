@@ -53,7 +53,7 @@ public class CRSMenuApplication {
 						System.out.println("\nYou have logged in");
 					}
 					else {
-						System.out.println("\nusername and password combination incorrect or does not exist");
+						System.out.println("\nusername and password combination is incorrect or does not exist");
 						break;
 					}
 					
