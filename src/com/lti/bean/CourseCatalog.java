@@ -32,20 +32,119 @@ public class CourseCatalog {
 	public CourseCatalog() {
 		
 		courses = new ArrayList<Course>();
-		
-		// default data - initial in-memory data
-		// Biology courses
-//		courses.add(new Course(0, "Biology 0", "Rubin", "Biology", "-", 3));
-//		courses.add(new Course(1, "Biology 1", "Rubin", "Biology", "Biology 0", 3));
-//		courses.add(new Course(2, "Biology 2", "Rubin", "Biology", "Biology 1", 3));
-//		// Psychology courses
-//		courses.add(new Course(3, "Psychology 0", "Axel", "Psychology", "-", 3));
-//		courses.add(new Course(4, "Psychology 1", "Axel", "Psychology", "Psychology 0", 3));
-//		courses.add(new Course(5, "Psychology 2", "Axel", "Psychology", "Psychology 1", 3));
-//		// Economics Courses
-//		courses.add(new Course(6, "Economics 0", "Nelson", "Economics", "-", 3));
-//		courses.add(new Course(7, "Economics 1", "Nelson", "Economics", "Economics 0", 3));
-//		courses.add(new Course(8, "Economics 2", "Nelson", "Economics", "Economics 1", 3));
+	}
+	
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the professorId
+	 */
+	public int getProfessorId() {
+		return professorId;
+	}
+
+	/**
+	 * @param professorId the professorId to set
+	 */
+	public void setProfessorId(int professorId) {
+		this.professorId = professorId;
+	}
+
+	/**
+	 * @return the departmentId
+	 */
+	public int getDepartmentId() {
+		return departmentId;
+	}
+
+	/**
+	 * @param departmentId the departmentId to set
+	 */
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	/**
+	 * @return the prerequisites
+	 */
+	public String getPrerequisites() {
+		return prerequisites;
+	}
+
+	/**
+	 * @param prerequisites the prerequisites to set
+	 */
+	public void setPrerequisites(String prerequisites) {
+		this.prerequisites = prerequisites;
+	}
+
+	/**
+	 * @return the credits
+	 */
+	public int getCredits() {
+		return credits;
+	}
+
+	/**
+	 * @param credits the credits to set
+	 */
+	public void setCredits(int credits) {
+		this.credits = credits;
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @return the enrolled
+	 */
+	public int getEnrolled() {
+		return enrolled;
+	}
+
+	/**
+	 * @param enrolled the enrolled to set
+	 */
+	public void setEnrolled(int enrolled) {
+		this.enrolled = enrolled;
+	}
+
+	/**
+	 * @return the semester
+	 */
+	public String getSemester() {
+		return semester;
+	}
+
+	/**
+	 * @param semester the semester to set
+	 */
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 
 	public ArrayList<Course> getCourses() {

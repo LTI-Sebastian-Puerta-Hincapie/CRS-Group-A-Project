@@ -10,7 +10,7 @@ public class Student {
 	
 	private int id;
 	private String name;
-	private String major;
+	private int majorId;
 	private String email;
 	private String phone;
 	private String address;
@@ -19,11 +19,11 @@ public class Student {
 	
 	public Student() {}
 	
-	public Student(int id, String name, String major, String email, String phone, String address) {
+	public Student(int id, String name, int majorId, String email, String phone, String address) {
 		
 		this.id = id;
 		this.name = name;
-		this.major = major;
+		this.majorId = majorId;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
@@ -90,15 +90,15 @@ public class Student {
 	/**
 	 * @return the major
 	 */
-	public String getMajor() {
-		return major;
+	public int getMajorId() {
+		return majorId;
 	}
 
 	/**
 	 * @param major the major to set
 	 */
-	public void setMajor(String major) {
-		this.major = major;
+	public void setMajorId(int majorId) {
+		this.majorId = majorId;
 	}
 
 	/**

@@ -6,25 +6,24 @@ public class Professor {
 	
 	private int id;
 	private String name;
-	private String department;
+	private int departmentId;
 	private String email;
 	private String phone;
 	private String address;
 	private ArrayList<Course> courses;
 	
 	public Professor() {};
-	public Professor(int id, String name, String department, String email, String phone, String address) {
+	
+	public Professor(int id, String name, int departmentId, String email, String phone, String address) {
 		this.id = id;
 		this.name = name;
-		this.department = department;
+		this.departmentId = departmentId;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
 		courses = new ArrayList<Course>();
 	}
 	
-	
-
 	/**
 	 * @return the email
 	 */
@@ -90,17 +89,17 @@ public class Professor {
 	}
 
 	/**
-	 * @return the department
+	 * @return the departmentId
 	 */
-	public String getDepartment() {
-		return department;
+	public int getDepartmentId() {
+		return departmentId;
 	}
 
 	/**
-	 * @param department the department to set
+	 * @param departmentId the departmentId to set
 	 */
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	/**
