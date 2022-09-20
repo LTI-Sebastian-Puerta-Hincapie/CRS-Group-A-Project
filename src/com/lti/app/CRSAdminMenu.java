@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.lti.bean.Admin;
 import com.lti.bean.Student;
+import com.lti.service.AdminService;
+import com.lti.service.AdminServiceOperation;
 
 public class CRSAdminMenu {
 	
@@ -16,6 +18,7 @@ public class CRSAdminMenu {
 	private int adminMaxId = 1000;		
 	private List<Admin> admins = new ArrayList<Admin>();
 	private Admin admin;
+	private AdminServiceOperation service;
 	
 	public CRSAdminMenu(Scanner scan, String username) {
 		
@@ -25,6 +28,8 @@ public class CRSAdminMenu {
 		admin = new Admin();
 		
 		admins.add(charlie);
+		
+		service = new AdminService();
 	}
 	
 	public void menu() {
@@ -62,27 +67,35 @@ public class CRSAdminMenu {
 			
 			switch(adminSelection.toLowerCase()) {
 				case "generate report card":
+					service.generateReportCard(null, null);
 					System.out.println("Generating report card...");
 					break;
 				case "add professor":
+					service.addProfessor(null);
 					System.out.println("Adding professor...");
 					break;
 				case "view courses":
+					service.viewCourses(null);
 					System.out.println("Viewing courses...");
 					break;
 				case "approve registration":
+					service.approveStudentRegistration(null);
 					System.out.println("Approving registration...");
 					break;
 				case "add course":
+					service.addCourse(null);
 					System.out.println("Adding course...");
 					break;
 				case "drop course":
+					service.removeCourse(0);
 					System.out.println("Dropping course...");
 					break;
 				case "update course":
+//					service.updateCourse(adminMaxId, adminSelection, adminSelection, adminSelection, adminSelection, adminMaxId);
 					System.out.println("Updating course...");
 					break;
 				case "check availability":
+					service.checkAvailability(0);
 					System.out.println("Checking availability...");
 					break;
 				case "back":

@@ -1,47 +1,29 @@
 package com.lti.service;
 
 import com.lti.bean.User;
+import com.lti.dao.UserDAO;
+import com.lti.dao.UserDAOImpl;
+
+/**
+ * @author Sebastian 
+ *
+ */
 
 public class UserService implements UserServiceOperation {
 	
-	// default credentials
-	private String thomasUsername;
-	private String thomasPassword;
-	private String abigailUsername;
-	private String abigailPassword;
-	private String tejUsername;
-	private String tejPassword;
+	private UserDAO userdao;
 	
 	public UserService() {
 		
-		thomasUsername = "thomas";
-		thomasPassword = "welcome";
-		abigailUsername = "abigail";
-		abigailPassword = "apples";
-		tejUsername = "tej";
-		tejPassword = "mountains";
+		userdao = new UserDAOImpl();
 	}
-	
-	public void Login(String username, String password) {
 		
-		Boolean validate = false;
-		switch(username) {
-			case "thomas": 
-				validate = password == thomasPassword ? true : false;
-				System.out.println("\nYou have logged in");
-				break;
-			case "abigail": 
-				validate = password == abigailPassword ? true : false;
-				System.out.println("\nYou have logged in");
-				break;
-			case "tej": 
-				validate = password == tejPassword ? true : false;
-				System.out.println("\nYou have logged in");
-				break;
-			default: 
-				System.out.println("\nNew user logged in");
-				break;
-		}
+	public Boolean Login(String username, String password) {
+		
+		Boolean isUserFound = false;
+		String result = userdao.LoginDAO(username);
+		isUserFound = result.equals(password) ? true : false;
+		return isUserFound;
 	}
 	
 	public void Logout(String username, String password) {

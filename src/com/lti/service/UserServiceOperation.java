@@ -4,12 +4,12 @@
 package com.lti.service;
 
 /**
- * @author user106
+ * @author Sebastian
  *
  */
 public interface UserServiceOperation {
 	
-	public void Login(String username, String password);
+	public Boolean Login(String username, String password);
 	
 	public void Logout(String username, String password);
 }

@@ -27,6 +27,8 @@ public class AdminService implements AdminServiceOperation {
 	}
 	
 	public void approveStudentRegistration(Student student) {
+		
+		// 
 		System.out.println("Registration for " + student.getName() + " is approved");
 	}
 	
@@ -40,8 +42,8 @@ public class AdminService implements AdminServiceOperation {
 	
 	public void updateCourse(int id, String name, String professor, String department, String prerequisites, int credits) {
 		this.courses.get(id).setName(name);
-		this.courses.get(id).setProfessor(professor);
-		this.courses.get(id).setDepartment(department);
+//		this.courses.get(id).setProfessor(professor);
+//		this.courses.get(id).setDepartment(department);
 		this.courses.get(id).setPrerequisites(prerequisites);
 		this.courses.get(id).setCredits(credits);
 	}

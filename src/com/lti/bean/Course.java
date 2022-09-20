@@ -4,19 +4,75 @@ public class Course {
 	
 	private int id;
 	private String name;
-	private String professor;
-	private String department;
+	private int professorId;
+	private int departmentId;
 	private String prerequisites;
 	private int credits;
+	private int capacity;
+	private int enrolled;
+	private String semester;
 	
-	public Course(int id, String name, String professor, String department, String prerequisites, int credits) {
+	public Course(int id, String name, int professorId, int departmentId, 
+			String prerequisites, int credits, int capacity, int enrolled, String semester) {
 		
 		this.id = id;
 		this.name = name;
-		this.professor = professor;
-		this.department = department;
+		this.professorId = professorId;
+		this.departmentId = departmentId;
 		this.prerequisites = prerequisites;
 		this.credits = credits;
+		this.capacity = capacity;
+		this.enrolled = 0;
+		this.semester = semester;
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @return the enrolled
+	 */
+	public int getEnrolled() {
+		return enrolled;
+	}
+
+	/**
+	 * @param enrolled the enrolled to set
+	 */
+	public void setEnrolled(int enrolled) {
+		this.enrolled = enrolled;
+	}
+
+	/**
+	 * @return the semester
+	 */
+	public String getSemester() {
+		return semester;
+	}
+
+	/**
+	 * @param semester the semester to set
+	 */
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
+	/**
+	 * @param professorId the professorId to set
+	 */
+	public void setProfessorId(int professorId) {
+		this.professorId = professorId;
 	}
 
 	/**
@@ -64,29 +120,29 @@ public class Course {
 	/**
 	 * @return the professor
 	 */
-	public String getProfessor() {
-		return professor;
+	public int getProfessorId() {
+		return professorId;
 	}
 
 	/**
 	 * @param professor the professor to set
 	 */
-	public void setProfessor(String professor) {
-		this.professor = professor;
+	public void setProfessor(int professorId) {
+		this.professorId = professorId;
 	}
 
 	/**
 	 * @return the department
 	 */
-	public String getDepartment() {
-		return department;
+	public int getDepartmentId() {
+		return departmentId;
 	}
 
 	/**
 	 * @param department the department to set
 	 */
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	/**

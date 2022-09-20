@@ -9,6 +9,8 @@ import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 import com.lti.bean.Payment;
 import com.lti.bean.Student;
+import com.lti.service.CourseCatalogOperation;
+import com.lti.service.CourseCatalogService;
 import com.lti.service.StudentService;
 import com.lti.service.StudentServiceOperation;
 
@@ -16,53 +18,19 @@ public class CRSStudentMenu {
 	
 	private Scanner scan;
 	private String username;
-	private Student student;
-	private StudentServiceOperation service;
-	
-	// default data - initial in-memory data
-	private Student thomas = new Student(1, "Thomas", "Biology");
-	private Student abigail = new Student(2, "Abigail", "Psychology");
-	private Student tej = new Student(3, "Tej", "Economics");
-	private int studentMaxId = 3;
-	private List<Student> students;
-	private CourseCatalog catalog;
+	private CourseCatalogOperation courseService;
+	private StudentServiceOperation studentService;
 	
 	public CRSStudentMenu(Scanner scan, String username) {
 		
 		this.scan = scan;
 		this.username = username;
 		
-		this.student = new Student();
-		this.service = new StudentService();
-		
-		students = new ArrayList<Student>();
-		students.add(thomas);
-		students.add(abigail);
-		students.add(tej);
-		
-		catalog = new CourseCatalog();
+		this.studentService = new StudentService();
+		this.courseService = new CourseCatalogService();
 	}
 	
 	public void menu() {
-		
-		// use existing student or create new 
-		switch(username.toLowerCase()) {
-			case "thomas": 
-				student = thomas;
-				break;
-			case "abigail":
-				student = abigail;
-				break;
-			case "tej":
-				student = tej;
-			default:
-				student = new Student(studentMaxId + 1, username, "undefined");				
-		}
-		
-		students.add(student);
-		
-		// course catalog
-		ArrayList<Course> courses = catalog.getCourses();
 		
 		// menu
 		while(true)
@@ -88,189 +56,209 @@ public class CRSStudentMenu {
 				case "register for course":
 					
 					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
-							"PROFESSOR", 
-							"DEPARTMENT", 
+							"PROFESSORID", 
+							"DEPARTMENTID", 
 							"PREREQUISITE",
-							"CREDITS");
-					for(Course course : student.getCourses()) {
-						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-								course.getId(), 
-								course.getName(), 
-								course.getProfessor(),
-								course.getDepartment(), 
-								course.getPrerequisites(), 
-								course.getCredits());
-					}
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+//					for(Course course : courseService.ListOfAllCourses()) {
+//						System.out.format("%4s%16s%16s%16s%16s%16s%16s%12s\n", 
+//								course.getId(), 
+//								course.getName(), 
+//								course.getProfessorId(),
+//								course.getDepartmentId(), 
+//								course.getPrerequisites(), 
+//								course.getCredits(),
+//								course.getCapacity(),
+//								course.getEnrolled(),
+//								course.getSemester());
+//					}
 					
-					System.out.print("\nRegister for a course, select by ID -> ");
-					int courseId = scan.nextInt();
-					
-					service.registerForCourse(student, student.getCourses().get(courseId));
-					System.out.println("\n-- You have registered for a course --");	
-					
-					System.out.println("\nCourses you have been registered for:");
-					System.out.format("%4s%16s%16s\n", 
-							"ID",
-							"NAME", 
-							"STATUS");
-					
-					for(Map.Entry<Course, Boolean> entry : student.getCourseRegistration().entrySet()) {
-						System.out.format("%4s%16s%16s\n", 
-								Integer.toString(entry.getKey().getId()), 
-								entry.getKey().getName(), 
-								entry.getValue() ? "Registered" : "Not Registered");
-					}
-					
+//					System.out.print("\nRegister for a course, select by ID -> ");
+//					int courseId = scan.nextInt();
+//					
+//					studentService.registerForCourse(student, student.getCourses().get(courseId));
+//					System.out.println("\n-- You have registered for a course --");	
+//					
+//					System.out.println("\nCourses you have been registered for:");
+//					System.out.format("%4s%16s%16s\n", 
+//							"ID",
+//							"NAME", 
+//							"STATUS");
+//					
+//					for(Map.Entry<Course, Boolean> entry : student.getCourseRegistration().entrySet()) {
+//						System.out.format("%4s%16s%16s\n", 
+//								Integer.toString(entry.getKey().getId()), 
+//								entry.getKey().getName(), 
+//								entry.getValue() ? "Registered" : "Not Registered");
+//					}
+//					
 					break;
 				case "add course":
 					
 					System.out.println("\nAvailable courses:");
-					
-					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
-							"PROFESSOR", 
-							"DEPARTMENT", 
+							"PROFESSORID", 
+							"DEPARTMENTID", 
 							"PREREQUISITE",
-							"CREDITS");
-					for(int i = 0; i < catalog.getCourses().size(); i++) {
-
-						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-								Integer.toString(courses.get(i).getId()),
-								courses.get(i).getName(), 
-								courses.get(i).getProfessor(),
-								courses.get(i).getDepartment(), 
-								courses.get(i).getPrerequisites(),
-								Integer.toString(courses.get(i).getCredits()));
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+					for(Course course : courseService.ListOfAllCourses()) {
+						System.out.format("%4s%16s%16s%16s%16s%16s%16s%12s\n", 
+								course.getId(), 
+								course.getName(), 
+								course.getProfessorId(),
+								course.getDepartmentId(), 
+								course.getPrerequisites(), 
+								course.getCredits(),
+								course.getCapacity(),
+								course.getEnrolled(),
+								course.getSemester());
 					}
+
 					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-					service.addCourse(student, courses.get(course_id_selected));
+//					service.addCourse(student, courses.get(course_id_selected));
 					System.out.println("\n-- Course has been added --");
 					
 					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
-							"PROFESSOR", 
-							"DEPARTMENT", 
+							"PROFESSORID", 
+							"DEPARTMENTID", 
 							"PREREQUISITE",
-							"CREDITS");
-					for(Course course : student.getCourses()) {
-						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-								course.getId(), 
-								course.getName(), 
-								course.getProfessor(),
-								course.getDepartment(), 
-								course.getPrerequisites(), 
-								course.getCredits());
-					}
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+//					for(Course course : student.getCourses()) {
+//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+//								course.getId(), 
+//								course.getName(), 
+//								course.getProfessorId(),
+//								course.getDepartmentId(), 
+//								course.getPrerequisites(), 
+//								course.getCredits());
+//					}
 					break;
 				case "drop course":
 					
 					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
-							"PROFESSOR", 
-							"DEPARTMENT", 
+							"PROFESSORID", 
+							"DEPARTMENTID", 
 							"PREREQUISITE",
-							"CREDITS");
-					for(Course course : student.getCourses()) {
-						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-								course.getId(), 
-								course.getName(), 
-								course.getProfessor(),
-								course.getDepartment(), 
-								course.getPrerequisites(), 
-								course.getCredits());
-					}
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+//					for(Course course : student.getCourses()) {
+//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+//								course.getId(), 
+//								course.getName(), 
+//								course.getProfessorId(),
+//								course.getDepartmentId(), 
+//								course.getPrerequisites(), 
+//								course.getCredits());
+//					}
 					
 					System.out.print("\nSelect course to drop by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-					service.dropCourse(student, courses.get(course_id_selected));
+//					service.dropCourse(student, courses.get(course_id_selected));
 					System.out.println("\n-- Course has been dropped --");
 					
 					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
 							"ID",
 							"NAME", 
-							"PROFESSOR", 
-							"DEPARTMENT", 
+							"PROFESSORID", 
+							"DEPARTMENTID", 
 							"PREREQUISITE",
-							"CREDITS");
-					for(Course course : student.getCourses()) {
-						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-								course.getId(), 
-								course.getName(), 
-								course.getProfessor(),
-								course.getDepartment(), 
-								course.getPrerequisites(), 
-								course.getCredits());
-					}
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+//					for(Course course : student.getCourses()) {
+//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
+//								course.getId(), 
+//								course.getName(), 
+//								course.getProfessorId(),
+//								course.getDepartmentId(), 
+//								course.getPrerequisites(), 
+//								course.getCredits());
+//					}
 					
 					break;
 				case "view grades":
 					//TODO: complete functionality
-					service.viewGrades(student);
+//					studentService.viewGrades(student);
 //					System.out.println("Viewing grades...");
 					break;
 				case "pay fee":
 					
-					Payment payment = new Payment(student);
-					int totalNumberOfCredits = 0;
-					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);
-					for(Course course : student.getCourses()) {
-						
-						totalNumberOfCredits += course.getCredits();
-					}
-					System.out.println("Total number of courses added: " + student.getCourses().size());
-					System.out.println("Total number of credits: " + totalNumberOfCredits);
-					
-					double totalFee = payment.COST_PER_CREDIT * totalNumberOfCredits;
-					System.out.println("Total fee: " + totalFee);
-					
-					System.out.println("\nPayment Method:");
-					System.out.println("1. Credit");
-					System.out.println("2. Debit");
-					System.out.println("3. Direct Withdrawal");
-					System.out.println("4. Paypal");
-					System.out.println("5. Pay in person");
-					System.out.println("6. Back");
-					System.out.print("\n-> ");
-					
-					String paymentMethod = scan.nextLine();	
-					
-					switch(paymentMethod) {
-						case "credit": 
-							service.payFee(student, paymentMethod);
-							System.out.println("\n--Payment Complete--");
-							break;
-						case "debit": 
-							service.payFee(student, paymentMethod);
-							System.out.println("\n--Payment Complete--");
-							break;
-						case "direct withdrawal": 
-							service.payFee(student, paymentMethod);
-							System.out.println("\n--Payment Complete--");
-							break;
-						case "paypal": 
-							service.payFee(student, paymentMethod);
-							System.out.println("\n--Payment Complete--");
-							break;
-						case "pay in person": 
-							service.payFee(student, paymentMethod);
-							System.out.println("\n--Payment Complete--");
-							break;
-						case "back": break;
-						default:
-							System.out.println("No course have been added to your cart, please add a course");
-					}
+//					Payment payment = new Payment(student);
+//					int totalNumberOfCredits = 0;
+//					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);
+//					for(Course course : student.getCourses()) {
+//						
+//						totalNumberOfCredits += course.getCredits();
+//					}
+//					System.out.println("Total number of courses added: " + student.getCourses().size());
+//					System.out.println("Total number of credits: " + totalNumberOfCredits);
+//					
+//					double totalFee = payment.COST_PER_CREDIT * totalNumberOfCredits;
+//					System.out.println("Total fee: " + totalFee);
+//					
+//					System.out.println("\nPayment Method:");
+//					System.out.println("1. Credit");
+//					System.out.println("2. Debit");
+//					System.out.println("3. Direct Withdrawal");
+//					System.out.println("4. Paypal");
+//					System.out.println("5. Pay in person");
+//					System.out.println("6. Back");
+//					System.out.print("\n-> ");
+//					
+//					String paymentMethod = scan.nextLine();	
+//					
+//					switch(paymentMethod) {
+//						case "credit": 
+//							studentService.payFee(student, paymentMethod);
+//							System.out.println("\n--Payment Complete--");
+//							break;
+//						case "debit": 
+//							studentService.payFee(student, paymentMethod);
+//							System.out.println("\n--Payment Complete--");
+//							break;
+//						case "direct withdrawal": 
+//							studentService.payFee(student, paymentMethod);
+//							System.out.println("\n--Payment Complete--");
+//							break;
+//						case "paypal": 
+//							studentService.payFee(student, paymentMethod);
+//							System.out.println("\n--Payment Complete--");
+//							break;
+//						case "pay in person": 
+//							studentService.payFee(student, paymentMethod);
+//							System.out.println("\n--Payment Complete--");
+//							break;
+//						case "back": break;
+//						default:
+//							System.out.println("No course have been added to your cart, please add a course");
+//					}
 					break;
 				case "back":
 					student_back = true;

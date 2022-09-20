@@ -1,17 +1,22 @@
 package com.lti.app;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import com.lti.bean.Course;
+import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.service.UserService;
 
 public class CRSMenuApplication {
-
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
-		
+
 		String username = "";
 		String password = "";
 		UserService userService = new UserService();
@@ -43,7 +48,14 @@ public class CRSMenuApplication {
 					password = scan.next();		
 					
 					// validate login
-					userService.Login(username, password);
+					Boolean isLoggedIn = userService.Login(username, password);
+					if(isLoggedIn) {
+						System.out.println("\nYou have logged in");
+					}
+					else {
+						System.out.println("\nusername and password combination incorrect or does not exist");
+						break;
+					}
 					
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, username);

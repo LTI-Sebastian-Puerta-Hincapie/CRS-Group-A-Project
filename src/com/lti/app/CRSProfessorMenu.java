@@ -72,8 +72,8 @@ public class CRSProfessorMenu {
 				case "add grades":
 					ProfessorService PRService = new ProfessorService();
 					Student newStudent = new Student(1, "Thomas", "Biology");
-					Course newCourse = new Course(100, "Biology", "Rubin", "Science", "Prerequisites", 3);
-					PRService.addGrades(newStudent, newCourse);
+//					Course newCourse = new Course(100, "Biology", "Rubin", "Science", "Prerequisites", 3);
+//					PRService.addGrades(newStudent, newCourse);
 					System.out.println("Enter grades");
 					Scanner input = new Scanner(System.in);
 					String grades = input.nextLine();
