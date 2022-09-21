@@ -1,6 +1,7 @@
 package com.lti.bean;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author Sebastian
@@ -12,12 +13,11 @@ public class Payment {
 	private int paymentId;
 	private int studentId;
 	private int paymentAmount;
-	private Date dueDate;
+	private LocalDate dueDate;
 	private String semester;
 	
-	public Payment(int paymentId, int studentId, int paymentAmount, Date dueDate, String semester) {
+	public Payment(int studentId, int paymentAmount, LocalDate dueDate, String semester) {
 
-		this.paymentId = paymentId;
 		this.studentId = studentId;
 		this.paymentAmount = paymentAmount;
 		this.dueDate = dueDate;
@@ -69,14 +69,14 @@ public class Payment {
 	/**
 	 * @return the dueDate
 	 */
-	public Date getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
 	/**
 	 * @param dueDate the dueDate to set
 	 */
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 

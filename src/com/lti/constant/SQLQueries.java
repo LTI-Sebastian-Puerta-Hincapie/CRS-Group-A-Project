@@ -37,7 +37,20 @@ public class SQLQueries {
 			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
 	
 	public static final String INSERT_PAYMENT_FOR_STUDENT_COURSES = 
-			"INSERT INTO payment (PaymentId, PaymentAmount, StudentId, DueDate, Semester) VALUES (?, ?, ?, ?, ?)";
+			"INSERT INTO payment (PaymentAmount, StudentId, DueDate, Semester) VALUES (?, ?, ?, ?)";
+	
+	public static final String SELECT_REGISTERED_COURSE_DATA_BY_STUDENTID = 
+			"SELECT * "
+			+ "FROM registeredcourse rc "
+			+ "JOIN coursecatalog cc "
+			+ " ON rc.CourseId = cc.Id "
+			+ "WHERE rc.StudentId = ? AND rc.RegistrationStatus = 1";
+	
+	public static final String SELECT_PAYMENT_BY_STUDENTID = 
+			"SELECT * FROM payment WHERE StudentId = ?";
+	
+	public static final String UPDATE_PAYMENT_BY_STUDENTID = 
+			"UPDATE payment SET IsPaid = ? PaymentMethod = ? WHERE StudentId = ?";
 	
 	// PROFESSOR
 	public static final String UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 

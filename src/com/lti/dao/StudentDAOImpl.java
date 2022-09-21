@@ -1,14 +1,17 @@
 package com.lti.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 import com.lti.bean.Grade;
 import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
@@ -128,9 +131,25 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public void payFeeDAO(Student student, String paymentMethod) {
-		// TODO Auto-generated method stub
 		
-	}	   
+	   try {
+
+		  conn = DBUtils.getConnection();
+		  
+	      stmt = conn.prepareStatement(SQLQueries.UPDATE_PAYMENT_BY_STUDENTID);
+	      stmt.setInt(1, 1);
+	      stmt.setString(2, paymentMethod);
+	      stmt.setInt(3,student.getId());
+	      stmt.executeUpdate();
+
+	   } catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   } catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }		  	
+}	   
 	
 	@Override
 	public Student getStudentDAO(int studentId) {
@@ -227,17 +246,52 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public void generatePaymentDAO(int studentId, Payment payment) {
 		
+	   try {
+			  conn = DBUtils.getConnection();
+			  
+		      stmt = conn.prepareStatement(SQLQueries.INSERT_PAYMENT_FOR_STUDENT_COURSES);
+		      stmt.setInt(1, payment.getPaymentAmount());
+		      stmt.setInt(2, studentId);
+		      stmt.setDate(3,Date.valueOf(payment.getDueDate()));
+		      stmt.setString(4, payment.getSemester());
+		      stmt.executeUpdate();
+
+		   } catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }	
+	}
+
+	@Override
+	public List<CourseCatalog> getRegisteredCourseDataDAO(int studentId) {
+		
+		List<CourseCatalog> courses = new ArrayList<CourseCatalog>();
+		CourseCatalog course = null;
+		
 		   try {
 				  conn = DBUtils.getConnection();
 				  
-			      stmt = conn.prepareStatement(SQLQueries.INSERT_PAYMENT_FOR_STUDENT_COURSES);
-			      stmt.setInt(1, payment.getPaymentId());
-			      stmt.setInt(2, payment.getPaymentAmount());
-			      stmt.setInt(3, payment.getStudentId());
-			      stmt.setDate(4, payment.getDueDate());
-			      stmt.setString(5, payment.getSemester());
-			      stmt.setInt(6,studentId);
-			      stmt.executeUpdate();
+			      stmt = conn.prepareStatement(SQLQueries.SELECT_REGISTERED_COURSE_DATA_BY_STUDENTID);
+			      stmt.setInt(1,studentId);
+			      ResultSet rs = stmt.executeQuery();
+			      while(rs.next()) {
+			    	  
+			    	  int courseId = rs.getInt("Id");
+			    	  int professorId = rs.getInt("ProfessorId");
+			    	  int departmentId = rs.getInt("DepartmentId");
+			    	  String prerequisite = rs.getString("Prerequisite");
+			    	  int credits = rs.getInt("Credits");
+			    	  int capacity = rs.getInt("Capacity");
+			    	  int enrolled = rs.getInt("Enrolled");
+			    	  String semester = rs.getString("Semester");	
+			    	  
+			    	  course = new CourseCatalog(courseId, professorId, departmentId, 
+			    			  prerequisite, credits, capacity , enrolled, semester);
+			    	  courses.add(course);
+			      }
 
 			   } catch(SQLException se){
 			      //Handle errors for JDBC
@@ -245,7 +299,40 @@ public class StudentDAOImpl implements StudentDAO {
 			   } catch(Exception e){
 			      //Handle errors for Class.forName
 			      e.printStackTrace();
-			   }	
+			   }
 		
+		return courses;
+	}
+
+	@Override
+	public Payment getFeeDAO(int studentId) {
+		
+	   Payment payment = null;
+		
+	   try {
+			  conn = DBUtils.getConnection();
+			  
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_PAYMENT_BY_STUDENTID);
+		      stmt.setInt(1,studentId);
+		      ResultSet rs = stmt.executeQuery();
+		      if(rs.next()) {
+
+		    	  int paymentAmount = rs.getInt("PaymentAmount");
+		    	  int _studentId = rs.getInt("StudentId");
+		    	  LocalDate date = rs.getDate("DueDate").toLocalDate();
+		    	  String semester = rs.getString("Semester");
+		    	  
+		    	  payment = new Payment(paymentAmount, _studentId, date, semester);	    	  
+		      }
+
+		   } catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }
+		   
+		return payment;
 	}
 }

@@ -6,6 +6,7 @@ package com.lti.dao;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 import com.lti.bean.Grade;
 import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
@@ -79,4 +80,17 @@ public interface StudentDAO {
 	 * @param Payment payment
 	 */
 	public void generatePaymentDAO(int studentId, Payment payment);
+	
+	/**
+	 * This method gets course data from course catalog and returns a list of courses
+	 * @param int studentId
+	 */
+	public List<CourseCatalog> getRegisteredCourseDataDAO(int studentId);
+	
+	/**
+	 * This method gets fee/payment due for a specific student 
+	 * @param int studentId
+	 * @return Payment
+	 */
+	public Payment getFeeDAO(int studentId);
 }
