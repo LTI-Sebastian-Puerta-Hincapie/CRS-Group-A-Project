@@ -9,6 +9,7 @@ import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.CourseEnrollment;
 import com.lti.service.ProfessorService;
 
 public class CRSProfessorMenu {
@@ -32,6 +33,11 @@ public class CRSProfessorMenu {
 		
 		// need to get professor from db - create professor instance
 		professor = professorService.getProfessor(user.getId());
+		
+		// init.
+		int courseId = -1;
+		List<CourseCatalog> courses = null;
+		List<CourseEnrollment> courseEnrollment = null;
 
 		// menu
 		while(true)
@@ -52,17 +58,16 @@ public class CRSProfessorMenu {
 			switch(professorSelection.toLowerCase()) {
 				case "add grades":
 					
-					// TODO: need to get and display a list of enrolled students in the course
 					System.out.println("\nList of courses: ");
-					List<CourseCatalog> courses = professorService.getProfessorCourses(professor.getId());
-					System.out.format("%16s%16s%16s%16s%16s", 
+					courses = professorService.getProfessorCourses(professor.getId());
+					System.out.format("%16s%16s%16s%16s%16s\n", 
 							"COURSEID",
 							"CREDITS",
 							"CAPACITY",
 							"ENROLLED",
 							"SEMESTER");
 					for(CourseCatalog course : courses) {
-						System.out.format("%16s%16s%16s%16s%16s", 
+						System.out.format("%16s%16s%16s%16s%16s\n", 
 								course.getId(),
 								course.getCredits(),
 								course.getCapacity(),
@@ -73,7 +78,19 @@ public class CRSProfessorMenu {
 					
 					// prompt professor to select a course
 					System.out.print("\nSelect a course by ID: ");
-					int courseId = scan.nextInt();
+					courseId = scan.nextInt();
+					
+					courseEnrollment = professorService.viewEnrolledStudents(courseId);
+					System.out.format("%16s%16s%16s\n", 
+							"COURSEID",
+							"STUDENTID",
+							"STUDENTNAME");
+					for(CourseEnrollment entry : courseEnrollment) {
+						System.out.format("%16s%16s%16s\n", 
+								entry.getCourseId(),
+								entry.getStudentId(),
+								entry.getStudentName());
+					}
 					
 					// prompt professor to select a student
 					System.out.print("\nSelect a student by ID: ");
@@ -82,13 +99,49 @@ public class CRSProfessorMenu {
 					// prompt professor to enter a grade for that student
 					System.out.print("\nEnter grade for this student: ");
 					String grade = scan.nextLine();
-					
-					
+					while(grade == "" || grade == null) {
+						grade = scan.nextLine();
+					}
+								
 					professorService.addGrades(studentId, courseId, grade);
 					
 					break;
 				case "view enrolled students":
 	
+					System.out.println("\nList of courses: ");
+					courses = professorService.getProfessorCourses(professor.getId());
+					System.out.format("%16s%16s%16s%16s%16s\n", 
+							"COURSEID",
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+					for(CourseCatalog course : courses) {
+						System.out.format("%16s%16s%16s%16s%16s\n", 
+								course.getId(),
+								course.getCredits(),
+								course.getCapacity(),
+								course.getEnrolled(),
+								course.getSemester());
+					}
+					
+					
+					// prompt professor to select a course
+					System.out.print("\nSelect a course by ID: ");
+					courseId = scan.nextInt();
+					
+					System.out.println("Current course enrollment: ");
+					courseEnrollment = professorService.viewEnrolledStudents(courseId);
+					System.out.format("%16s%16s%16s\n", 
+							"COURSEID",
+							"STUDENTID",
+							"STUDENTNAME");
+					for(CourseEnrollment entry : courseEnrollment) {
+						System.out.format("%16s%16s%16s\n", 
+								entry.getCourseId(),
+								entry.getStudentId(),
+								entry.getStudentName());
+					}
 					break;
 				case "back":
 					professor_back = true;

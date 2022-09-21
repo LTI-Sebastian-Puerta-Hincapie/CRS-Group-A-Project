@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.CourseEnrollment;
 import com.lti.bean.Grade;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
@@ -29,7 +30,7 @@ public class ProfessorService implements ProfessorServiceOperation {
 		professorDao.addGradesDAO(studentId, courseId, grade);
 	}
 	
-	public List<Student> viewEnrolledStudents(int courserId) {
+	public List<CourseEnrollment> viewEnrolledStudents(int courserId) {
 		
 		return professorDao.viewEnrolledStudentsDAO(courserId);
 	}

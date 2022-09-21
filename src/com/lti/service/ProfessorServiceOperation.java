@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.CourseEnrollment;
 import com.lti.bean.Grade;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
@@ -31,7 +32,7 @@ public interface ProfessorServiceOperation {
 	 * @param int courseId
 	 * @return List<Student> 
 	 */
-	public List<Student> viewEnrolledStudents(int courseId);
+	public List<CourseEnrollment> viewEnrolledStudents(int courseId);
 	
 	/**
 	 * This method gets the professor data 

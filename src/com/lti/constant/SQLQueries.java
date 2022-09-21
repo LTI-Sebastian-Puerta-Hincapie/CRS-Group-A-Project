@@ -37,8 +37,8 @@ public class SQLQueries {
 			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
 	
 	// PROFESSOR
-	public static final String INSERT_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 
-			"INSERT INTO registeredcourse SET Grade = ? WHERE StudentId = ? AND CourseId = ?";
+	public static final String UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 
+			"UPDATE registeredcourse SET Grade = ? WHERE StudentId = ? AND CourseId = ?";
 	
 	public static final String SELECT_PROFESSOR_COURSES_BY_PROFESSORID = 
 			"SELECT pc.CourseId, cc.Credits, cc.Capacity, cc.Enrolled, cc.Semester "
@@ -49,6 +49,15 @@ public class SQLQueries {
 	
 	public static final String SELECT_PROFESSOR_BY_PROFESSORID = 
 			"SELECT * FROM professors WHERE Id = ?";
+	
+	public static final String SELECT_STUDENT_ENROLLMENT_BY_COURSEID = 
+			"SELECT pc.CourseId, rc.StudentId, s.Name "
+			+ "FROM professorcourses pc "
+			+ "JOIN registeredcourse rc "
+			+ " ON pc.CourseId = rc.CourseId "
+			+ "JOIN students s "
+			+ " ON rc.StudentId = s.Id "
+			+ "WHERE pc.CourseId = ?";
 	
 	
 	// ADMIN

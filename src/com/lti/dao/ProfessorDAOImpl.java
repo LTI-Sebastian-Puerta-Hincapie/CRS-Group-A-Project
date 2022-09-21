@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.CourseEnrollment;
 import com.lti.bean.Grade;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
@@ -31,10 +32,10 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	   try {  
 			  conn = DBUtils.getConnection();
 			  
-		      stmt = conn.prepareStatement(SQLQueries.INSERT_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID);
+		      stmt = conn.prepareStatement(SQLQueries.UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID);
 		      
 		      //TODO: Update the Professor interfaces + classes to pass in a Grade (String)
-		      stmt.setString(1, "A");
+		      stmt.setString(1, grade);
 		      stmt.setInt(2,studentId);
 		      stmt.setInt(3, courseId);
 		      stmt.executeUpdate();	
@@ -49,10 +50,35 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	}
 
 	@Override
-	public List<Student> viewEnrolledStudentsDAO(int courseId) {
-		// TODO Auto-generated method stub
+	public List<CourseEnrollment> viewEnrolledStudentsDAO(int courseId) {
 		
-		return null;
+		List<CourseEnrollment> courseEnrollment = new ArrayList<CourseEnrollment>();
+		CourseEnrollment courseEnrollmentEntry; 
+		   try {  
+				  conn = DBUtils.getConnection();
+				  
+			      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_ENROLLMENT_BY_COURSEID);
+			      
+			      //TODO: Update the Professor interfaces + classes to pass in a Grade (String)
+			      stmt.setInt(1, courseId);
+			      ResultSet rs = stmt.executeQuery();
+			      while(rs.next()) {
+			    	  int _courseId = rs.getInt("CourseId");
+			    	  int studentId = rs.getInt("studentId");
+			    	  String studentName = rs.getString("Name");
+			    	  courseEnrollmentEntry = new CourseEnrollment(_courseId, studentId, studentName);
+			    	  courseEnrollment.add(courseEnrollmentEntry);
+			      }
+			    
+			   } catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   } catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }
+		   
+		   return courseEnrollment;
 	}
 
 	@Override
@@ -107,6 +133,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		    	  int enrolled = rs.getInt("Enrolled");
 		    	  String semester = rs.getString("Semester");
 		    	  course = new CourseCatalog(courseId, 0, 0, null, credits, capacity, enrolled, semester);
+		    	  courses.add(course);
 		      }
 		    
 		   } catch(SQLException se){
