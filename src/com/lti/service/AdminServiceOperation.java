@@ -14,7 +14,7 @@ import com.lti.bean.Student;
  */
 public interface AdminServiceOperation {
 	
-	public void generateReportCard(Student student, Professor professor);
+	public void generateReportCard(int studentID);
 	
 	public void addProfessor(Professor professor);
 	
@@ -24,9 +24,9 @@ public interface AdminServiceOperation {
 	
 	public void removeCourse(int id);
 	
-	public void updateCourse(int id, String name, String professor, String department, String prerequisites, int credits);
+	public void updateCourse(int id, String name, String description);
 	
 	public void checkAvailability(int id);
 	
-	public void viewCourses(Student student);
+	public void viewCourses(int studentID);
 }
