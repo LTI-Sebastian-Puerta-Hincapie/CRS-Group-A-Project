@@ -70,6 +70,14 @@ public class StudentService implements StudentServiceOperation {
 		
 		return studentDao.getStudentRegisteredCoursesDAO(studentId);
 	}
+
+	@Override
+	public void generatePayment(int studentId) {
+		
+		Payment payment = null;
+		studentDao.generatePaymentDAO(studentId, payment);
+		
+	}
 	
 	
 }

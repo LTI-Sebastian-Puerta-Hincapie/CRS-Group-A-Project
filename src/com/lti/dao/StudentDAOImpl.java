@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.lti.bean.Course;
 import com.lti.bean.Grade;
+import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.constant.SQLQueries;
@@ -221,5 +222,30 @@ public class StudentDAOImpl implements StudentDAO {
 		   }
 		   
 		   return rcourses;
+	}
+
+	@Override
+	public void generatePaymentDAO(int studentId, Payment payment) {
+		
+		   try {
+				  conn = DBUtils.getConnection();
+				  
+			      stmt = conn.prepareStatement(SQLQueries.INSERT_PAYMENT_FOR_STUDENT_COURSES);
+			      stmt.setInt(1, payment.getPaymentId());
+			      stmt.setInt(2, payment.getPaymentAmount());
+			      stmt.setInt(3, payment.getStudentId());
+			      stmt.setDate(4, payment.getDueDate());
+			      stmt.setString(5, payment.getSemester());
+			      stmt.setInt(6,studentId);
+			      stmt.executeUpdate();
+
+			   } catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   } catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }	
+		
 	}
 }

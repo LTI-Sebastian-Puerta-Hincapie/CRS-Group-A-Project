@@ -71,4 +71,10 @@ public interface StudentServiceOperation {
 	 * @return List<RegisteredCourse>
 	 */
 	public List<RegisteredCourse> getStudentRegisteredCourses(int studentId);
+	
+	/**
+	 * This method add payment data (amount, due date, semester, etc.) to the system
+	 * @param int studentId
+	 */
+	public void generatePayment(int studentId);
 }

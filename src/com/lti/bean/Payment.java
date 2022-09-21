@@ -1,5 +1,7 @@
 package com.lti.bean;
 
+import java.sql.Date;
+
 /**
  * @author Sebastian
  *
@@ -7,67 +9,88 @@ package com.lti.bean;
 
 public class Payment {
 	
-	private double fee;
 	private int paymentId;
-	private String modeOfPayment;     // debit, credit, cash
-	private String description;		  // online or offline
-	public final int COST_PER_CREDIT = 1125;
-	private Student student;
+	private int studentId;
+	private int paymentAmount;
+	private Date dueDate;
+	private String semester;
 	
-	public Payment(Student student) {
-		
-		this.student = student;
-	}
-	
-	/**
-	 * @return the fee
-	 */
-	public double getFee() {
-		
-		int totalCredits = 0;
-//		for(Course course : this.student.getCourses()) {
-			
-//			totalCredits += course.getCredits();
-//		}
-		
-		fee = totalCredits * COST_PER_CREDIT;
-		return fee;
+	public Payment(int paymentId, int studentId, int paymentAmount, Date dueDate, String semester) {
+
+		this.paymentId = paymentId;
+		this.studentId = studentId;
+		this.paymentAmount = paymentAmount;
+		this.dueDate = dueDate;
+		this.semester = semester;
 	}
 
-	/**
-	 * @return the modeOfPayment
-	 */
-	public String getModeOfPayment() {
-		return modeOfPayment;
-	}
-	/**
-	 * @param modeOfPayment the modeOfPayment to set
-	 */
-	public void setModeOfPayment(String modeOfPayment) {
-		this.modeOfPayment = modeOfPayment;
-	}
 	/**
 	 * @return the paymentId
 	 */
 	public int getPaymentId() {
 		return paymentId;
 	}
+
 	/**
 	 * @param paymentId the paymentId to set
 	 */
 	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
+
 	/**
-	 * @return the description
+	 * @return the studentId
 	 */
-	public String getDescription() {
-		return description;
+	public int getStudentId() {
+		return studentId;
 	}
+
 	/**
-	 * @param description the description to set
+	 * @param studentId the studentId to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	/**
+	 * @return the paymentAmount
+	 */
+	public int getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	/**
+	 * @param paymentAmount the paymentAmount to set
+	 */
+	public void setPaymentAmount(int paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
+
+	/**
+	 * @return the dueDate
+	 */
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	/**
+	 * @param dueDate the dueDate to set
+	 */
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	/**
+	 * @return the semester
+	 */
+	public String getSemester() {
+		return semester;
+	}
+
+	/**
+	 * @param semester the semester to set
+	 */
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 }

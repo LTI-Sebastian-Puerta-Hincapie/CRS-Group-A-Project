@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.lti.bean.Course;
 import com.lti.bean.Grade;
+import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 
@@ -71,4 +72,11 @@ public interface StudentDAO {
 	 * @return List<RegisteredCourse>
 	 */
 	public List<RegisteredCourse> getStudentRegisteredCoursesDAO(int studentId);
+	
+	/**
+	 * This method add payment data (amount, due date, semester, etc.) to the system
+	 * @param int studentId
+	 * @param Payment payment
+	 */
+	public void generatePaymentDAO(int studentId, Payment payment);
 }
