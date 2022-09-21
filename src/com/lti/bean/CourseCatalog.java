@@ -2,6 +2,11 @@ package com.lti.bean;
 
 import java.util.ArrayList;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class CourseCatalog {
 	
 	private ArrayList<Course> courses;
@@ -14,8 +19,7 @@ public class CourseCatalog {
 	private int capacity;
 	private int enrolled;
 	private String semester;
-	
-	
+		
 	public CourseCatalog(int id, int professorId, int departmentId, 
 			String prerequisites, int credits, int capacity, int enrolled, String semester) {
 		

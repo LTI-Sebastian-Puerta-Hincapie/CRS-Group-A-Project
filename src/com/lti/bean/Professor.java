@@ -2,6 +2,12 @@ package com.lti.bean;
 
 import java.util.ArrayList;
 
+/**
+ * @author Sebastian
+ *
+ */
+
+
 public class Professor {
 	
 	private int id;

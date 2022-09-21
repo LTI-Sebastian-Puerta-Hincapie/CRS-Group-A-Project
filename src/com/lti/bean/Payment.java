@@ -1,5 +1,10 @@
 package com.lti.bean;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class Payment {
 	
 	private double fee;
@@ -20,10 +25,10 @@ public class Payment {
 	public double getFee() {
 		
 		int totalCredits = 0;
-		for(Course course : this.student.getCourses()) {
+//		for(Course course : this.student.getCourses()) {
 			
 //			totalCredits += course.getCredits();
-		}
+//		}
 		
 		fee = totalCredits * COST_PER_CREDIT;
 		return fee;

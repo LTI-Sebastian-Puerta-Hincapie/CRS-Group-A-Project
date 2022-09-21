@@ -1,5 +1,6 @@
 package com.lti.service;
 
+import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOImpl;
@@ -18,14 +19,9 @@ public class UserService implements UserServiceOperation {
 		userdao = new UserDAOImpl();
 	}
 		
-	public Boolean Login(String username, String password) {
+	public User Login(String username, String password) {
 		
-		Boolean isUserFound = false;
-		String result = userdao.LoginDAO(username);
-		
-		isUserFound = password.equals(result) ? true : false;
-
-		return isUserFound;
+		return userdao.LoginDAO(username);
 	}
 	
 	public void Logout(String username, String password) {

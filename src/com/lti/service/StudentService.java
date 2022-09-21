@@ -6,43 +6,70 @@ import java.util.List;
 import java.util.Map;
 
 import com.lti.bean.Course;
+import com.lti.bean.Grade;
 import com.lti.bean.Payment;
+import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
+import com.lti.dao.StudentDAO;
+import com.lti.dao.StudentDAOImpl;
+
+/**
+ * @author Sebastian
+ *
+ */
 
 // TODO define all services method based on the use case diagram
 public class StudentService implements StudentServiceOperation {
 	
-	private Map<Student, Course> addedCourses;
+	private StudentDAO studentDao;
 	
 	public StudentService() {
 		
-		addedCourses = new HashMap<Student,Course>();
+		studentDao = new StudentDAOImpl();
 	}
 	
-	public void registerForCourse(Student student, Course course) {
+	public void registerForCourse(Student student, int courseId) {
 		
-		student.registerCourse(course);
+		studentDao.registerForCourseDAO(student, courseId);
 	}
 	
-	public void addCourse(Student student, Course course) {
+	public void addCourse(Student student, int courseId) {
 		
-		student.addCourse(course);
-		addedCourses.put(student, course);
+		studentDao.addCourseDAO(student, courseId);
 	}
 	
-	public void dropCourse(Student student, Course course) {
+	public void dropCourse(Student student, int courseId) {
 		
-		student.dropCourse(course);
-		addedCourses.remove(student, course);
+		studentDao.dropCourseDAO(student, courseId);
 	}
 
-	public void viewGrades(Student student) {
+	public List<Grade> viewGrades(Student student) {
 		
-		System.out.println("\nNo grades have been entered, please comeback at a later time");
+		return studentDao.viewGradesDAO(student);
 	}
 	
 	public void payFee(Student student, String paymentMethod) {
 		
 		System.out.println("\nYou have opted to pay: " + paymentMethod);
 	}
+	
+	@Override
+	public Student getStudent(int studentId) {
+		
+		return studentDao.getStudentDAO(studentId);
+	}
+
+	@Override
+	public List<Course> getStudentCourses(int studentId) {
+
+		return studentDao.getStudentCoursesDAO(studentId);
+	}
+
+	@Override
+	public List<RegisteredCourse> getStudentRegisteredCourses(int studentId) {
+		
+		return studentDao.getStudentRegisteredCoursesDAO(studentId);
+	}
+	
+	
 }
