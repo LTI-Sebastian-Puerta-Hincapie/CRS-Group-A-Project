@@ -93,4 +93,10 @@ public interface StudentDAO {
 	 * @return Payment
 	 */
 	public Payment getFeeDAO(int studentId);
+	
+	/**
+	 * This methods adds student semester registration for admin approval
+	 * @param int studentId
+	 */
+	public void addStudentSemesterRegistrationDAO(int studentId);
 }

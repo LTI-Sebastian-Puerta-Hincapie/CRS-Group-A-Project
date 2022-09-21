@@ -75,7 +75,6 @@ public class AdminDAOImpl implements AdminDAO{
 		}
 	}
 	
-
 	@Override
 	public void approveStudentRegistrationDAO(Student student, Admin admin) {/*
 		try{

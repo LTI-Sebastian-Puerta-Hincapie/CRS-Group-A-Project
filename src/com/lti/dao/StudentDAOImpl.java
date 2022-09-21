@@ -249,6 +249,12 @@ public class StudentDAOImpl implements StudentDAO {
 	   try {
 			  conn = DBUtils.getConnection();
 			  
+			  // delete existing payment data
+		      stmt = conn.prepareStatement(SQLQueries.DELETE_PAYMENT_FOR_STUDENT_COURSES);
+		      stmt.setInt(1, studentId);
+		      stmt.executeUpdate();
+			  
+		      // add new
 		      stmt = conn.prepareStatement(SQLQueries.INSERT_PAYMENT_FOR_STUDENT_COURSES);
 		      stmt.setInt(1, payment.getPaymentAmount());
 		      stmt.setInt(2, studentId);
@@ -322,7 +328,7 @@ public class StudentDAOImpl implements StudentDAO {
 		    	  LocalDate date = rs.getDate("DueDate").toLocalDate();
 		    	  String semester = rs.getString("Semester");
 		    	  
-		    	  payment = new Payment(paymentAmount, _studentId, date, semester);	    	  
+		    	  payment = new Payment(_studentId, paymentAmount, date, semester);	    	  
 		      }
 
 		   } catch(SQLException se){
@@ -334,5 +340,27 @@ public class StudentDAOImpl implements StudentDAO {
 		   }
 		   
 		return payment;
+	}
+
+	@Override
+	public void addStudentSemesterRegistrationDAO(int studentId) {
+		
+	   try {
+			  conn = DBUtils.getConnection();
+			  
+		      stmt = conn.prepareStatement(SQLQueries.INSERT_STUDENT_SEMESTER_REGISTRATION);
+		      stmt.setInt(1,studentId);
+		      stmt.setInt(2,0);
+		      stmt.setString(3,null);
+		      stmt.setString(4, null);
+		      stmt.executeUpdate();
+
+		   } catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }
 	}
 }

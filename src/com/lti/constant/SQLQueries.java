@@ -36,6 +36,8 @@ public class SQLQueries {
 	public static final String SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID = 
 			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
 	
+	public static final String DELETE_PAYMENT_FOR_STUDENT_COURSES = "DELETE FROM payment WHERE StudentId = ?";
+	
 	public static final String INSERT_PAYMENT_FOR_STUDENT_COURSES = 
 			"INSERT INTO payment (PaymentAmount, StudentId, DueDate, Semester) VALUES (?, ?, ?, ?)";
 	
@@ -50,7 +52,10 @@ public class SQLQueries {
 			"SELECT * FROM payment WHERE StudentId = ?";
 	
 	public static final String UPDATE_PAYMENT_BY_STUDENTID = 
-			"UPDATE payment SET IsPaid = ? PaymentMethod = ? WHERE StudentId = ?";
+			"UPDATE payment SET IsPaid = ?, PaymentMethod = ? WHERE StudentId = ?";
+	
+	public static final String INSERT_STUDENT_SEMESTER_REGISTRATION = 
+			"INSERT INTO semesterregistration (StudentId, ApprovalStatus, AdminId, Comment) VALUES (?, ?, ?, ?)";
 	
 	// PROFESSOR
 	public static final String UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 

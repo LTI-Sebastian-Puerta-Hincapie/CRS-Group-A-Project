@@ -55,6 +55,7 @@ public class StudentService implements StudentServiceOperation {
 	public void payFee(Student student, String paymentMethod) {
 		
 		System.out.println("\nYou have opted to pay: " + paymentMethod);
+		studentDao.payFeeDAO(student, paymentMethod);
 	}
 	
 	@Override
@@ -88,7 +89,7 @@ public class StudentService implements StudentServiceOperation {
 		}
 		
 		int amount = COST_PER_CREDIT * totalCredits;
-		Payment payment = new Payment(amount, studentId, LocalDate.now().plusDays(30), "Fall 2022");
+		Payment payment = new Payment(studentId, amount, LocalDate.now().plusDays(30), "Fall 2022");
 		studentDao.generatePaymentDAO(studentId, payment);
 	}
 
@@ -102,5 +103,11 @@ public class StudentService implements StudentServiceOperation {
 	public Payment getFee(int studentId) {
 		
 		return studentDao.getFeeDAO(studentId);
+	}
+
+	@Override
+	public void addStudentSemesterRegistration(int studentId) {
+		
+		studentDao.addStudentSemesterRegistrationDAO(studentId);
 	}
 }

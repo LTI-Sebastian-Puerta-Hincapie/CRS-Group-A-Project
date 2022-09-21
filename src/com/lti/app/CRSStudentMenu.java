@@ -91,6 +91,9 @@ public class CRSStudentMenu {
 					// add payment data to payment table
 					studentService.generatePayment(student.getId());
 					
+					// add student semester registration
+					studentService.addStudentSemesterRegistration(student.getId());
+					
 					break;
 				case "add course":
 					
@@ -207,11 +210,14 @@ public class CRSStudentMenu {
 					System.out.format("\n%16s%16s\n", "Amount", "Due Date");
 					System.out.format("%16s%16s", 
 							studentService.getFee(student.getId()).getPaymentAmount(), 
-							studentService.getFee(student.getId()).getPaymentAmount());
+							studentService.getFee(student.getId()).getDueDate());
 					
-					System.out.println("\nPayment Method: ");
+					System.out.print("\nPayment Method: ");
 					String paymentMethod = scan.nextLine();
+					
 					studentService.payFee(student, paymentMethod);
+					
+					System.out.println("\n--PAYMENT COMPLETE--");
 					
 					break;
 				case "back":

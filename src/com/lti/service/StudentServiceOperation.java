@@ -92,4 +92,10 @@ public interface StudentServiceOperation {
 	 * @return Payment
 	 */
 	public Payment getFee(int studentId);
+	
+	/**
+	 * This methods adds student semester registration for admin approval
+	 * @param int studentId
+	 */
+	public void addStudentSemesterRegistration(int studentId);
 }
