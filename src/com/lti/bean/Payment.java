@@ -1,5 +1,10 @@
 package com.lti.bean;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class Payment {
 	
 	private double fee;

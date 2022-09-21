@@ -9,7 +9,7 @@ import com.lti.bean.Professor;
 import com.lti.bean.Student;
 
 /**
- * @author user106
+ * @author Sebastian
  *
  */
 public interface AdminServiceOperation {

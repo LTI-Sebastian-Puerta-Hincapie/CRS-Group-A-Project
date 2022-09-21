@@ -3,10 +3,7 @@
  */
 package com.lti.dao;
 
-/**
- * @author user106
- *
- */
+
 public interface AdminDAO {
 
 	// TODO: define all respective method with database operations and 

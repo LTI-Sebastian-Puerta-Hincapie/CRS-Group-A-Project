@@ -1,5 +1,10 @@
 package com.lti.bean;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class Admin {
 	
 	private int id;

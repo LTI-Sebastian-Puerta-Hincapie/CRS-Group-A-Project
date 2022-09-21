@@ -14,5 +14,9 @@ import com.lti.bean.CourseCatalog;
  */
 public interface CourseCatalogOperation {
 	
+	/**
+	 * This method list all available courses in the course catalog
+	 * @return List<CourseCatalog> 
+	 */
 	public List<CourseCatalog> ListOfAllCourses();
 }

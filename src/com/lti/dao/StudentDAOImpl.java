@@ -12,39 +12,15 @@ import com.lti.bean.Course;
 import com.lti.bean.Grade;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
+import com.lti.constant.SQLQueries;
 import com.lti.utils.DBUtils;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class StudentDAOImpl implements StudentDAO {
-	
-	// Queries
-	private static final String INSERT_STUDENT_COURSE = 
-			"INSERT INTO registeredcourse (StudentId, CourseId, RegistrationStatus, Grade) "
-			+ "VALUES (?, ?, ?, ?)";
-	
-	private static final String SELECT_STUDENT_BY_STUDENTID = "SELECT * FROM students WHERE Id = ?";
-	
-	private static final String SELECT_STUDENT_COURSES_BY_STUDENTID = 
-			"SELECT rc.CourseId, c.CourseName "
-			+ "FROM registeredcourse rc "
-			+ "JOIN course c "
-			+ "  ON rc.CourseId = c.CourseId "
-			+ "WHERE rc.StudentId = ?";
-	
-	private static final String DELETE_STUDENT_COURSE_BY_COURSEID_AND_STUDENTID = 
-			"DELETE FROM registeredcourse WHERE StudentId = ? AND CourseId = ?";
-	
-	private static final String SELECT_GRADES_BY_STUDENTID = 
-			"SELECT rc.CourseId, c.CourseName, rc.Grade "
-			+ "FROM registeredcourse rc "
-			+ "JOIN course c "
-			+ "ON rc.CourseId = c.CourseId "
-			+ "WHERE rc.StudentId = ?";
-	
-	private static final String UPDATE_REGISTRATION_BY_COURSEID_AND_STUDENTID = 
-			"UPDATE registeredcourse SET RegistrationStatus = 1 WHERE StudentId = ? AND CourseId = ?";
-	
-	private static final String SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID = 
-			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
 	  
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
@@ -57,7 +33,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 		  conn = DBUtils.getConnection();
 		  
-	      stmt = conn.prepareStatement(UPDATE_REGISTRATION_BY_COURSEID_AND_STUDENTID);
+	      stmt = conn.prepareStatement(SQLQueries.UPDATE_REGISTRATION_BY_COURSEID_AND_STUDENTID);
 	      stmt.setInt(1,student.getId());
 	      stmt.setInt(2, courseId);
 	      stmt.executeUpdate();
@@ -78,7 +54,7 @@ public class StudentDAOImpl implements StudentDAO {
 		   
 		  conn = DBUtils.getConnection();
 		  
-	      stmt = conn.prepareStatement(INSERT_STUDENT_COURSE);
+	      stmt = conn.prepareStatement(SQLQueries.INSERT_STUDENT_COURSE);
 	      stmt.setInt(1,student.getId());
 	      stmt.setInt(2, courseId);
 	      stmt.setInt(3, 0);
@@ -101,7 +77,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 		  conn = DBUtils.getConnection();
 		  
-	      stmt = conn.prepareStatement(DELETE_STUDENT_COURSE_BY_COURSEID_AND_STUDENTID);
+	      stmt = conn.prepareStatement(SQLQueries.DELETE_STUDENT_COURSE_BY_COURSEID_AND_STUDENTID);
 	      stmt.setInt(1,student.getId());
 	      stmt.setInt(2, courseId);
 	      stmt.executeUpdate();
@@ -125,7 +101,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 			  conn = DBUtils.getConnection();
 			  
-		      stmt = conn.prepareStatement(SELECT_GRADES_BY_STUDENTID);
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_GRADES_BY_STUDENTID);
 		      stmt.setInt(1,student.getId());
 		      ResultSet rs = stmt.executeQuery();
 		      while(rs.next()) {
@@ -163,7 +139,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 			  conn = DBUtils.getConnection();
 			  
-		      stmt = conn.prepareStatement(SELECT_STUDENT_BY_STUDENTID);
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_BY_STUDENTID);
 		      stmt.setInt(1,studentId);
 		      ResultSet rs = stmt.executeQuery();
 		      if(rs.next()) {
@@ -195,7 +171,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 			  conn = DBUtils.getConnection();
 			  
-		      stmt = conn.prepareStatement(SELECT_STUDENT_COURSES_BY_STUDENTID);
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_COURSES_BY_STUDENTID);
 		      stmt.setInt(1,studentId);
 		      ResultSet rs = stmt.executeQuery();
 		      while(rs.next()) {
@@ -224,7 +200,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 			  conn = DBUtils.getConnection();
 			  
-		      stmt = conn.prepareStatement(SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID);
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID);
 		      stmt.setInt(1,studentId);
 		      ResultSet rs = stmt.executeQuery();
 		      while(rs.next()) {

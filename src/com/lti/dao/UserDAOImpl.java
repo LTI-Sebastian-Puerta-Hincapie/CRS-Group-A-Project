@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lti.bean.User;
+import com.lti.constant.SQLQueries;
 import com.lti.utils.DBUtils;
 
 /**
@@ -15,10 +16,6 @@ import com.lti.utils.DBUtils;
  */
 
 public class UserDAOImpl implements UserDAO {
-
-	// Queries
-	private static final String SELECT_USER_BY_USERNAME = 
-			"SELECT * FROM users WHERE Username = ?";
 	
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
@@ -31,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 		   	
 		  conn = DBUtils.getConnection();
 		  
-	      stmt = conn.prepareStatement(SELECT_USER_BY_USERNAME);
+	      stmt = conn.prepareStatement(SQLQueries.SELECT_USER_BY_USERNAME);
 	      stmt.setString(1, username);
 	      ResultSet rs = stmt.executeQuery();
 	      if(rs.next()) {

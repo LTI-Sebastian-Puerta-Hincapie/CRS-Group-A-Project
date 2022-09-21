@@ -13,6 +13,11 @@ import com.lti.bean.Student;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOImpl;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 // TODO define all services method based on the use case diagram
 public class StudentService implements StudentServiceOperation {
 	

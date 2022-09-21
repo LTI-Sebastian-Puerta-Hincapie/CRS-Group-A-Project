@@ -8,6 +8,11 @@ import com.lti.bean.CourseCatalog;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class AdminService implements AdminServiceOperation {
 	
 	private HashMap<Integer,Professor> professors;

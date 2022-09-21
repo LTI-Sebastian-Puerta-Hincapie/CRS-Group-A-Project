@@ -2,6 +2,11 @@ package com.lti.bean;
 
 import java.util.ArrayList;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class CourseCatalog {
 	
 	private ArrayList<Course> courses;
