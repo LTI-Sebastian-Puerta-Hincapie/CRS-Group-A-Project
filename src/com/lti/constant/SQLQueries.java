@@ -36,6 +36,9 @@ public class SQLQueries {
 	public static final String SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID = 
 			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
 	
+	public static final String INSERT_PAYMENT_FOR_STUDENT_COURSES = 
+			"INSERT INTO payment (PaymentId, PaymentAmount, StudentId, DueDate, Semester) VALUES (?, ?, ?, ?, ?)";
+	
 	// PROFESSOR
 	public static final String UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 
 			"UPDATE registeredcourse SET Grade = ? WHERE StudentId = ? AND CourseId = ?";

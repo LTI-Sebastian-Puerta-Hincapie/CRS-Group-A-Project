@@ -30,7 +30,7 @@ public interface ProfessorServiceOperation {
 	/**
 	 * This method returns a list of all enrolled students in a specific course
 	 * @param int courseId
-	 * @return List<Student> 
+	 * @return List<CourseEnrollment> 
 	 */
 	public List<CourseEnrollment> viewEnrolledStudents(int courseId);
 	

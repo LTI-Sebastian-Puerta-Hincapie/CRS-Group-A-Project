@@ -11,7 +11,18 @@ import com.lti.bean.User;
  */
 public interface UserDAO {
 	
+	/**
+	 * This method validates the user login credentials 
+	 * @param String username
+	 * @param String password
+	 * @return User 
+	 */
 	public User LoginDAO(String username);
 	
+	/**
+	 * This method validates the user logout
+	 * @param String username
+	 * @param String password
+	 */
 	public void LogoutDAO(String username);
 }

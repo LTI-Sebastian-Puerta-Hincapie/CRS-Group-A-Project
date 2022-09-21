@@ -86,7 +86,11 @@ public class CRSStudentMenu {
 						System.out.format("%16s%32s\n", 
 								course.getCourseId(), 
 								course.getRegisteredStatus() == 1 ? "Yes" : "No");
-					}					
+					}	
+					
+					// add payment data to payment table
+					
+					
 					break;
 				case "add course":
 					
@@ -181,6 +185,15 @@ public class CRSStudentMenu {
 				case "pay fee":
 					
 					System.out.println("\n--UNDER CONSTRUCTION--");
+					
+					// TODO: Validate if the student has registered for any courses
+					
+					// TODO: Display list of registered courses
+					
+					// TODO: Based on the registered courses perform payment operation
+					
+					// TODO: Display payment due
+					
 //					Payment payment = new Payment(student);
 //					int totalNumberOfCredits = 0;
 //					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);

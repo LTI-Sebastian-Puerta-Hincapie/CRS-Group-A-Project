@@ -97,7 +97,7 @@ public class CRSProfessorMenu {
 					int studentId = scan.nextInt();
 					
 					// prompt professor to enter a grade for that student
-					System.out.print("\nEnter grade for this student: ");
+					System.out.print("\n\nEnter grade for this student: ");
 					String grade = scan.nextLine();
 					while(grade == "" || grade == null) {
 						grade = scan.nextLine();
