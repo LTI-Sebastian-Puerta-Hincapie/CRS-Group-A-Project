@@ -35,4 +35,21 @@ public class SQLQueries {
 	
 	public static final String SELECT_STUDENT_REGISTERED_COURSES_BY_STUDENTID = 
 			"SELECT * FROM registeredcourse WHERE StudentId = ? AND RegistrationStatus = 1";
+	
+	// PROFESSOR
+	public static final String INSERT_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID = 
+			"INSERT INTO registeredcourse SET Grade = ? WHERE StudentId = ? AND CourseId = ?";
+	
+	public static final String SELECT_PROFESSOR_COURSES_BY_PROFESSORID = 
+			"SELECT pc.CourseId, cc.Credits, cc.Capacity, cc.Enrolled, cc.Semester "
+			+ "FROM professorcourses pc "
+			+ "JOIN coursecatalog cc "
+			+ " ON pc.CourseId = cc.Id "
+			+ "WHERE pc.ProfessorId = ?";
+	
+	public static final String SELECT_PROFESSOR_BY_PROFESSORID = 
+			"SELECT * FROM professors WHERE Id = ?";
+	
+	
+	// ADMIN
 }

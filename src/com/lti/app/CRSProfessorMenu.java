@@ -6,51 +6,32 @@ import java.util.Scanner;
 
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.bean.User;
 import com.lti.bean.Course;
+import com.lti.bean.CourseCatalog;
 import com.lti.service.ProfessorService;
 
 public class CRSProfessorMenu {
 	
 	private Scanner scan;
-	private String username;
-	
-	// default data - initial in-memory data
-//	private Professor rubin = new Professor(100, "Rubin", "Biology");
-//	private Professor axel = new Professor(200, "Axel", "Psychology");
-//	private Professor nelson = new Professor(300, "Nelson", "Economics");
-	private int professorMaxId = 300;
-	private List<Professor> professors = new ArrayList<Professor>();
+	private User user;
 	private Professor professor;
+	private ProfessorService professorService;
 	
-	public CRSProfessorMenu(Scanner scan, String username) {
+	public CRSProfessorMenu(Scanner scan, User user) {
 		
 		this.scan = scan;
-		this.username = username;
+		this.user = user;
 		
 		professor = new Professor();
-		
-//		professors.add(rubin);
-//		professors.add(axel);
-//		professors.add(nelson);
+		professorService = new ProfessorService();
+
 	}
 	
 	public void menu() {
 		
-		// use existing professor or create new 
-//		switch(username) {
-//			case "thomas": 
-//				professor = rubin;
-//				break;
-//			case "abigail":
-//				professor = axel;
-//				break;
-//			case "tej":
-//				professor = nelson;
-//			default:
-//				professor = new Professor(professorMaxId + 1, username, "undefined");				
-//		}
-		
-		professors.add(professor);
+		// need to get professor from db - create professor instance
+		professor = professorService.getProfessor(user.getId());
 
 		// menu
 		while(true)
@@ -68,32 +49,54 @@ public class CRSProfessorMenu {
 			
 			Boolean professor_back = false;
 			
-//			switch(professorSelection.toLowerCase()) {
-//				case "add grades":
-//					ProfessorService PRService = new ProfessorService();
-////					Student newStudent = new Student(1, "Thomas", "Biology");
-////					Course newCourse = new Course(100, "Biology", "Rubin", "Science", "Prerequisites", 3);
-////					PRService.addGrades(newStudent, newCourse);
-//					System.out.println("Enter grades");
-//					Scanner input = new Scanner(System.in);
-//					String grades = input.nextLine();
-//					System.out.println( grades + " added to " + newStudent.getName());
-//					break;
-//				case "view enrolled students":
-//					Student newStudent1 = new Student(1, "Thomas", "Biology");
-//					Student newStudent2 = new Student(2, "Abigail", "Psychology");
-//					Student newStudent3 = new Student(3, "Tej", "Economics");
-//					System.out.println(newStudent1.getId() + " " + newStudent1.getName());
-//					System.out.println(newStudent2.getId() + " " + newStudent2.getName());
-//					System.out.println(newStudent3.getId() + " " + newStudent3.getName());
-//					break;
-//				case "back":
-//					professor_back = true;
-//					break;
-//				default:
-//					System.out.println("Incorrect input, try again");
-//					continue;
-//			}
+			switch(professorSelection.toLowerCase()) {
+				case "add grades":
+					
+					// TODO: need to get and display a list of enrolled students in the course
+					System.out.println("\nList of courses: ");
+					List<CourseCatalog> courses = professorService.getProfessorCourses(professor.getId());
+					System.out.format("%16s%16s%16s%16s%16s", 
+							"COURSEID",
+							"CREDITS",
+							"CAPACITY",
+							"ENROLLED",
+							"SEMESTER");
+					for(CourseCatalog course : courses) {
+						System.out.format("%16s%16s%16s%16s%16s", 
+								course.getId(),
+								course.getCredits(),
+								course.getCapacity(),
+								course.getEnrolled(),
+								course.getSemester());
+					}
+					
+					
+					// prompt professor to select a course
+					System.out.print("\nSelect a course by ID: ");
+					int courseId = scan.nextInt();
+					
+					// prompt professor to select a student
+					System.out.print("\nSelect a student by ID: ");
+					int studentId = scan.nextInt();
+					
+					// prompt professor to enter a grade for that student
+					System.out.print("\nEnter grade for this student: ");
+					String grade = scan.nextLine();
+					
+					
+					professorService.addGrades(studentId, courseId, grade);
+					
+					break;
+				case "view enrolled students":
+	
+					break;
+				case "back":
+					professor_back = true;
+					break;
+				default:
+					System.out.println("Incorrect input, try again");
+					continue;
+			}
 			if(professor_back) break;		//   exit from professor menu while loop
 		}
 	}
