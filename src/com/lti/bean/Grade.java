@@ -2,20 +2,20 @@ package com.lti.bean;
 
 public class Grade {
 	
-	private char grade;
+	private String grade;
 	private Course course;
 	
-	public Grade(char grade, Course course) {
+	public Grade(String grade, Course course) {
 		
 		this.grade = grade;
 		this.course = course;
 	}
 
-	public char getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(char grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 

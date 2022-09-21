@@ -46,6 +46,9 @@ public class CRSMenuApplication {
 			System.out.print("\n-> ");
 			
 			String selection = scan.nextLine();
+			if(selection == "" || selection == null || selection.equals(null)) {
+				selection = scan.nextLine();
+			}
 			
 			Boolean exit = false;
 			

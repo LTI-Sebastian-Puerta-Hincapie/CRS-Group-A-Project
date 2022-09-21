@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
+import com.lti.bean.Grade;
 import com.lti.bean.Payment;
+import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.service.CourseCatalogOperation;
@@ -59,49 +61,32 @@ public class CRSStudentMenu {
 			switch(studentSelection.toLowerCase()) {
 				case "register for course":
 					
-					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
+					System.out.println("\nCourses added:");
+					System.out.format("%16s%16s\n", 
 							"ID",
-							"NAME", 
-							"PROFESSORID", 
-							"DEPARTMENTID", 
-							"PREREQUISITE",
-							"CREDITS",
-							"CAPACITY",
-							"ENROLLED",
-							"SEMESTER");
-//					for(Course course : courseService.ListOfAllCourses()) {
-//						System.out.format("%4s%16s%16s%16s%16s%16s%16s%12s\n", 
-//								course.getId(), 
-//								course.getName(), 
-//								course.getProfessorId(),
-//								course.getDepartmentId(), 
-//								course.getPrerequisites(), 
-//								course.getCredits(),
-//								course.getCapacity(),
-//								course.getEnrolled(),
-//								course.getSemester());
-//					}
+							"NAME");
+					for(Course course : studentService.getStudentCourses(student.getId())) {
+						System.out.format("%16s%16s\n", 
+								course.getCourseId(), 
+								course.getCourseName());
+					}
 					
-//					System.out.print("\nRegister for a course, select by ID -> ");
-//					int courseId = scan.nextInt();
-//					
-//					studentService.registerForCourse(student, student.getCourses().get(courseId));
-//					System.out.println("\n-- You have registered for a course --");	
-//					
-//					System.out.println("\nCourses you have been registered for:");
-//					System.out.format("%4s%16s%16s\n", 
-//							"ID",
-//							"NAME", 
-//							"STATUS");
-//					
-//					for(Map.Entry<Course, Boolean> entry : student.getCourseRegistration().entrySet()) {
-//						System.out.format("%4s%16s%16s\n", 
-//								Integer.toString(entry.getKey().getId()), 
-//								entry.getKey().getName(), 
-//								entry.getValue() ? "Registered" : "Not Registered");
-//					}
-//					
+					System.out.print("\nRegister for a course, select by ID -> ");
+					int courseId = scan.nextInt();
+					
+				    studentService.registerForCourse(student, courseId);
+					System.out.println("\n-- You have registered for a course --");	
+					
+					System.out.println("\nCourses you have registered for:");
+					System.out.format("%16s%32s\n", 
+							"COURSEID",
+							"REGISTRATIONSTATUS");
+					
+					for(RegisteredCourse course : studentService.getStudentRegisteredCourses(student.getId())) {
+						System.out.format("%16s%32s\n", 
+								course.getCourseId(), 
+								course.getRegisteredStatus() == 1 ? "Yes" : "No");
+					}					
 					break;
 				case "add course":
 					
@@ -162,38 +147,40 @@ public class CRSStudentMenu {
 					System.out.print("\nSelect course to drop by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-//					service.dropCourse(student, courses.get(course_id_selected));
+					studentService.dropCourse(student, course_id_selected);
 					System.out.println("\n-- Course has been dropped --");
 					
-					System.out.println("\nCourses in your cart:");
-					System.out.format("%4s%16s%16s%16s%16s%16s%16s%16s%12s\n", 
+					System.out.println("\nCourses added:");
+					System.out.format("%16s%16s\n", 
 							"ID",
-							"NAME", 
-							"PROFESSORID", 
-							"DEPARTMENTID", 
-							"PREREQUISITE",
-							"CREDITS",
-							"CAPACITY",
-							"ENROLLED",
-							"SEMESTER");
-//					for(Course course : student.getCourses()) {
-//						System.out.format("%4s%16s%16s%16s%16s%12s\n", 
-//								course.getId(), 
-//								course.getName(), 
-//								course.getProfessorId(),
-//								course.getDepartmentId(), 
-//								course.getPrerequisites(), 
-//								course.getCredits());
-//					}
+							"NAME");
+					for(Course course : studentService.getStudentCourses(student.getId())) {
+						System.out.format("%16s%16s\n", 
+								course.getCourseId(), 
+								course.getCourseName());
+					}
 					
 					break;
 				case "view grades":
-					//TODO: complete functionality
-//					studentService.viewGrades(student);
-//					System.out.println("Viewing grades...");
+					
+					List<Grade> grades = studentService.viewGrades(student);
+					
+					System.out.println("\nStudent Course Grades:");
+					System.out.format("%16s%16s%16s\n", 
+							"COURSEID",
+							"COURSENAME",
+							"GRADE");
+					for(Grade grade : grades) {
+						System.out.format("%16s%16s%16s\n", 
+								grade.getCourse().getCourseId(), 
+								grade.getCourse().getCourseName(),
+								grade.getGrade());
+					}
+					
 					break;
 				case "pay fee":
 					
+					System.out.println("\n--UNDER CONSTRUCTION--");
 //					Payment payment = new Payment(student);
 //					int totalNumberOfCredits = 0;
 //					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);
