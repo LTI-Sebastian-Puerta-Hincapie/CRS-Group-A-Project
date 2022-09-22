@@ -83,7 +83,7 @@ public class CRSMenuApplication {
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, user);
-					CRSAdminMenu adminMenu = new CRSAdminMenu(scan, username);
+					CRSAdminMenu adminMenu = new CRSAdminMenu(scan);
 					
 					// TODO: login credential validation method here						
 					

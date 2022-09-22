@@ -1,13 +1,10 @@
 package com.lti.app;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.lti.bean.Professor;
-import com.lti.bean.Student;
 import com.lti.bean.User;
-import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 import com.lti.bean.CourseEnrollment;
 import com.lti.service.ProfessorService;

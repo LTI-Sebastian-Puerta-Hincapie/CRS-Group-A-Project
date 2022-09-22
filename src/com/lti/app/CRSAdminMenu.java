@@ -1,50 +1,26 @@
 package com.lti.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
-import com.lti.bean.Student;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceOperation;
 
 public class CRSAdminMenu {
 	
 	private Scanner scan;
-	private String username;
 	
-//	private Admin charlie = new Admin(1000, "Charlie");
-	private int adminMaxId = 1000;		
-	private List<Admin> admins = new ArrayList<Admin>();
-	private Admin admin;
 	private AdminServiceOperation service;
 	
-	public CRSAdminMenu(Scanner scan, String username) {
+	public CRSAdminMenu(Scanner scan) {
 		
 		this.scan = scan;
-		this.username = username;
-		
-		admin = new Admin();
-		
-//		admins.add(charlie);
-		
+				
 		service = new AdminService();
 	}
 	
 	public void menu() {
-		
-		// use existing admin or create new 
-		switch(username) {
-			case "charlie":
-//				admin = charlie;
-			default:
-//				admin = new Admin(adminMaxId + 1, username);				
-		}
-		
-		admins.add(admin);
 		
 		// menu
 		while(true)
