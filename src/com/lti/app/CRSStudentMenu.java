@@ -319,8 +319,39 @@ public class CRSStudentMenu {
 							payment.getPaymentAmount(), 
 							payment.getDueDate());
 					
+					System.out.println("\n");
+					System.out.println("1. Credit");
+					System.out.println("2. Debit");
+					System.out.println("3. Cash (in-person)");
+					System.out.println("4. Paypal");
+					System.out.println("5. Direct withdrawal");
 					System.out.print("\nPayment Method: ");
 					String paymentMethod = scan.nextLine();
+					
+					paymentMethod = paymentMethod					
+							.toLowerCase()
+							.replaceAll("^\\s+", "")
+							.replaceAll("\\s+$", "");
+					
+					switch(paymentMethod) {
+						
+						case "1":
+							paymentMethod = "credit";
+							break;
+						case "2":
+							paymentMethod = "debit";
+							break;
+						case "3":
+							paymentMethod = "cash";
+							break;
+						case "4":
+							paymentMethod = "paypal";
+							break;
+						case "5":
+							paymentMethod = "direct withdrawal";
+							break;
+						default: break;
+					}
 					
 					try {
 						studentService.payFee(student, paymentMethod);
