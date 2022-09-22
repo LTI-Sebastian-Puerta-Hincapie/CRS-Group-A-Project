@@ -63,7 +63,7 @@ public class CRSMenuApplication {
 					password = scan.next();		
 					
 					// validate login
-					User user;
+					User user = null;
 					try {
 						user = userService.Login(username, password);
 					} catch (UserNotFoundException e) {

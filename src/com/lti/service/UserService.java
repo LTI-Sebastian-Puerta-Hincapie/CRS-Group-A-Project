@@ -32,6 +32,7 @@ public class UserService implements UserServiceOperation {
 			
 			throw new IncorrectPasswordException();
 		}
+		System.out.println("\n--You have logged in--");
 		return user;
 	}
 	

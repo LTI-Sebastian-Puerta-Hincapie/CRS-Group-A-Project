@@ -1,5 +1,6 @@
 package com.lti.app;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,15 @@ import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.bean.User;
+import com.lti.exception.PaymentBillNotCreatedException;
+import com.lti.exception.RegisteredCourseNotFound;
 import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.StudentPayFeeFailureException;
+import com.lti.exception.StudentPaymentRecordNotFoundException;
+import com.lti.exception.UnableToViewStudentGradesException;
 import com.lti.exception.StudentCourseRegistrationNotFoundException;
 import com.lti.service.CourseCatalogOperation;
 import com.lti.service.CourseCatalogService;
@@ -41,6 +48,9 @@ public class CRSStudentMenu {
 		
 		// create student instance
 		Student student = null;
+		List<Course> courses = null;
+		List<RegisteredCourse> rcourses = null;
+		
 		try {
 			student = studentService.getStudent(user.getId());
 		} catch (StudentNotFoundException e) {
@@ -98,7 +108,14 @@ public class CRSStudentMenu {
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
-					for(Course course : studentService.getStudentCourses(student.getId())) {
+					
+					try {
+						courses = studentService.getStudentCourses(student.getId());
+					} catch (StudentCourseNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
 								course.getCourseId(), 
 								course.getCourseName());
@@ -120,14 +137,26 @@ public class CRSStudentMenu {
 							"COURSEID",
 							"REGISTRATIONSTATUS");
 					
-					for(RegisteredCourse course : studentService.getStudentRegisteredCourses(student.getId())) {
+
+					try {
+						rcourses = studentService.getStudentRegisteredCourses(student.getId());
+					} catch (RegisteredCourseNotFound e) {
+						e.printStackTrace();
+					}
+					
+					for(RegisteredCourse course : rcourses) {
 						System.out.format("%16s%32s\n", 
 								course.getCourseId(), 
 								course.getRegisteredStatus() == 1 ? "Yes" : "No");
 					}	
 					
 					// add payment data to payment table
-					studentService.generatePayment(student.getId());
+					try {
+						studentService.generatePayment(student.getId());
+					} catch (PaymentBillNotCreatedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					// add student semester registration
 					studentService.addStudentSemesterRegistration(student.getId());
@@ -176,7 +205,14 @@ public class CRSStudentMenu {
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
-					for(Course course : studentService.getStudentCourses(student.getId())) {
+					
+					try {
+						courses = studentService.getStudentCourses(student.getId());
+					} catch (StudentCourseNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
 								course.getCourseId(), 
 								course.getCourseName());
@@ -188,7 +224,14 @@ public class CRSStudentMenu {
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
-					for(Course course : studentService.getStudentCourses(student.getId())) {
+					
+					try {
+						courses =  studentService.getStudentCourses(student.getId());
+					} catch (StudentCourseNotFoundException e1) {
+						e1.printStackTrace();
+					}
+					
+					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
 								course.getCourseId(), 
 								course.getCourseName());
@@ -209,7 +252,13 @@ public class CRSStudentMenu {
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
-					for(Course course : studentService.getStudentCourses(student.getId())) {
+					
+					try {
+						courses = studentService.getStudentCourses(student.getId());
+					} catch (StudentCourseNotFoundException e) {
+						e.printStackTrace();
+					}
+					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
 								course.getCourseId(), 
 								course.getCourseName());
@@ -218,7 +267,13 @@ public class CRSStudentMenu {
 					break;
 				case "view grades":
 					
-					List<Grade> grades = studentService.viewGrades(student);
+					List<Grade> grades = null;
+					try {
+						grades = studentService.viewGrades(student);
+					} catch (UnableToViewStudentGradesException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					System.out.println("\nStudent Course Grades:");
 					System.out.format("%16s%16s%16s\n", 
@@ -235,14 +290,16 @@ public class CRSStudentMenu {
 					break;
 				case "pay fee":
 					
-					// TODO: Validate if the student has registered for any courses
-					List<RegisteredCourse> rcourses = studentService.getStudentRegisteredCourses(student.getId());
+					try {
+						rcourses = studentService.getStudentRegisteredCourses(student.getId());
+					} catch (RegisteredCourseNotFound e) {
+						e.printStackTrace();
+					}
 					if(rcourses.size() == 0) {
 						System.out.println("\nYou have not registered for any courses yet, please register.");
 						break;
 					}
 					
-					// TODO: Display list of registered courses
 					System.out.println("\nCourses you have registered for:");
 					System.out.format("%16s%32s\n", 
 							"COURSEID",
@@ -254,17 +311,29 @@ public class CRSStudentMenu {
 								course.getRegisteredStatus() == 1 ? "Yes" : "No");
 					}			
 					
-					// TODO: Display payment due
+					Payment payment = null;
+					try {
+					    payment = studentService.getFee(student.getId());
+					} catch (StudentPaymentRecordNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					System.out.format("\n%16s%16s\n", "Amount", "Due Date");
 					System.out.format("%16s%16s", 
-							studentService.getFee(student.getId()).getPaymentAmount(), 
-							studentService.getFee(student.getId()).getDueDate());
+							payment.getPaymentAmount(), 
+							payment.getDueDate());
 					
 					System.out.print("\nPayment Method: ");
 					String paymentMethod = scan.nextLine();
 					
-					studentService.payFee(student, paymentMethod);
-					
+					try {
+						studentService.payFee(student, paymentMethod);
+					} catch (StudentPayFeeFailureException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
 					System.out.println("\n--PAYMENT COMPLETE--");
 					
 					break;
