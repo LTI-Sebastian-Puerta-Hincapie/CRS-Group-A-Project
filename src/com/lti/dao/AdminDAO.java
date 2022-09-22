@@ -6,6 +6,7 @@ package com.lti.dao;
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 
 /**
@@ -31,7 +32,13 @@ public interface AdminDAO {
 	 * @param student
 	 * @param admin
 	 */
-	public void approveStudentRegistrationDAO(Student student, Admin admin);
+	public void approveStudentRegistrationDAO(int studentID, boolean approvalStatus);
+	
+	/**
+	 * Creates StudentRegistration in database
+	 * @param semesterRegistration
+	 */
+	public void createStudentRegistrationDAO(SemesterRegistration semesterRegistration);
 	
 	/**
 	 * This method adds a course to the course list

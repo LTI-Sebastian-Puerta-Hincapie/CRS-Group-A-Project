@@ -95,8 +95,17 @@ public class CRSAdminMenu {
 					service.viewCourses(studentID);
 					break;
 				case "approve registration":
-					service.approveStudentRegistration(null);
-					System.out.println("Approving registration...");
+					System.out.println("Enter studentID: ");
+					studentID = Integer.parseInt(scan.nextLine());
+					System.out.println("Approve? Y/N: ");
+					boolean approvalStatus;
+					if(scan.nextLine().toLowerCase() == "y") {
+						approvalStatus = true;
+					}
+					else {
+						approvalStatus = false;
+					}
+					service.approveStudentRegistration(studentID, approvalStatus);
 					break;
 				case "add course":
 					System.out.println("Enter Course ID: ");
