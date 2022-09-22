@@ -14,6 +14,7 @@ import com.lti.bean.Professor;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.constant.SQLQueries;
+import com.lti.exception.CourseNotFoundException;
 import com.lti.utils.DBUtils;
 
 public class AdminDAOImpl implements AdminDAO{
@@ -128,10 +129,22 @@ public class AdminDAOImpl implements AdminDAO{
 	public void removeCourseDAO(int id) {
 		try{
 			conn = DBUtils.getConnection();
-			String sql="DELETE from course where CourseID=?";
+			String sql = "SELECT * From course WHERE CourseID = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(!rs.next()) {
+				throw new CourseNotFoundException("Course not found in course list");
+			}
+			
+			conn = DBUtils.getConnection();
+			sql="DELETE from course where CourseID=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
+		}catch(CourseNotFoundException ce) {
+			System.out.println(ce.getMessage());
 		}catch(SQLException se){
 			//Handle errors for JDBC
 			se.printStackTrace();
@@ -145,13 +158,25 @@ public class AdminDAOImpl implements AdminDAO{
 	public void updateCourseDAO(int id, String name, String description) {
 		try{
 			conn = DBUtils.getConnection();
-			String sql = "UPDATE course SET CourseName=?, Description=? WHERE CourseID=?";
+			String sql = "SELECT * From course WHERE CourseID = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(!rs.next()) {
+				throw new CourseNotFoundException("Course not found in course list");
+			}
+			
+			conn = DBUtils.getConnection();
+			sql = "UPDATE course SET CourseName=?, Description=? WHERE CourseID=?";
 			stmt = conn.prepareStatement(sql);
 			
 			stmt.setString(1,name);
 			stmt.setString(2, description);
 			stmt.setInt(3, id);
 			stmt.executeUpdate();
+		}catch(CourseNotFoundException ce) {
+			System.out.println(ce.getMessage());
 		}catch(SQLException se){
 			//Handle errors for JDBC
 			se.printStackTrace();
@@ -179,8 +204,10 @@ public class AdminDAOImpl implements AdminDAO{
 				}
 			}
 			else {
-				System.out.println("Course is not being offered");
+				throw new CourseNotFoundException("Course not found in course list");
 			}	
+		}catch(CourseNotFoundException ce) {
+			System.out.println(ce.getMessage());
 		}catch(SQLException se){
 			//Handle errors for JDBC
 			se.printStackTrace();
