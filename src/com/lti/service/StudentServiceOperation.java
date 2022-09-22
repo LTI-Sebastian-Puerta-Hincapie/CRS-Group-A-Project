@@ -11,10 +11,16 @@ import com.lti.bean.Grade;
 import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
+import com.lti.exception.PaymentBillNotCreatedException;
+import com.lti.exception.RegisteredCourseNotFound;
 import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
-import com.lti.exception.StudentRegistrationNotFoundException;
+import com.lti.exception.StudentPayFeeFailureException;
+import com.lti.exception.StudentPaymentRecordNotFoundException;
+import com.lti.exception.StudentCourseRegistrationNotFoundException;
+import com.lti.exception.UnableToViewStudentGradesException;
 
 /**
  * @author Sebastian
@@ -26,9 +32,9 @@ public interface StudentServiceOperation {
 	 * This method registers a student for a specific course 
 	 * @param Student student
 	 * @param int courseId
-	 * @exception StudentRegistrationNotFoundException
+	 * @exception StudentCourseRegistrationNotFoundException
 	 */
-	public void registerForCourse(Student student, int courseId) throws StudentRegistrationNotFoundException;
+	public void registerForCourse(Student student, int courseId) throws StudentCourseRegistrationNotFoundException;
 	
 	/**
 	 * This method adds a course for a specific student
@@ -49,16 +55,18 @@ public interface StudentServiceOperation {
 	/**
 	 * This method view grades for a specific student and returns a list of grades
 	 * @param Student student
+	 * @exception UnableToViewStudentGradesException
 	 * @return List<Grade>
 	 */
-	public List<Grade> viewGrades(Student student);
+	public List<Grade> viewGrades(Student student) throws UnableToViewStudentGradesException;
 	
 	/**
 	 * This method makes a payment for the courses that the student is registered for
 	 * @param Student student
 	 * @param String paymentMethod
+	 * @exception StudentPayFeeFailureException
 	 */
-	public void payFee(Student student, String paymentMethod);
+	public void payFee(Student student, String paymentMethod) throws StudentPayFeeFailureException;
 	
 	/**
 	 * This method gets the student data 
@@ -71,35 +79,40 @@ public interface StudentServiceOperation {
 	/**
 	 * This method gets all courses for a specific student that they have added
 	 * @param int studentId
+	 * @exception StudentCourseNotFoundException
 	 * @return List<Course>
 	 */
-	public List<Course> getStudentCourses(int studentId);
+	public List<Course> getStudentCourses(int studentId) throws StudentCourseNotFoundException;
 	
 	/**
 	 * This method gets all registered courses for a specific student
 	 * @param int studentId
+	 * @exception RegisteredCourseNotFound
 	 * @return List<RegisteredCourse>
 	 */
-	public List<RegisteredCourse> getStudentRegisteredCourses(int studentId);
+	public List<RegisteredCourse> getStudentRegisteredCourses(int studentId) throws RegisteredCourseNotFound;
 	
 	/**
 	 * This method add payment data (amount, due date, semester, etc.) to the system
 	 * @param int studentId
+	 * @exception PaymentBillNotCreatedException
 	 */
-	public void generatePayment(int studentId);
+	public void generatePayment(int studentId) throws PaymentBillNotCreatedException;
 	
 	/**
 	 * This method gets course data from course catalog and returns a list of courses
 	 * @param int studentId
+	 * @exception RegisteredCourseNotFound
 	 */
-	public List<CourseCatalog> getRegisteredCourseData(int studentId);
+	public List<CourseCatalog> getRegisteredCourseData(int studentId) throws RegisteredCourseNotFound;
 	
 	/**
 	 * This method gets fee/payment due for a specific student 
 	 * @param int studentId
+	 * @exception StudentPaymentRecordNotFoundException
 	 * @return Payment
 	 */
-	public Payment getFee(int studentId);
+	public Payment getFee(int studentId) throws StudentPaymentRecordNotFoundException;
 	
 	/**
 	 * This methods adds student semester registration for admin approval

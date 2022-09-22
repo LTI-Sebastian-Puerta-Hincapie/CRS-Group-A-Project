@@ -15,7 +15,7 @@ import com.lti.bean.User;
 import com.lti.exception.StudentAddCourseFailureException;
 import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
-import com.lti.exception.StudentRegistrationNotFoundException;
+import com.lti.exception.StudentCourseRegistrationNotFoundException;
 import com.lti.service.CourseCatalogOperation;
 import com.lti.service.CourseCatalogService;
 import com.lti.service.StudentService;
@@ -109,7 +109,7 @@ public class CRSStudentMenu {
 					
 					try {
 						studentService.registerForCourse(student, courseId);
-					} catch (StudentRegistrationNotFoundException e) {
+					} catch (StudentCourseRegistrationNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
