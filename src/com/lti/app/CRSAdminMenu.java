@@ -42,9 +42,41 @@ public class CRSAdminMenu {
 				adminSelection = scan.nextLine();
 			}
 			
+			// user input clean up
+			adminSelection = adminSelection.toLowerCase();
+			
+			switch(adminSelection) {
+				case "1":
+					adminSelection = "generate report card";
+					break;
+				case "2":
+					adminSelection = "approve registration";
+					break;
+				case "3":
+					adminSelection = "add professor";
+					break;
+				case "4":
+					adminSelection = "add course";
+					break;
+				case "5":
+					adminSelection = "remove course";
+					break;				
+				case "6":
+					adminSelection = "update course";
+					break;
+				case "7":
+					adminSelection = "check availability";
+					break;
+				case "8":
+					adminSelection = "view courses";
+					break;
+				default: 
+					break;
+			}
+			
 			Boolean admin_back = false;
 			
-			switch(adminSelection.toLowerCase()) {
+			switch(adminSelection) {
 				case "generate report card":
 					System.out.println("Enter student ID:");
 					int studentID = Integer.parseInt(scan.nextLine());

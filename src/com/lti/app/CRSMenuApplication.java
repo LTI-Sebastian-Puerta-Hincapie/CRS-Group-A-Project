@@ -40,7 +40,11 @@ public class CRSMenuApplication {
 			Boolean exit = false;
 			
 			// input clean-up
-			selection = selection.toLowerCase().replace(" ", "");
+			selection = selection
+					.toLowerCase()
+					.replaceAll("^\\s+", "")
+					.replaceAll("\\s+$", "");
+			
 			switch(selection) {
 				case "1": 
 					selection = "login"; 
@@ -57,7 +61,7 @@ public class CRSMenuApplication {
 				default: break;
 			}
 			
-			switch(selection.toLowerCase().replace(" ", "")) {
+			switch(selection) {
 				case "login":
 					
 					System.out.print("\nEnter Username: ");
@@ -98,7 +102,11 @@ public class CRSMenuApplication {
 						System.out.print("\n-> ");
 						String role = scan.next();
 						
-						role = role.toLowerCase().replace(" ", "");
+						role = role
+								.toLowerCase()
+								.replaceAll("^\\s+", "")
+								.replaceAll("\\s+$", "");
+						
 						switch(role) {
 							case "1": 
 								role = "student";

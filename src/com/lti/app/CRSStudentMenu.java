@@ -73,7 +73,11 @@ public class CRSStudentMenu {
 			}
 			
 			// user input clean up
-			studentSelection = studentSelection.toLowerCase().replace(" ", "");
+			studentSelection = studentSelection
+					.toLowerCase()
+					.replaceAll("^\\s+", "")
+					.replaceAll("\\s+$", "");
+			
 			switch(studentSelection) {
 				case "1": 
 					studentSelection = "register for course";
@@ -124,7 +128,6 @@ public class CRSStudentMenu {
 					try {
 						studentService.registerForCourse(student, courseId);
 					} catch (StudentCourseRegistrationNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					System.out.println("\n-- You have registered for a course --");	
@@ -150,9 +153,8 @@ public class CRSStudentMenu {
 					// add payment data to payment table
 					try {
 						studentService.generatePayment(student.getId());
-					} catch (PaymentBillNotCreatedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (PaymentBillNotCreatedException e) {
+						e.printStackTrace();
 					}
 					
 					// add student semester registration
@@ -193,7 +195,6 @@ public class CRSStudentMenu {
 					try {
 						studentService.addCourse(student, course_id_selected);
 					} catch (StudentAddCourseFailureException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					System.out.println("\n-- Course has been added --");
@@ -205,9 +206,8 @@ public class CRSStudentMenu {
 					
 					try {
 						courses = studentService.getStudentCourses(student.getId());
-					} catch (StudentCourseNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (StudentCourseNotFoundException e) {
+						e.printStackTrace();
 					}
 					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
@@ -240,7 +240,6 @@ public class CRSStudentMenu {
 					try {
 						studentService.dropCourse(student, course_id_selected);
 					} catch (StudentDropCourseFailureException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					System.out.println("\n-- Course has been dropped --");
@@ -268,7 +267,6 @@ public class CRSStudentMenu {
 					try {
 						grades = studentService.viewGrades(student);
 					} catch (UnableToViewStudentGradesException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -312,7 +310,6 @@ public class CRSStudentMenu {
 					try {
 					    payment = studentService.getFee(student.getId());
 					} catch (StudentPaymentRecordNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -327,7 +324,6 @@ public class CRSStudentMenu {
 					try {
 						studentService.payFee(student, paymentMethod);
 					} catch (StudentPayFeeFailureException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 						

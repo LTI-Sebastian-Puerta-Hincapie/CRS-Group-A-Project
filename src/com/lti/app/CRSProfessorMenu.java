@@ -50,9 +50,25 @@ public class CRSProfessorMenu {
 				professorSelection = scan.nextLine();
 			}
 			
+			professorSelection = professorSelection
+					.toLowerCase()
+					.replaceAll("^\\s+", "")
+					.replaceAll("\\s+$", "");
+			
+			switch(professorSelection) {
+				case "1":
+					professorSelection = "add grades";
+					break;
+				case "2":
+					professorSelection = "view enrolled students";
+					break;
+				default:
+					break;
+			}
+			
 			Boolean professor_back = false;
 			
-			switch(professorSelection.toLowerCase()) {
+			switch(professorSelection) {
 				case "add grades":
 					
 					System.out.println("\nList of courses: ");
