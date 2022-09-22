@@ -1,4 +1,8 @@
 package com.lti.dao;
+import java.util.List;
+import com.lti.bean.Course;
+import com.lti.bean.Grade;
+import com.lti.bean.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,13 +19,38 @@ import com.lti.bean.Professor;
 import com.lti.bean.Student;
 import com.lti.constant.SQLQueries;
 import com.lti.utils.DBUtils;
+import com.lti.exception.NoEnrolledStudentsFoundException;
 
-/**
- * @author Sebastian
- *
- */
 
 public class ProfessorDAOImpl implements ProfessorDAO {
+    
+    public List<Grade> addGradesDAO(String student, int courseId, String grade) {
+        // TODO Auto-generated method stub
+    	 try {  
+			  conn = DBUtils.getConnection();
+			  
+		      stmt = conn.prepareStatement(SQLQueries.UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID);
+		      
+		      //TODO: Update the Professor interfaces + classes to pass in a Grade (String)
+		      stmt.setString(1, grade);
+		      stmt.setString(2,student);
+		      stmt.setInt(3, courseId);
+		      stmt.executeUpdate();	
+		    
+		   } catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }
+	
+
+        return null;
+    }
+    
+
+
 	
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
@@ -30,9 +59,13 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public void addGradesDAO(int studentId, int courseId, String grade) {
 		
 	   try {  
+		   
 			  conn = DBUtils.getConnection();
 			  
 		      stmt = conn.prepareStatement(SQLQueries.UPDATE_STUDENT_GRADE_BY_STUDENTID_AND_COURSEID);
+		      
+		    
+		    
 		      
 		      //TODO: Update the Professor interfaces + classes to pass in a Grade (String)
 		      stmt.setString(1, grade);
@@ -49,6 +82,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		   }
 	}
 
+
 	@Override
 	public List<CourseEnrollment> viewEnrolledStudentsDAO(int courseId) {
 		
@@ -59,9 +93,16 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 				  
 			      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_ENROLLMENT_BY_COURSEID);
 			      
+			    
+			      
 			      //TODO: Update the Professor interfaces + classes to pass in a Grade (String)
 			      stmt.setInt(1, courseId);
 			      ResultSet rs = stmt.executeQuery();
+			      
+			      if(rs==null) {
+			    	  throw new NoEnrolledStudentsFoundException("Student not available");
+			    	  }
+			    
 			      while(rs.next()) {
 			    	  int _courseId = rs.getInt("CourseId");
 			    	  int studentId = rs.getInt("studentId");
@@ -69,7 +110,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 			    	  courseEnrollmentEntry = new CourseEnrollment(_courseId, studentId, studentName);
 			    	  courseEnrollment.add(courseEnrollmentEntry);
 			      }
-			    
+			      
 			   } catch(SQLException se){
 			      //Handle errors for JDBC
 			      se.printStackTrace();
@@ -148,3 +189,4 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	}
 
 }
+
