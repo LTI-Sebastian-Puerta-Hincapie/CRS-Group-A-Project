@@ -62,10 +62,33 @@ public class CRSStudentMenu {
 				studentSelection = scan.nextLine();
 			}
 			
+			// user input clean up
+			studentSelection = studentSelection.toLowerCase().replace(" ", "");
+			switch(studentSelection) {
+				case "1": 
+					studentSelection = "register for course";
+					break;
+				case "2": 
+					studentSelection = "add course";
+					break;
+				case "3": 
+					studentSelection = "drop course";
+					break;
+				case "4": 
+					studentSelection = "view grades";
+					break;
+				case "5": 
+					studentSelection = "pay fee";
+					break;
+				case "6": 
+					studentSelection = "back";
+					break;
+			}
+			
 			Boolean student_back = false;
 			int course_id_selected = -1;
 			
-			switch(studentSelection.toLowerCase().replace(" ", "")) {
+			switch(studentSelection) {
 				case "register for course":
 					
 					System.out.println("\nCourses added:");
