@@ -11,7 +11,10 @@ import com.lti.bean.Grade;
 import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
+import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.StudentRegistrationNotFoundException;
 
 /**
  * @author Sebastian
@@ -23,22 +26,25 @@ public interface StudentServiceOperation {
 	 * This method registers a student for a specific course 
 	 * @param Student student
 	 * @param int courseId
+	 * @exception StudentRegistrationNotFoundException
 	 */
-	public void registerForCourse(Student student, int courseId);
+	public void registerForCourse(Student student, int courseId) throws StudentRegistrationNotFoundException;
 	
 	/**
 	 * This method adds a course for a specific student
 	 * @param Student student
 	 * @param int courseId
+	 * @exception StudentAddCourseFailureException
 	 */
-	public void addCourse(Student student, int courseId);
+	public void addCourse(Student student, int courseId) throws StudentAddCourseFailureException;
 	
 	/**
 	 * This method drops a course for a specific student
 	 * @param Student student
 	 * @param int courseId
+	 * @exception StudentDropCourseFailureException
 	 */
-	public void dropCourse(Student student, int courseId);
+	public void dropCourse(Student student, int courseId) throws StudentDropCourseFailureException;
 	
 	/**
 	 * This method view grades for a specific student and returns a list of grades

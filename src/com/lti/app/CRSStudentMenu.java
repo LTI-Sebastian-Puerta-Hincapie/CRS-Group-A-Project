@@ -12,7 +12,10 @@ import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.bean.User;
+import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.StudentRegistrationNotFoundException;
 import com.lti.service.CourseCatalogOperation;
 import com.lti.service.CourseCatalogService;
 import com.lti.service.StudentService;
@@ -43,7 +46,7 @@ public class CRSStudentMenu {
 		} catch (StudentNotFoundException e) {
 			e.getMessage();
 			e.printStackTrace();
-		}
+		} 
 		
 		// menu
 		while(true)
@@ -104,7 +107,12 @@ public class CRSStudentMenu {
 					System.out.print("\nRegister for a course, select by ID -> ");
 					int courseId = scan.nextInt();
 					
-				    studentService.registerForCourse(student, courseId);
+					try {
+						studentService.registerForCourse(student, courseId);
+					} catch (StudentRegistrationNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					System.out.println("\n-- You have registered for a course --");	
 					
 					System.out.println("\nCourses you have registered for:");
@@ -156,7 +164,12 @@ public class CRSStudentMenu {
 					System.out.print("\nSelect course to add by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-					studentService.addCourse(student, course_id_selected);
+					try {
+						studentService.addCourse(student, course_id_selected);
+					} catch (StudentAddCourseFailureException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					System.out.println("\n-- Course has been added --");
 					
 					System.out.println("\nCourses added:");
@@ -184,7 +197,12 @@ public class CRSStudentMenu {
 					System.out.print("\nSelect course to drop by Id -> ");
 					course_id_selected = scan.nextInt();
 					
-					studentService.dropCourse(student, course_id_selected);
+					try {
+						studentService.dropCourse(student, course_id_selected);
+					} catch (StudentDropCourseFailureException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					System.out.println("\n-- Course has been dropped --");
 					
 					System.out.println("\nCourses added:");

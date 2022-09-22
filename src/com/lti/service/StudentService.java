@@ -66,6 +66,7 @@ public class StudentService implements StudentServiceOperation {
 		if(student == null) {			
 			throw new StudentNotFoundException();
 		}
+		System.out.println("\nYou are logged in, welcome back!");
 		return student;
 	}
 
