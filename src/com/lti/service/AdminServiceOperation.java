@@ -6,6 +6,7 @@ package com.lti.service;
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 
 /**
@@ -19,6 +20,8 @@ public interface AdminServiceOperation {
 	public void addProfessor(Professor professor);
 	
 	public void approveStudentRegistration(int studentID, boolean approvalStatus);
+	
+	public void createStudentRegistration(SemesterRegistration semesterRegistration);
 	
 	public void addCourse(Course course);
 	

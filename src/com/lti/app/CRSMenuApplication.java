@@ -1,9 +1,13 @@
 package com.lti.app;
 
 import java.util.Scanner;
+
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.User;
 import com.lti.exception.IncorrectPasswordException;
 import com.lti.exception.UserNotFoundException;
+import com.lti.service.AdminService;
+import com.lti.service.AdminServiceOperation;
 import com.lti.service.UserService;
 
 public class CRSMenuApplication {
@@ -135,7 +139,15 @@ public class CRSMenuApplication {
 					}	
 					break;  	// login switch case
 				case "student registration": 
-					System.out.println("Student Registration...");
+					AdminServiceOperation admin = new AdminService();
+					System.out.println("Enter Student ID: ");
+					int studentId = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Admin ID: ");
+					int adminId = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Comments: ");
+					String comments = scan.nextLine();
+					SemesterRegistration semesterRegistration = new SemesterRegistration(studentId, adminId, false, comments);
+					admin.createStudentRegistration(semesterRegistration);
 					break;
 				case "update password": 
 					System.out.println("Updating Password...");

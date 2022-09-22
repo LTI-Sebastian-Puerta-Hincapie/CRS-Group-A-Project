@@ -102,7 +102,7 @@ public class CRSAdminMenu {
 					if(scan.nextLine().toLowerCase() == "y") {
 						approvalStatus = true;
 					}
-					else {
+					else { 
 						approvalStatus = false;
 					}
 					service.approveStudentRegistration(studentID, approvalStatus);
