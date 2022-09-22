@@ -93,3 +93,4 @@ public class Admin {
 		this.name = name;
 	}
 }
+

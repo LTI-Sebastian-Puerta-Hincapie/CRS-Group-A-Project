@@ -56,15 +56,4 @@ public class AdminService implements AdminServiceOperation {
 		admindao.viewCourses(studentID);
 	}
 
-	@Override
-	public void approveStudentRegistration(Student student) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void approveStudentRegistration(com.lti.service.SemesterRegistration semesterRegistration) {
-		// TODO Auto-generated method stub
-		
-	}
 }

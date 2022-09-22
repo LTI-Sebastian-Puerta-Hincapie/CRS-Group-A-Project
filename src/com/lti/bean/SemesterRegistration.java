@@ -110,10 +110,5 @@ public class SemesterRegistration {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}
-
-
-
-	
-	
+	}	
 }

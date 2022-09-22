@@ -32,11 +32,8 @@ public interface AdminDAO {
 	 * @param student
 	 * @param admin
 	 */
-<<<<<<< HEAD
+
 	public void approveStudentRegistrationDAO(SemesterRegistration semesterRegistration);
-=======
-	public void approveStudentRegistrationDAO(Student student, Admin admin);
->>>>>>> 6586b1a83b0e29f8672999acb901a3966e3a5879
 	
 	/**
 	 * This method adds a course to the course list
@@ -71,3 +68,4 @@ public interface AdminDAO {
 	public void viewCourses(int studentID);
 	
 }
+

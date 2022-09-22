@@ -96,22 +96,19 @@ public class CRSAdminMenu {
 					service.viewCourses(studentID);
 					break;
 				case "approve registration":
-
-
-System.out.println("Enter Student ID: ");
-int studentId = Integer.parseInt(scan.nextLine());
-System.out.println("Enter Admin ID");
-int adminId = Integer.parseInt(scan.nextLine());
-System.out.println("Enter Comments: ");
-String comments = scan.nextLine();
-System.out.println("Enter Approval Status: Y/N ");
-String approvalStatus = scan.nextLine();
-
-service.approveStudentRegistration(new SemesterRegistration(studentId, adminId, approvalStatus=="Y"?true:false, comments));
-System.out.println("Approving registration...");
-break;
-				
+					System.out.println("Enter Student ID: ");
+					int studentId = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Admin ID");
+					int adminId = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Comments: ");
+					String comments = scan.nextLine();
+					System.out.println("Enter Approval Status: Y/N ");
+					String approvalStatus = scan.nextLine();
+					
+					service.approveStudentRegistration(new SemesterRegistration(studentId, adminId, approvalStatus=="Y"?true:false, comments));
+					System.out.println("Approving registration...");
 					break;
+				
 				case "add course":
 					System.out.println("Enter Course ID: ");
 					int courseID = Integer.parseInt(scan.nextLine());
@@ -157,3 +154,4 @@ break;
 		}
 	}
 }
+
