@@ -10,7 +10,7 @@ import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 
 /**
- * @author Sebastian
+ * @author Jonathan
  *
  */
 public interface AdminServiceOperation {
