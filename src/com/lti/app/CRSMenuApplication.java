@@ -1,30 +1,11 @@
 package com.lti.app;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import com.lti.bean.Course;
-import com.lti.bean.CourseCatalog;
-import com.lti.bean.Professor;
-import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.service.UserService;
 
 public class CRSMenuApplication {
-	
-	// db - connection string
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost/crs-group-a";
 
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
 	
 	public static void main(String[] args) {
 
@@ -73,7 +54,7 @@ public class CRSMenuApplication {
 					
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
-					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, username);
+					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, user);
 					CRSAdminMenu adminMenu = new CRSAdminMenu(scan, username);
 					
 					// TODO: login credential validation method here						

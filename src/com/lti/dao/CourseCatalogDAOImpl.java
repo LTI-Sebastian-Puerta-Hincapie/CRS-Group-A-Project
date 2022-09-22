@@ -11,6 +11,11 @@ import java.util.List;
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class CourseCatalogDAOImpl implements CourseCatalogDAO {
 	
 	private static final String SELECT_ALL_COURSES = "SELECT * FROM coursecatalog";

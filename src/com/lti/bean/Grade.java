@@ -1,5 +1,10 @@
 package com.lti.bean;
 
+/**
+ * @author Sebastian
+ *
+ */
+
 public class Grade {
 	
 	private String grade;

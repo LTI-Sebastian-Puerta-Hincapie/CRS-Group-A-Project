@@ -86,7 +86,14 @@ public class CRSStudentMenu {
 						System.out.format("%16s%32s\n", 
 								course.getCourseId(), 
 								course.getRegisteredStatus() == 1 ? "Yes" : "No");
-					}					
+					}	
+					
+					// add payment data to payment table
+					studentService.generatePayment(student.getId());
+					
+					// add student semester registration
+					studentService.addStudentSemesterRegistration(student.getId());
+					
 					break;
 				case "add course":
 					
@@ -180,56 +187,38 @@ public class CRSStudentMenu {
 					break;
 				case "pay fee":
 					
-					System.out.println("\n--UNDER CONSTRUCTION--");
-//					Payment payment = new Payment(student);
-//					int totalNumberOfCredits = 0;
-//					System.out.println("\nFee per credit: " + payment.COST_PER_CREDIT);
-//					for(Course course : student.getCourses()) {
-//						
-//						totalNumberOfCredits += course.getCredits();
-//					}
-//					System.out.println("Total number of courses added: " + student.getCourses().size());
-//					System.out.println("Total number of credits: " + totalNumberOfCredits);
-//					
-//					double totalFee = payment.COST_PER_CREDIT * totalNumberOfCredits;
-//					System.out.println("Total fee: " + totalFee);
-//					
-//					System.out.println("\nPayment Method:");
-//					System.out.println("1. Credit");
-//					System.out.println("2. Debit");
-//					System.out.println("3. Direct Withdrawal");
-//					System.out.println("4. Paypal");
-//					System.out.println("5. Pay in person");
-//					System.out.println("6. Back");
-//					System.out.print("\n-> ");
-//					
-//					String paymentMethod = scan.nextLine();	
-//					
-//					switch(paymentMethod) {
-//						case "credit": 
-//							studentService.payFee(student, paymentMethod);
-//							System.out.println("\n--Payment Complete--");
-//							break;
-//						case "debit": 
-//							studentService.payFee(student, paymentMethod);
-//							System.out.println("\n--Payment Complete--");
-//							break;
-//						case "direct withdrawal": 
-//							studentService.payFee(student, paymentMethod);
-//							System.out.println("\n--Payment Complete--");
-//							break;
-//						case "paypal": 
-//							studentService.payFee(student, paymentMethod);
-//							System.out.println("\n--Payment Complete--");
-//							break;
-//						case "pay in person": 
-//							studentService.payFee(student, paymentMethod);
-//							System.out.println("\n--Payment Complete--");
-//							break;
-//						case "back": break;
-//						default:
-//							System.out.println("No course have been added to your cart, please add a course");
-//					}
+					// TODO: Validate if the student has registered for any courses
+					List<RegisteredCourse> rcourses = studentService.getStudentRegisteredCourses(student.getId());
+					if(rcourses.size() == 0) {
+						System.out.println("\nYou have not registered for any courses yet, please register.");
+						break;
+					}
+					
+					// TODO: Display list of registered courses
+					System.out.println("\nCourses you have registered for:");
+					System.out.format("%16s%32s\n", 
+							"COURSEID",
+							"REGISTRATIONSTATUS");
+					
+					for(RegisteredCourse course : rcourses) {
+						System.out.format("%16s%32s\n", 
+								course.getCourseId(), 
+								course.getRegisteredStatus() == 1 ? "Yes" : "No");
+					}			
+					
+					// TODO: Display payment due
+					System.out.format("\n%16s%16s\n", "Amount", "Due Date");
+					System.out.format("%16s%16s", 
+							studentService.getFee(student.getId()).getPaymentAmount(), 
+							studentService.getFee(student.getId()).getDueDate());
+					
+					System.out.print("\nPayment Method: ");
+					String paymentMethod = scan.nextLine();
+					
+					studentService.payFee(student, paymentMethod);
+					
+					System.out.println("\n--PAYMENT COMPLETE--");
+					
 					break;
 				case "back":
 					student_back = true;

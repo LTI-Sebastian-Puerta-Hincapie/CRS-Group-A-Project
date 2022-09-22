@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.lti.bean.Admin;
+import com.lti.bean.Course;
+import com.lti.bean.Professor;
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceOperation;
@@ -50,12 +53,13 @@ public class CRSAdminMenu {
 			System.out.println("\nEnter selection: ");
 			System.out.println("1. Generate Report Card");
 			System.out.println("2. Approve Registration");
-			System.out.println("3. Add Course");
-			System.out.println("4. Remove Course");
-			System.out.println("5. Update Course");
-			System.out.println("6. Check Availability");
-			System.out.println("7. View Courses");
-			System.out.println("7. Back (previous menu)");
+			System.out.println("3. Add Professor");
+			System.out.println("4. Add Course");
+			System.out.println("5. Remove Course");
+			System.out.println("6. Update Course");
+			System.out.println("7. Check Availability");
+			System.out.println("8. View Courses");
+			System.out.println("9. Back (previous menu)");
 			System.out.print("\n-> ");
 			
 			String adminSelection = scan.nextLine();
@@ -67,36 +71,80 @@ public class CRSAdminMenu {
 			
 			switch(adminSelection.toLowerCase()) {
 				case "generate report card":
-					service.generateReportCard(null, null);
-					System.out.println("Generating report card...");
+					System.out.println("Enter student ID:");
+					int studentID = Integer.parseInt(scan.nextLine());
+					service.generateReportCard(studentID);
 					break;
 				case "add professor":
-					service.addProfessor(null);
-					System.out.println("Adding professor...");
+					System.out.println("Enter Professor ID: ");
+					int professorID = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Professor Name: ");
+					String professorName = scan.nextLine();
+					System.out.println("Enter Professor Department ID");
+					int departmentID = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Professor Email: ");
+					String email = scan.nextLine();
+					System.out.println("Enter Professor Phone: ");
+					String phone = scan.nextLine();
+					System.out.println("Enter Professor Address: ");
+					String address = scan.nextLine();
+					service.addProfessor(new Professor(professorID,professorName,departmentID,email,phone,address));
 					break;
 				case "view courses":
-					service.viewCourses(null);
-					System.out.println("Viewing courses...");
+					System.out.println("Enter student ID:");
+					studentID = Integer.parseInt(scan.nextLine());
+					service.viewCourses(studentID);
 					break;
 				case "approve registration":
-					service.approveStudentRegistration(null);
-					System.out.println("Approving registration...");
+
+
+System.out.println("Enter Student ID: ");
+int studentId = Integer.parseInt(scan.nextLine());
+System.out.println("Enter Admin ID");
+int adminId = Integer.parseInt(scan.nextLine());
+System.out.println("Enter Comments: ");
+String comments = scan.nextLine();
+System.out.println("Enter Approval Status: Y/N ");
+String approvalStatus = scan.nextLine();
+
+service.approveStudentRegistration(new SemesterRegistration(studentId, adminId, approvalStatus=="Y"?true:false, comments));
+System.out.println("Approving registration...");
+break;
+				
 					break;
 				case "add course":
-					service.addCourse(null);
-					System.out.println("Adding course...");
+					System.out.println("Enter Course ID: ");
+					int courseID = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Course Name: ");
+					String courseName = scan.nextLine();
+					System.out.println("Enter Course Description: ");
+					String description = scan.nextLine();
+					service.addCourse(new Course(courseID,courseName,description));
 					break;
 				case "drop course":
-					service.removeCourse(0);
-					System.out.println("Dropping course...");
+					System.out.println("Enter Course ID: ");
+					courseID = Integer.parseInt(scan.nextLine());
+					service.removeCourse(courseID);
 					break;
 				case "update course":
-//					service.updateCourse(adminMaxId, adminSelection, adminSelection, adminSelection, adminSelection, adminMaxId);
+					System.out.println("Enter Course ID: ");
+					courseID = Integer.parseInt(scan.nextLine());
+					System.out.println("Enter Course Name: ");
+					courseName = scan.nextLine();
+					System.out.println("Enter Course Description: ");
+					description = scan.nextLine();
+					service.updateCourse(courseID,courseName,description);
 					System.out.println("Updating course...");
 					break;
+				case "remove course":
+					System.out.println("Enter Course ID: ");
+					courseID = Integer.parseInt(scan.nextLine());
+					service.removeCourse(courseID);
+					break;
 				case "check availability":
-					service.checkAvailability(0);
-					System.out.println("Checking availability...");
+					System.out.println("Enter course ID:");
+					courseID = Integer.parseInt(scan.nextLine());
+					service.checkAvailability(courseID);
 					break;
 				case "back":
 					admin_back = true;

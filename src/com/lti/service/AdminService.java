@@ -7,60 +7,64 @@ import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.bean.SemesterRegistration;
+import com.lti.dao.AdminDAO;
+import com.lti.dao.AdminDAOImpl;
+
+/**
+ * @author Sebastian
+ *
+ */
 
 public class AdminService implements AdminServiceOperation {
-	
-	private HashMap<Integer,Professor> professors;
-	private HashMap<Integer,Course> courses;
+
+	private AdminDAO admindao;
 	
 	public AdminService() {
-		this.professors = new HashMap<Integer,Professor>();
-		this.courses = new HashMap<Integer,Course>();
+		admindao = new AdminDAOImpl();
 	}
 
-	public void generateReportCard(Student student, Professor professor) {
-		System.out.println("Generating report card for " + student.getName() + " by " + professor.getName());
+	public void generateReportCard(int studentID) {
+		admindao.generateReportCardDAO(studentID);
 	}
 	
 	public void addProfessor(Professor professor) {
-		this.professors.put(professor.getId(), professor);
+		admindao.addProfessorDAO(professor);
 	}
 	
-	public void approveStudentRegistration(Student student) {
-		
-		// 
-		System.out.println("Registration for " + student.getName() + " is approved");
-	}
+	public void approveStudentRegistration(SemesterRegistration semesterRegistration) {
+		admindao.approveStudentRegistrationDAO(semesterRegistration);
+		}
 	
 	public void addCourse(Course course) {
-//		this.courses.put(course.getId(), course);
+		admindao.addCourseDAO(course);
 	}
 	
 	public void removeCourse(int id) {
-		this.courses.remove(id);
+		admindao.removeCourseDAO(id);
 	}
 	
-	public void updateCourse(int id, String name, String professor, String department, String prerequisites, int credits) {
-//		this.courses.get(id).setName(name);
-//		this.courses.get(id).setProfessor(professor);
-//		this.courses.get(id).setDepartment(department);
-//		this.courses.get(id).setPrerequisites(prerequisites);
-//		this.courses.get(id).setCredits(credits);
+	public void updateCourse(int id, String name, String description) {
+		admindao.updateCourseDAO(id, name, description); 
 	}
 	
 	public void checkAvailability(int id) {
-		if(courses.containsKey(id)) {
-//			System.out.println("The course " + courses.get(id).getName() + " (" + courses.get(id).getId() + ") is available.");
-		}
-		else {
-			System.out.println("The course is not available");
-		}
+		admindao.checkAvailabilityDAO(id);
 	}
 	
-	public void viewCourses(Student student) {
-		System.out.println("Listing course list for " + student.getName() + ":");
-//		for(Course course : student.getCourses()) {
-////			System.out.println(course.getId() + ": " + course.getName());
-//		}
+	public void viewCourses(int studentID) {
+		admindao.viewCourses(studentID);
+	}
+
+	@Override
+	public void approveStudentRegistration(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void approveStudentRegistration(com.lti.service.SemesterRegistration semesterRegistration) {
+		// TODO Auto-generated method stub
+		
 	}
 }
