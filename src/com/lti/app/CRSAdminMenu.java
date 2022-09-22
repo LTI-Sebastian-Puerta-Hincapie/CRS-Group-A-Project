@@ -1,20 +1,15 @@
 package com.lti.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
-import com.lti.bean.Student;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceOperation;
 
 public class CRSAdminMenu {
 	
 	private Scanner scan;
-	private String username;
 	
 	private AdminServiceOperation service;
 	
