@@ -6,6 +6,7 @@ import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.CourseCatalog;
 import com.lti.bean.Professor;
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 import com.lti.dao.AdminDAO;
 import com.lti.dao.AdminDAOImpl;
@@ -31,8 +32,12 @@ public class AdminService implements AdminServiceOperation {
 		admindao.addProfessorDAO(professor);
 	}
 	
-	public void approveStudentRegistration(Student student) {
-		
+	public void approveStudentRegistration(int studentID, boolean approvalStatus) {
+		admindao.approveStudentRegistrationDAO(studentID, approvalStatus); 
+	}
+	
+	public void createStudentRegistration(SemesterRegistration semesterRegistration) {
+		admindao.createStudentRegistrationDAO(semesterRegistration);
 	}
 	
 	public void addCourse(Course course) {
