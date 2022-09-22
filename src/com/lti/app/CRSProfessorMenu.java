@@ -35,6 +35,8 @@ public class CRSProfessorMenu {
 		int courseId = -1;
 		List<CourseCatalog> courses = null;
 		List<CourseEnrollment> courseEnrollment = null;
+		
+		System.out.println("\nWelcome back " + professor.getName() + " (Professor)\n");
 
 		// menu
 		while(true)

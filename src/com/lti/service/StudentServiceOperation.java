@@ -13,7 +13,7 @@ import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.exception.PaymentBillNotCreatedException;
 import com.lti.exception.RegisteredCourseNotFound;
-import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
@@ -40,9 +40,17 @@ public interface StudentServiceOperation {
 	 * This method adds a course for a specific student
 	 * @param Student student
 	 * @param int courseId
-	 * @exception StudentAddCourseFailureException
+	 * @exception StudentAddCourseException
 	 */
-	public void addCourse(Student student, int courseId) throws StudentAddCourseFailureException;
+	public void addCourse(Student student, int courseId) throws StudentAddCourseException;
+	
+	/**
+	 * This method gets a course for a specific student and courseId
+	 * @param Student student
+	 * @param int courseId
+	 * @return RegisteredCourse
+	 */
+	public RegisteredCourse getCourse(Student student, int courseId);
 	
 	/**
 	 * This method drops a course for a specific student

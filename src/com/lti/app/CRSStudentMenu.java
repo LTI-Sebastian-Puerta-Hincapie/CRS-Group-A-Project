@@ -12,7 +12,7 @@ import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.exception.PaymentBillNotCreatedException;
 import com.lti.exception.RegisteredCourseNotFound;
-import com.lti.exception.StudentAddCourseFailureException;
+import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseFailureException;
 import com.lti.exception.StudentNotFoundException;
@@ -54,6 +54,8 @@ public class CRSStudentMenu {
 			e.getMessage();
 			e.printStackTrace();
 		} 
+		
+		System.out.print("\nWelcome back " + student.getName() + " (Student) \n");
 		
 		// menu
 		while(true)
@@ -194,10 +196,9 @@ public class CRSStudentMenu {
 					
 					try {
 						studentService.addCourse(student, course_id_selected);
-					} catch (StudentAddCourseFailureException e) {
+					} catch (StudentAddCourseException e) {
 						e.printStackTrace();
 					}
-					System.out.println("\n-- Course has been added --");
 					
 					System.out.println("\nCourses added:");
 					System.out.format("%16s%16s\n", 

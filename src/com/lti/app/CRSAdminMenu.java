@@ -22,6 +22,8 @@ public class CRSAdminMenu {
 	
 	public void menu() {
 		
+		System.out.println("\nWelcome back Administrator\n");
+		
 		// menu
 		while(true)
 		{

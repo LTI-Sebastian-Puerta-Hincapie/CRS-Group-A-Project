@@ -29,8 +29,17 @@ public interface StudentDAO {
 	 * This method adds a course for a specific student
 	 * @param Student student
 	 * @param int courseId
+	 * @return int
 	 */
-	public void addCourseDAO(Student student, int courseId);
+	public int addCourseDAO(Student student, int courseId);
+	
+	/**
+	 * This method gets a course for a specific student and courseId
+	 * @param Student student
+	 * @param int courseId
+	 * @return RegisteredCourse
+	 */
+	public RegisteredCourse getCourseDAO(Student student, int courseId);
 	
 	/**
 	 * This method drops a course for a specific student

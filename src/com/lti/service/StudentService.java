@@ -16,6 +16,8 @@ import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOImpl;
+import com.lti.exception.StudentAddCourseException;
+import com.lti.exception.StudentCourseRegistrationNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 
 /**
@@ -23,7 +25,6 @@ import com.lti.exception.StudentNotFoundException;
  *
  */
 
-// TODO define all services method based on the use case diagram
 public class StudentService implements StudentServiceOperation {
 	
 	private StudentDAO studentDao;
@@ -38,9 +39,18 @@ public class StudentService implements StudentServiceOperation {
 		studentDao.registerForCourseDAO(student, courseId);
 	}
 	
-	public void addCourse(Student student, int courseId) {
+	public void addCourse(Student student, int courseId) throws StudentAddCourseException {
 		
-		studentDao.addCourseDAO(student, courseId);
+		RegisteredCourse course = studentDao.getCourseDAO(student, courseId);
+		
+		if(course == null) {
+			int _courseId = studentDao.addCourseDAO(student, courseId);
+			if(_courseId < 0) {
+				throw new StudentAddCourseException();
+			}
+			System.out.println("\n-- Course has been added --");
+		}
+		System.out.println("\nCourse has already been added for this student, select another course");
 	}
 	
 	public void dropCourse(Student student, int courseId) {
@@ -63,10 +73,10 @@ public class StudentService implements StudentServiceOperation {
 	public Student getStudent(int studentId) throws StudentNotFoundException {
 		
 		Student student = studentDao.getStudentDAO(studentId);
+		
 		if(student == null) {			
 			throw new StudentNotFoundException();
 		}
-		System.out.println("\nYou are logged in, welcome back!");
 		return student;
 	}
 
@@ -115,5 +125,11 @@ public class StudentService implements StudentServiceOperation {
 	public void addStudentSemesterRegistration(int studentId) {
 		
 		studentDao.addStudentSemesterRegistrationDAO(studentId);
+	}
+
+	@Override
+	public RegisteredCourse getCourse(Student student, int courseId)  {
+
+		return studentDao.getCourseDAO(student, courseId);
 	}
 }

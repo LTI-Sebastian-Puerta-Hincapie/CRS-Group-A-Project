@@ -52,8 +52,9 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public void addCourseDAO(Student student, int courseId) {
+	public int addCourseDAO(Student student, int courseId) {
 		
+	   int _courseId = -1;
 	   try {
 		   
 		  conn = DBUtils.getConnection();
@@ -64,6 +65,14 @@ public class StudentDAOImpl implements StudentDAO {
 	      stmt.setInt(3, 0);
 	      stmt.setString(4, null);
 	      stmt.executeUpdate();	
+	      
+	      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_COURSE);
+	      stmt.setInt(1, courseId);
+	      stmt.setInt(2, student.getId());
+	      ResultSet rs = stmt.executeQuery();
+	      if(rs.next()) {
+	    	  _courseId = rs.getInt("CourseId");
+	      }
 	    
 	   } catch(SQLException se){
 	      //Handle errors for JDBC
@@ -72,6 +81,40 @@ public class StudentDAOImpl implements StudentDAO {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   } 	
+	   
+	   return _courseId;
+	}
+	
+	@Override
+	public RegisteredCourse getCourseDAO(Student student, int courseId) {
+		
+		RegisteredCourse rcourse = null;
+	   try {
+		   
+		  conn = DBUtils.getConnection();
+
+	      stmt = conn.prepareStatement(SQLQueries.SELECT_STUDENT_COURSE);
+	      stmt.setInt(1, courseId);
+	      stmt.setInt(2, student.getId());
+	      ResultSet rs = stmt.executeQuery();
+	      
+	      if(rs.next()) {
+	    	  int _courseId = rs.getInt("CourseId");
+	    	  int studentId = rs.getInt("StudentId");
+	    	  int registeredStatus = rs.getInt("RegistrationStatus");
+	    	  String grade = rs.getString("Grade");
+	    	  rcourse = new RegisteredCourse(_courseId, studentId, registeredStatus, grade);
+	      }
+	    
+	   } catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   } catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   } 	
+	   
+	   return rcourse;
 	}
 
 	@Override

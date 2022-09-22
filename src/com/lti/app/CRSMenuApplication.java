@@ -125,15 +125,12 @@ public class CRSMenuApplication {
 						Boolean role_back = false;
 						switch(role.toLowerCase()) {
 							case "student": 								
-								System.out.println("\nHi Student " + "(" + username.toUpperCase() + ")");
 								studentMenu.menu();
 								break;			
 							case "professor": 
-								System.out.println("\nHi Professor " + "(" + username.toUpperCase() + ")");
 								professorMenu.menu();
 								break;		
 							case "admin": 
-								System.out.println("\nHi Admin" + "(" + username.toUpperCase() + ")");
 								adminMenu.menu();
 								break;					
 							case "back":

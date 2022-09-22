@@ -11,6 +11,9 @@ public class SQLQueries {
 			"INSERT INTO registeredcourse (StudentId, CourseId, RegistrationStatus, Grade) "
 			+ "VALUES (?, ?, ?, ?)";
 	
+	public static final String SELECT_STUDENT_COURSE = 
+			"SELECT * FROM registeredcourse WHERE CourseId = ? AND StudentId = ?";
+	
 	public static final String SELECT_STUDENT_BY_STUDENTID = "SELECT * FROM students WHERE Id = ?";
 	
 	public static final String SELECT_STUDENT_COURSES_BY_STUDENTID = 
