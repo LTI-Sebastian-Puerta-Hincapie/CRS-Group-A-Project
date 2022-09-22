@@ -2,6 +2,8 @@ package com.lti.app;
 
 import java.util.Scanner;
 import com.lti.bean.User;
+import com.lti.exception.IncorrectPasswordException;
+import com.lti.exception.UserNotFoundException;
 import com.lti.service.UserService;
 
 public class CRSMenuApplication {
@@ -33,7 +35,25 @@ public class CRSMenuApplication {
 			
 			Boolean exit = false;
 			
-			switch(selection.toLowerCase()) {
+			// input clean-up
+			selection = selection.toLowerCase().replace(" ", "");
+			switch(selection) {
+				case "1": 
+					selection = "login"; 
+					break;
+				case "2": 
+					selection = "student registration"; 
+					break;
+				case "3": 
+					selection = "update password"; 
+					break;
+				case "4": 
+					selection = "exit"; 
+					break;
+				default: break;
+			}
+			
+			switch(selection.toLowerCase().replace(" ", "")) {
 				case "login":
 					
 					System.out.print("\nEnter Username: ");
@@ -43,14 +63,18 @@ public class CRSMenuApplication {
 					password = scan.next();		
 					
 					// validate login
-					User user = userService.Login(username, password);
-					if(user != null) {
-						System.out.println("\nYou have logged in");
-					}
-					else {
-						System.out.println("\nusername and password combination is incorrect or does not exist");
+					User user;
+					try {
+						user = userService.Login(username, password);
+					} catch (UserNotFoundException e) {
+						e.getMessage();
+						e.printStackTrace();
 						break;
-					}
+					} catch (IncorrectPasswordException e) {
+						e.getMessage();
+						e.printStackTrace();
+						break;
+					} 
 					
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
@@ -69,6 +93,22 @@ public class CRSMenuApplication {
 						System.out.println("4. Back");
 						System.out.print("\n-> ");
 						String role = scan.next();
+						
+						role = role.toLowerCase().replace(" ", "");
+						switch(role) {
+							case "1": 
+								role = "student";
+								break;
+							case "2": 
+								role = "professor";
+								break;
+							case "3": 
+								role = "admin";
+								break;
+							case "4": 
+								role = "back";
+								break;
+						}
 						
 						Boolean role_back = false;
 						switch(role.toLowerCase()) {
@@ -112,7 +152,7 @@ public class CRSMenuApplication {
 			if(exit) break;    // exit out of main menu loop
 		}
 		
-		userService.Logout(username, password);
+		userService.Logout(username);
 		System.out.println("\nEnd of program");	
 	}
 }

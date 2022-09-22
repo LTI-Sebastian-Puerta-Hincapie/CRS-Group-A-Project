@@ -12,6 +12,7 @@ import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.bean.User;
+import com.lti.exception.StudentNotFoundException;
 import com.lti.service.CourseCatalogOperation;
 import com.lti.service.CourseCatalogService;
 import com.lti.service.StudentService;
@@ -36,7 +37,13 @@ public class CRSStudentMenu {
 	public void menu() {
 		
 		// create student instance
-		Student student = studentService.getStudent(user.getId());
+		Student student = null;
+		try {
+			student = studentService.getStudent(user.getId());
+		} catch (StudentNotFoundException e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
 		
 		// menu
 		while(true)
@@ -58,7 +65,7 @@ public class CRSStudentMenu {
 			Boolean student_back = false;
 			int course_id_selected = -1;
 			
-			switch(studentSelection.toLowerCase()) {
+			switch(studentSelection.toLowerCase().replace(" ", "")) {
 				case "register for course":
 					
 					System.out.println("\nCourses added:");

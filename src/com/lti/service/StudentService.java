@@ -16,6 +16,7 @@ import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOImpl;
+import com.lti.exception.StudentNotFoundException;
 
 /**
  * @author Sebastian
@@ -59,9 +60,13 @@ public class StudentService implements StudentServiceOperation {
 	}
 	
 	@Override
-	public Student getStudent(int studentId) {
+	public Student getStudent(int studentId) throws StudentNotFoundException {
 		
-		return studentDao.getStudentDAO(studentId);
+		Student student = studentDao.getStudentDAO(studentId);
+		if(student == null) {			
+			throw new StudentNotFoundException();
+		}
+		return student;
 	}
 
 	@Override

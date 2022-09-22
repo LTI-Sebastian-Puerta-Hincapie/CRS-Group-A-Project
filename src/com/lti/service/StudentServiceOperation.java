@@ -11,6 +11,7 @@ import com.lti.bean.Grade;
 import com.lti.bean.Payment;
 import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
+import com.lti.exception.StudentNotFoundException;
 
 /**
  * @author Sebastian
@@ -56,9 +57,10 @@ public interface StudentServiceOperation {
 	/**
 	 * This method gets the student data 
 	 * @param int studentId
+	 * @exception StudentNotFoundException
 	 * @return Student student
 	 */
-	public Student getStudent(int studentId);
+	public Student getStudent(int studentId) throws StudentNotFoundException;
 	
 	/**
 	 * This method gets all courses for a specific student that they have added

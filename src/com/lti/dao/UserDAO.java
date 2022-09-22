@@ -22,7 +22,6 @@ public interface UserDAO {
 	/**
 	 * This method validates the user logout
 	 * @param String username
-	 * @param String password
 	 */
 	public void LogoutDAO(String username);
 }
