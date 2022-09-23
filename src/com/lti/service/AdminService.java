@@ -62,7 +62,7 @@ public class AdminService implements AdminServiceOperation {
 
 	@Override
 	public SemesterRegistration getSemesterRegistration(int studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return admindao.getSemesterRegistrationDAO(studentId);
 	}
 }

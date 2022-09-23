@@ -8,6 +8,7 @@ import com.lti.dao.AdminDAOImpl;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOImpl;
 import com.lti.exception.IncorrectPasswordException;
+import com.lti.exception.SemesterRegistrationNotApprovedException;
 import com.lti.exception.UserNotFoundException;
 
 /**
@@ -26,21 +27,26 @@ public class UserService implements UserServiceOperation {
 		admindao = new AdminDAOImpl();
 	}
 		
-	public User Login(String username, String password) throws UserNotFoundException, IncorrectPasswordException
+	public User Login(String username, String password) throws UserNotFoundException, IncorrectPasswordException, SemesterRegistrationNotApprovedException
 	{		
 		User user = userdao.LoginDAO(username);
-		SemesterRegistration registration = admindao.getSemesterRegistration(user.getId());
 		if(user == null) {
 			
 			throw new UserNotFoundException();
 		}
-		else if(!password.equals(user.getPassword())) {
+		
+		SemesterRegistration registration = admindao.getSemesterRegistrationDAO(user.getId());
+		
+		if(!password.equals(user.getPassword())) {
 			
 			throw new IncorrectPasswordException();
 		}
 		else if(registration.isApprovalStatus()) {
 			
 			System.out.println("\n--You have logged in--");
+		}
+		else {
+			throw new SemesterRegistrationNotApprovedException(user);
 		}
 		return user;
 	}

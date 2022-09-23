@@ -263,8 +263,32 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public SemesterRegistration getSemesterRegistrationDAO(int studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		SemesterRegistration registration = null;
+		   try {
+
+			  conn = DBUtils.getConnection();
+			  
+		      stmt = conn.prepareStatement(SQLQueries.SELECT_SUMMER_REGISTRATION_BY_STUDENTID);
+		      stmt.setInt(1,studentId);
+		      ResultSet rs = stmt.executeQuery();
+		      if(rs.next()) {
+		    	  int _studentId = rs.getInt("StudentId");
+		    	  Boolean approvalStatus = rs.getBoolean("ApprovalStatus");
+		    	  int adminId = rs.getInt("AdminId");
+		    	  String comment = rs.getString("Comment");
+		    	  registration = new SemesterRegistration(_studentId, adminId, approvalStatus, comment);
+		      }
+
+		   } catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }
+		
+		return registration;
 	}
 
 }

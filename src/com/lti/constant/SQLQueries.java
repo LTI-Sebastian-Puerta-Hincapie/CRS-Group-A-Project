@@ -87,4 +87,6 @@ public class SQLQueries {
 			"UPDATE users SET Password = ? WHERE Username = ? ";
 	
 	// ADMIN
+	public static final String SELECT_SUMMER_REGISTRATION_BY_STUDENTID = 
+			"SELECT * FROM semesterregistration WHERE StudentId = ?";
 }

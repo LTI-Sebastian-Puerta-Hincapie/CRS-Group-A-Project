@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.lti.bean.SemesterRegistration;
 import com.lti.bean.User;
 import com.lti.exception.IncorrectPasswordException;
+import com.lti.exception.SemesterRegistrationNotApprovedException;
 import com.lti.exception.UserNotFoundException;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceOperation;
@@ -80,14 +81,12 @@ public class CRSMenuApplication {
 					try {
 						user = userService.Login(username, password);
 					} catch (UserNotFoundException e) {
-						e.getMessage();
-						e.printStackTrace();
 						break;
 					} catch (IncorrectPasswordException e) {
-						e.getMessage();
-						e.printStackTrace();
 						break;
-					} 
+					} catch(SemesterRegistrationNotApprovedException e) {
+						break;
+					}
 					
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
