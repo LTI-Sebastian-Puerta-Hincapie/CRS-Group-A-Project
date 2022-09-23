@@ -17,64 +17,64 @@ public interface AdminServiceOperation {
 	
 	/**
 	 * This method generates a report card for the student
-	 * @param StudentID
+	 * @param studentID of type integer
 	 */
 	public void generateReportCard(int studentID);
 	
 	/**
 	 * This method adds a professor to the database
-	 * @param professor
+	 * @param professor of type Professor
 	 */
 	public void addProfessor(Professor professor);
 	
 	/**
 	 * This method approves the registration of a student's course
-	 * @param int 
-	 * @param int 
+	 * @param studentID of type integer 
+	 * @param approvalStatus of type integer 
 	 */
 	public void approveStudentRegistration(int studentID, int approvalStatus);
 	
 	/**
 	 * Creates StudentRegistration in database
-	 * @param semesterRegistration
+	 * @param semesterRegistration of type SemesterRegistration
 	 */
 	public void createStudentRegistration(SemesterRegistration semesterRegistration);
 	
 	/**
 	 * This method adds a course to the course list
-	 * @param course
+	 * @param course of type Course
 	 */
 	public void addCourse(Course course);
 	
 	/**
 	 * This method removes the course from the course list
-	 * @param id
+	 * @param courseId of type integer
 	 */
-	public void removeCourse(int id);
+	public void removeCourse(int courseId);
 	
 	/**
 	 * This method updates a course's information in the course list
-	 * @param int id
-	 * @param String name
-	 * @param String description
+	 * @param courseId of type integer
+	 * @param courseName of type String
+	 * @param description of type String
 	 */
-	public void updateCourse(int id, String name, String description);
+	public void updateCourse(int courseId, String courseName, String description);
 	
 	/**
 	 * This method checks if a course is available for enrollment
-	 * @param int id
+	 * @param courseId of type integer
 	 */
-	public void checkAvailability(int id);
+	public void checkAvailability(int courseId);
 	
 	/**
 	 * This method checks the list of courses a student is registered to
-	 * @param int studentID
+	 * @param studentID of type integer
 	 */
 	public void viewCourses(int studentID);
 	
 	/**
 	 * This method checks the list of courses a student is registered to
-	 * @param int studentId
+	 * @param studentId of type integer
 	 */
 	public SemesterRegistration getSemesterRegistration(int studentId);
 }

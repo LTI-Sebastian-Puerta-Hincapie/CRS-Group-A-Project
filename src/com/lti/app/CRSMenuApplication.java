@@ -15,7 +15,6 @@ import com.lti.service.UserService;
 
 public class CRSMenuApplication {
 
-	
 	/**
 	 * @param args
 	 */
