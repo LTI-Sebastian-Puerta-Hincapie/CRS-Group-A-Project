@@ -9,8 +9,8 @@ public interface PasswordDAO {
 	
 	/**
 	 * This method updates the user password
-	 * @param String username
-	 * @param String password
+	 * @param username of type String
+	 * @param password of type String
 	 */
 	public void updatePassword(String username, String password);
 }

@@ -20,92 +20,92 @@ public interface StudentDAO {
 
 	/**
 	 * This method registers a student for a specific course 
-	 * @param Student student
-	 * @param int courseId
+	 * @param student of type integer
+	 * @param courseId of type integer
 	 */
 	public void registerForCourseDAO(Student student, int courseId);
 	
 	/**
 	 * This method adds a course for a specific student
-	 * @param Student student
-	 * @param int courseId
-	 * @return int
+	 * @param student of type Student
+	 * @param courseId of type integer
+	 * @return Integer returns the courseId
 	 */
 	public int addCourseDAO(Student student, int courseId);
 	
 	/**
 	 * This method gets a course for a specific student and courseId
-	 * @param Student student
-	 * @param int courseId
-	 * @return RegisteredCourse
+	 * @param student of type Student
+	 * @param courseId of type integer
+	 * @return RegisteredCourse returns a register course
 	 */
 	public RegisteredCourse getCourseDAO(Student student, int courseId);
 	
 	/**
 	 * This method drops a course for a specific student
-	 * @param Student student
-	 * @param int courseId
+	 * @param student of type Student
+	 * @param courseId of type integer
 	 */
 	public void dropCourseDAO(Student student, int courseId);
 	
 	/**
 	 * This method view grades for a specific student and returns a list of grades
-	 * @param Student student
-	 * @return List<Grade>
+	 * @param student of type Student
+	 * @return List<Grade> returns a list of grades for a specific student
 	 */
 	public List<Grade> viewGradesDAO(Student student);
 	
 	/**
 	 * This method makes a payment for the courses that the student is registered for
-	 * @param Student student
-	 * @param String paymentMethod
+	 * @param student of type Student
+	 * @param paymentMethod of type String
 	 */
 	public void payFeeDAO(Student student, String paymentMethod);
 	
 	/**
 	 * This method gets the student data 
-	 * @param int studentId
-	 * @return Student student
+	 * @param studentId of type integer
+	 * @return Student returns a student
 	 */
 	public Student getStudentDAO(int studentId);
 	
 	/**
 	 * This method gets all courses for a specific student that they have added
-	 * @param int studentId
-	 * @return List<Course>
+	 * @param studentId of type integer
+	 * @return List<Course> returns a list of courses
 	 */
 	public List<Course> getStudentCoursesDAO(int studentId);
 	
 	/**
 	 * This method gets all registered courses for a specific student
-	 * @param int studentId
-	 * @return List<RegisteredCourse>
+	 * @param studentId of type integer
+	 * @return List<RegisteredCourse> returns a list of registered courses
 	 */
 	public List<RegisteredCourse> getStudentRegisteredCoursesDAO(int studentId);
 	
 	/**
 	 * This method add payment data (amount, due date, semester, etc.) to the system
-	 * @param int studentId
-	 * @param Payment payment
+	 * @param studentId of type integer
+	 * @param Payment returns a payment for a specific student
 	 */
 	public void generatePaymentDAO(int studentId, Payment payment);
 	
 	/**
 	 * This method gets course data from course catalog and returns a list of courses
-	 * @param int studentId
+	 * @param studentId of type integer
 	 */
 	public List<CourseCatalog> getRegisteredCourseDataDAO(int studentId);
 	
 	/**
 	 * This method gets fee/payment due for a specific student 
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @return Payment
 	 */
 	public Payment getFeeDAO(int studentId);
 	
 	/**
 	 * This methods adds student semester registration for admin approval
-	 * @param int studentId
+	 * @param studentId of type integer
 	 */
 	public void addStudentSemesterRegistrationDAO(int studentId);
 }

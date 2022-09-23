@@ -13,9 +13,8 @@ public interface UserDAO {
 	
 	/**
 	 * This method validates the user login credentials 
-	 * @param String username
-	 * @param String password
-	 * @return User 
+	 * @param username of type String
+	 * @return User returns a user object
 	 */
 	public User LoginDAO(String username);
 	

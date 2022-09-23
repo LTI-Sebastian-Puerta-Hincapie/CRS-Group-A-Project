@@ -16,7 +16,7 @@ public interface CourseCatalogDAO {
 	
 	/**
 	 * This method list all available courses in the course catalog
-	 * @return List<CourseCatalog> 
+	 * @return List<CourseCatalog> returns a list of courses with course details
 	 */
 	public List<CourseCatalog> ListOfAllCoursesDAO();
 }

@@ -75,6 +75,7 @@ public interface AdminServiceOperation {
 	/**
 	 * This method checks the list of courses a student is registered to
 	 * @param studentId of type integer
+	 * @return SemesterRegistration returns a list of registered students for the semester
 	 */
 	public SemesterRegistration getSemesterRegistration(int studentId);
 }

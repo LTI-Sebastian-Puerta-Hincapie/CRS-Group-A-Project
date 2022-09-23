@@ -18,30 +18,30 @@ public interface ProfessorDAO {
 
 	/**
 	 * This method add grades for a specific student 
-	 * @param int studentId
-	 * @param int courseId
-	 * @param String grade
+	 * @param studentId of type integer
+	 * @param courseId of type integer
+	 * @param grade of type String
 	 */
 	public void addGradesDAO(int studentId, int courseId, String grade);
 	
 	/**
 	 * This method returns a list of all enrolled students in a specific course
-	 * @param int courseId
-	 * @return List<CourseEnrollment> 
+	 * @param courseId of type integer
+	 * @return List<CourseEnrollment> returns a list of students enrolled for a specific course
 	 */
 	public List<CourseEnrollment> viewEnrolledStudentsDAO(int courseId);
 	
 	/**
 	 * This method gets the professor data 
-	 * @param int professorId
-	 * @return Professor professor
+	 * @param professorId of type integer
+	 * @return Professor returns a professor
 	 */
 	public Professor getProfessorDAO(int professorId);
 	
 	/**
 	 * This method gets all courses for a specific professor
-	 * @param int professorId
-	 * @return List<CourseCatalog>
+	 * @param professorId of type integer
+	 * @return List<CourseCatalog> returns a list of courses with course details
 	 */
 	public List<CourseCatalog> getProfessorCoursesDAO(int professorId);
 }
