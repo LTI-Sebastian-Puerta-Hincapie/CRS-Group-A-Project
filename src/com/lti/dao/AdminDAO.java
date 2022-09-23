@@ -54,22 +54,28 @@ public interface AdminDAO {
 	
 	/**
 	 * This method updates a course's information in the course list
-	 * @param id
-	 * @param name
-	 * @param description
+	 * @param int id
+	 * @param String name
+	 * @param String description
 	 */
 	public void updateCourseDAO(int id, String name, String description);
 	
 	/**
 	 * This method checks if a course is available for enrollment
-	 * @param id
+	 * @param int id
 	 */
 	public void checkAvailabilityDAO(int id);
 	
 	/**
 	 * This method checks the list of courses a student is registered to
-	 * @param studentID
+	 * @param int studentID
 	 */
 	public void viewCourses(int studentID);
+	
+	/**
+	 * This method checks the list of courses a student is registered to
+	 * @param int studentId
+	 */
+	public SemesterRegistration getSemesterRegistrationDAO(int studentId);
 	
 }

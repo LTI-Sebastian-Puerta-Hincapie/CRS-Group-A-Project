@@ -261,4 +261,10 @@ public class AdminDAOImpl implements AdminDAO{
 		   }
 	}
 
+	@Override
+	public SemesterRegistration getSemesterRegistrationDAO(int studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

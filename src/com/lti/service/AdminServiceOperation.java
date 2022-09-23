@@ -32,4 +32,6 @@ public interface AdminServiceOperation {
 	public void checkAvailability(int id);
 	
 	public void viewCourses(int studentID);
+	
+	public SemesterRegistration getSemesterRegistration(int studentId);
 }

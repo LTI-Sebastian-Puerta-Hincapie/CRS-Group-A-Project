@@ -59,4 +59,10 @@ public class AdminService implements AdminServiceOperation {
 	public void viewCourses(int studentID) {
 		admindao.viewCourses(studentID);
 	}
+
+	@Override
+	public SemesterRegistration getSemesterRegistration(int studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
