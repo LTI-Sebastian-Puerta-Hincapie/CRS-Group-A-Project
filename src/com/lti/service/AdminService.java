@@ -32,7 +32,7 @@ public class AdminService implements AdminServiceOperation {
 		admindao.addProfessorDAO(professor);
 	}
 	
-	public void approveStudentRegistration(int studentID, boolean approvalStatus) {
+	public void approveStudentRegistration(int studentID, int approvalStatus) {
 		admindao.approveStudentRegistrationDAO(studentID, approvalStatus); 
 	}
 	

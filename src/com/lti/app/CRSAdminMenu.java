@@ -72,6 +72,9 @@ public class CRSAdminMenu {
 				case "8":
 					adminSelection = "view courses";
 					break;
+				case "9":
+					adminSelection = "back";
+					break;
 				default: 
 					break;
 			}
@@ -105,16 +108,13 @@ public class CRSAdminMenu {
 					service.viewCourses(studentID);
 					break;
 				case "approve registration":
-					System.out.println("Enter studentID: ");
-					studentID = Integer.parseInt(scan.nextLine());
-					System.out.println("Approve? Y/N: ");
-					boolean approvalStatus;
-					if(scan.nextLine().toLowerCase() == "y") {
-						approvalStatus = true;
-					}
-					else { 
-						approvalStatus = false;
-					}
+					
+					System.out.print("Enter studentID: ");
+					studentID = scan.nextInt();
+					
+					System.out.print("Approve: ");
+					int approvalStatus = scan.nextInt();
+					
 					service.approveStudentRegistration(studentID, approvalStatus);
 					break;
 				case "add course":

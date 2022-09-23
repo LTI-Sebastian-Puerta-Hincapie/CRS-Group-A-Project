@@ -34,19 +34,25 @@ public class UserService implements UserServiceOperation {
 			
 			throw new UserNotFoundException();
 		}
-		
-		SemesterRegistration registration = admindao.getSemesterRegistrationDAO(user.getId());
-		
-		if(!password.equals(user.getPassword())) {
+		else if(!password.equals(user.getPassword())) {
 			
 			throw new IncorrectPasswordException();
 		}
-		else if(registration.isApprovalStatus()) {
-			
-			System.out.println("\n--You have logged in--");
+		
+		SemesterRegistration registration = admindao.getSemesterRegistrationDAO(user.getId());
+		
+		if(user.getRoleId() == 3) {		// student
+			if(registration.isApprovalStatus()) {
+				
+				System.out.println("\n--You have logged in--");
+			}
+			else {
+				throw new SemesterRegistrationNotApprovedException(user);
+			}
 		}
 		else {
-			throw new SemesterRegistrationNotApprovedException(user);
+			
+			System.out.println("\n--You have logged in--");
 		}
 		return user;
 	}

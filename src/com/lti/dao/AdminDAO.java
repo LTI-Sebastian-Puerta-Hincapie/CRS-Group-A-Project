@@ -29,10 +29,10 @@ public interface AdminDAO {
 	
 	/**
 	 * This method approves the registration of a student's course
-	 * @param student
-	 * @param admin
+	 * @param int 
+	 * @param int 
 	 */
-	public void approveStudentRegistrationDAO(int studentID, boolean approvalStatus);
+	public void approveStudentRegistrationDAO(int studentID, int approvalStatus);
 	
 	/**
 	 * Creates StudentRegistration in database

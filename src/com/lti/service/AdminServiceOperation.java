@@ -19,7 +19,7 @@ public interface AdminServiceOperation {
 	
 	public void addProfessor(Professor professor);
 	
-	public void approveStudentRegistration(int studentID, boolean approvalStatus);
+	public void approveStudentRegistration(int studentID, int approvalStatus);
 	
 	public void createStudentRegistration(SemesterRegistration semesterRegistration);
 	
