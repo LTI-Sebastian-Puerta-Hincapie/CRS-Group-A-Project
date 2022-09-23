@@ -22,7 +22,7 @@ public interface AdminDAO {
 	public void generateReportCardDAO(int StudentID);
 	
 	/**
-	 * THis method adds a professor to the database
+	 * This method adds a professor to the database
 	 * @param professor
 	 */
 	public void addProfessorDAO(Professor professor);
