@@ -129,6 +129,7 @@ public class CRSStudentMenu {
 								course.getCourseName());
 					}
 					
+					
 					System.out.print("\nRegister for a course, select by ID -> ");
 					int courseId = scan.nextInt();
 					
