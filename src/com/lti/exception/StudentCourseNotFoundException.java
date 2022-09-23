@@ -2,7 +2,7 @@ package com.lti.exception;
 
 public class StudentCourseNotFoundException extends Exception {
 	
-	public StudentCourseNotFoundException(String e) {
-		super(e);
+	public StudentCourseNotFoundException() {
+		System.out.println("\nStudent course not found");
 	}
 }

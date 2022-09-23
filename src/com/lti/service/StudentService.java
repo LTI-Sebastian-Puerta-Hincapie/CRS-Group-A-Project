@@ -51,12 +51,12 @@ public class StudentService implements StudentServiceOperation {
 			course = studentDao.getCourseDAO(student, courseId);
 			
 			if(course.getRegisteredStatus() == 0) {
-				throw new CourseNotRegisteredException("Failed to registered course");
+				throw new CourseNotRegisteredException();
 			}
 		}
 		else {
 			
-			throw new StudentCourseNotFoundException("Course Not Found");
+			throw new StudentCourseNotFoundException();
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class StudentService implements StudentServiceOperation {
 		if(course == null) {
 			int _courseId = studentDao.addCourseDAO(student, courseId);
 			if(_courseId < 0) {
-				throw new StudentAddCourseException("Failure when adding course");
+				throw new StudentAddCourseException();
 			}
 			System.out.println("\n--Course has been added --");
 		}
@@ -82,14 +82,14 @@ public class StudentService implements StudentServiceOperation {
 			
 			course = studentDao.getCourseDAO(student, courseId);
 			if(course != null) {
-				throw new StudentDropCourseException("Failed to drop course");
+				throw new StudentDropCourseException();
 			}
 			else {
 				System.out.println("\nCourse has been dropped");
 			}
 		}
 		else {
-			throw new StudentCourseNotFoundException("Course not found");
+			throw new StudentCourseNotFoundException();
 		}
 	}
 
@@ -97,7 +97,7 @@ public class StudentService implements StudentServiceOperation {
 		
 		List<Grade> grades = studentDao.viewGradesDAO(student);
 		if(grades == null) {
-			throw new StudentCourseNotFoundException("Courses not found");
+			throw new StudentCourseNotFoundException();
 		}
 		return grades;
 	}
@@ -113,12 +113,12 @@ public class StudentService implements StudentServiceOperation {
 			
 			if(payment.getIsPaid() == 0) {
 				
-				throw new StudentMissingFeePaymentException("Failed to pay fee");
+				throw new StudentMissingFeePaymentException();
 			}
 		} 
 		else {
 			
-			throw new StudentPaymentRecordNotFoundException("No payment due for this student");
+			throw new StudentPaymentRecordNotFoundException();
 		}
 	}
 	
@@ -128,7 +128,7 @@ public class StudentService implements StudentServiceOperation {
 		Student student = studentDao.getStudentDAO(studentId);
 		
 		if(student == null) {			
-			throw new StudentNotFoundException("Student not found");
+			throw new StudentNotFoundException();
 		}
 		return student;
 	}

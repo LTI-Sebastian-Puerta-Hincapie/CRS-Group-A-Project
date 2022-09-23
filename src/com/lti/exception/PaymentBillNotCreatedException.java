@@ -3,6 +3,6 @@ package com.lti.exception;
 public class PaymentBillNotCreatedException extends Exception {
 
 	public PaymentBillNotCreatedException() {
-		super();
+		System.out.println("\nPayment bill not created");
 	}
 }

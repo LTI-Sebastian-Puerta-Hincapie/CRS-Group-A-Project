@@ -52,8 +52,7 @@ public class CRSStudentMenu {
 		try {
 			student = studentService.getStudent(user.getId());
 		} catch (StudentNotFoundException e) {
-			e.getMessage();
-			e.printStackTrace();
+			return;
 		} 
 		
 		System.out.print("\nWelcome back " + student.getName() + " (Student) \n");
@@ -116,7 +115,7 @@ public class CRSStudentMenu {
 					try {
 						courses = studentService.getStudentCourses(student.getId());
 					} catch (StudentCourseNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 					
 					for(Course course : courses) {
@@ -131,9 +130,9 @@ public class CRSStudentMenu {
 					try {
 						studentService.registerForCourse(student, courseId);
 					} catch(CourseNotRegisteredException e) {
-						e.printStackTrace();
+						break;
 					} catch(StudentCourseNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 					
 					System.out.println("\n-- You have registered for a course --");	
@@ -147,7 +146,7 @@ public class CRSStudentMenu {
 					try {
 						rcourses = studentService.getStudentRegisteredCourses(student.getId());
 					} catch (CourseNotRegisteredException e) {
-						e.printStackTrace();
+						break;
 					}
 					
 					for(RegisteredCourse course : rcourses) {
@@ -160,11 +159,9 @@ public class CRSStudentMenu {
 					try {
 						studentService.generatePayment(student.getId());
 					} catch (PaymentBillNotCreatedException e) {
-						e.printStackTrace();
+						break;
 					}
-					
-					// add student semester registration
-//					studentService.addStudentSemesterRegistration(student.getId());
+				
 					
 					break;
 				case "add course":
@@ -201,7 +198,7 @@ public class CRSStudentMenu {
 					try {
 						studentService.addCourse(student, course_id_selected);
 					} catch (StudentAddCourseException e) {
-						e.printStackTrace();
+						break;
 					}
 					
 					System.out.println("\nCourses added:");
@@ -212,7 +209,7 @@ public class CRSStudentMenu {
 					try {
 						courses = studentService.getStudentCourses(student.getId());
 					} catch (StudentCourseNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
@@ -230,7 +227,7 @@ public class CRSStudentMenu {
 					try {
 						courses =  studentService.getStudentCourses(student.getId());
 					} catch (StudentCourseNotFoundException e1) {
-						e1.printStackTrace();
+						break;
 					}
 					
 					for(Course course : courses) {
@@ -245,21 +242,19 @@ public class CRSStudentMenu {
 					try {
 						studentService.dropCourse(student, course_id_selected);
 					} catch (StudentDropCourseException e) {
-						e.printStackTrace();
+						break;
 					} catch(StudentCourseNotFoundException e) {
-						e.printStackTrace();
-					} finally {
-						
-						System.out.println("\nRemaining Courses:");
-					}
+						break;
+					} 
 					
+					System.out.println("\nRemaining Courses:");
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
 					try {
 						courses = studentService.getStudentCourses(student.getId());
 					} catch (StudentCourseNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 					for(Course course : courses) {
 						System.out.format("%16s%16s\n", 
@@ -274,7 +269,7 @@ public class CRSStudentMenu {
 					try {
 						grades = studentService.viewGrades(student);
 					} catch (StudentCourseNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 					
 					System.out.println("\nStudent Course Grades:");
@@ -295,7 +290,7 @@ public class CRSStudentMenu {
 					try {
 						rcourses = studentService.getStudentRegisteredCourses(student.getId());
 					} catch (CourseNotRegisteredException e) {
-						e.printStackTrace();
+						break;
 					}
 					if(rcourses.size() == 0) {
 						System.out.println("\nYou have not registered for any courses yet, please register.");
@@ -317,7 +312,7 @@ public class CRSStudentMenu {
 					try {
 					    payment = studentService.getFee(student.getId());
 					} catch (StudentPaymentRecordNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 
 					System.out.format("\n%16s%16s\n", "Amount", "Due Date");
@@ -362,9 +357,9 @@ public class CRSStudentMenu {
 					try {
 						studentService.payFee(student, paymentMethod);
 					} catch (StudentMissingFeePaymentException e) {
-						e.printStackTrace();
+						break;
 					} catch(StudentPaymentRecordNotFoundException e) {
-						e.printStackTrace();
+						break;
 					}
 						
 					System.out.println("\n--PAYMENT COMPLETE--");

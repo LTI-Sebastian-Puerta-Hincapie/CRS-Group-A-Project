@@ -100,7 +100,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 			      ResultSet rs = stmt.executeQuery();
 			      
 			      if(rs==null) {
-			    	  throw new NoEnrolledStudentsFoundException("Student not available");
+			    	  throw new NoEnrolledStudentsFoundException();
 			    	  }
 			    
 			      while(rs.next()) {

@@ -154,7 +154,7 @@ public class AdminDAOImpl implements AdminDAO{
 			ResultSet rs = stmt.executeQuery();
 			
 			if(!rs.next()) {
-				throw new CourseNotFoundException("Course not found in course list");
+				throw new CourseNotFoundException();
 			}
 			
 			conn = DBUtils.getConnection();
@@ -183,7 +183,7 @@ public class AdminDAOImpl implements AdminDAO{
 			ResultSet rs = stmt.executeQuery();
 			
 			if(!rs.next()) {
-				throw new CourseNotFoundException("Course not found in course list");
+				throw new CourseNotFoundException();
 			}
 			
 			conn = DBUtils.getConnection();
@@ -223,7 +223,7 @@ public class AdminDAOImpl implements AdminDAO{
 				}
 			}
 			else {
-				throw new CourseNotFoundException("Course not found in course list");
+				throw new CourseNotFoundException();
 			}	
 		}catch(CourseNotFoundException ce) {
 			System.out.println(ce.getMessage());
