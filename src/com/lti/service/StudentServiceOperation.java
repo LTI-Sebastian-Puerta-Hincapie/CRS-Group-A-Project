@@ -31,101 +31,101 @@ public interface StudentServiceOperation {
 	
 	/**
 	 * This method registers a student for a specific course 
-	 * @param Student student
-	 * @param int courseId
+	 * @param student of type Student
+	 * @param courseId of type integer
 	 * @exception StudentCourseRegistrationNotFoundException
 	 */
 	public void registerForCourse(Student student, int courseId) throws CourseNotRegisteredException, StudentCourseNotFoundException;
 	
 	/**
 	 * This method adds a course for a specific student
-	 * @param Student student
-	 * @param int courseId
+	 * @param student of type Student
+	 * @param courseId of type integer
 	 * @exception StudentAddCourseException
 	 */
 	public void addCourse(Student student, int courseId) throws StudentAddCourseException;
 	
 	/**
 	 * This method gets a course for a specific student and courseId
-	 * @param Student student
-	 * @param int courseId
-	 * @return RegisteredCourse
+	 * @param student of type Student
+	 * @param courseId of type integer
+	 * @return RegisteredCourse returns a registered course
 	 */
 	public RegisteredCourse getCourse(Student student, int courseId);
 	
 	/**
 	 * This method drops a course for a specific student
-	 * @param Student student
-	 * @param int courseId
+	 * @param student of type Student
+	 * @param courseId of type integer
 	 * @exception StudentDropCourseException
 	 */
 	public void dropCourse(Student student, int courseId) throws StudentDropCourseException, StudentCourseNotFoundException;
 	
 	/**
 	 * This method view grades for a specific student and returns a list of grades
-	 * @param Student student
+	 * @param student of type Student
 	 * @exception UnableToViewStudentGradesException
-	 * @return List<Grade>
+	 * @return List<Grade> returns a list of grades
 	 */
 	public List<Grade> viewGrades(Student student) throws StudentCourseNotFoundException;
 	
 	/**
 	 * This method makes a payment for the courses that the student is registered for
-	 * @param Student student
-	 * @param String paymentMethod
+	 * @param student of type Student
+	 * @param paymentMethod of type String
 	 * @exception StudentMissingFeePaymentException, StudentPaymentRecordNotFoundException
 	 */
 	public void payFee(Student student, String paymentMethod) throws StudentMissingFeePaymentException, StudentPaymentRecordNotFoundException;
 	
 	/**
 	 * This method gets the student data 
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception StudentNotFoundException
-	 * @return Student student
+	 * @return Student returns a student
 	 */
 	public Student getStudent(int studentId) throws StudentNotFoundException;
 	
 	/**
 	 * This method gets all courses for a specific student that they have added
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception StudentCourseNotFoundException
-	 * @return List<Course>
+	 * @return List<Course> returns a list of courses
 	 */
 	public List<Course> getStudentCourses(int studentId) throws StudentCourseNotFoundException;
 	
 	/**
 	 * This method gets all registered courses for a specific student
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception CourseNotRegisteredException
-	 * @return List<RegisteredCourse>
+	 * @return List<RegisteredCourse> returns a list of registered courses
 	 */
 	public List<RegisteredCourse> getStudentRegisteredCourses(int studentId) throws CourseNotRegisteredException;
 	
 	/**
 	 * This method add payment data (amount, due date, semester, etc.) to the system
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception PaymentBillNotCreatedException
 	 */
 	public void generatePayment(int studentId) throws PaymentBillNotCreatedException;
 	
 	/**
 	 * This method gets course data from course catalog and returns a list of courses
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception CourseNotRegisteredException
 	 */
 	public List<CourseCatalog> getRegisteredCourseData(int studentId) throws CourseNotRegisteredException;
 	
 	/**
 	 * This method gets fee/payment due for a specific student 
-	 * @param int studentId
+	 * @param studentId of type integer
 	 * @exception StudentPaymentRecordNotFoundException
-	 * @return Payment
+	 * @return Payment returns a payment object
 	 */
 	public Payment getFee(int studentId) throws StudentPaymentRecordNotFoundException;
 	
 	/**
 	 * This methods adds student semester registration for admin approval
-	 * @param int studentId
+	 * @param studentId of type integer
 	 */
 	public void addStudentSemesterRegistration(int studentId);
 }
