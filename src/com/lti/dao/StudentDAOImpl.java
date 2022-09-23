@@ -370,8 +370,12 @@ public class StudentDAOImpl implements StudentDAO {
 		    	  int _studentId = rs.getInt("StudentId");
 		    	  LocalDate date = rs.getDate("DueDate").toLocalDate();
 		    	  String semester = rs.getString("Semester");
+		    	  int isPaid = rs.getInt("IsPaid");
+		    	  String paymentMethod = rs.getString("PaymentMethod");
 		    	  
-		    	  payment = new Payment(_studentId, paymentAmount, date, semester);	    	  
+		    	  payment = new Payment(_studentId, paymentAmount, date, semester);
+		    	  payment.setIsPaid(isPaid);
+		    	  payment.setPaymentMethod(paymentMethod);
 		      }
 
 		   } catch(SQLException se){

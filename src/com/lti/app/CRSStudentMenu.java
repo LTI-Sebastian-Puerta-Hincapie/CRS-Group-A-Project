@@ -17,7 +17,7 @@ import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseException;
 import com.lti.exception.StudentNotFoundException;
-import com.lti.exception.StudentPayFeeFailureException;
+import com.lti.exception.StudentMissingFeePaymentException;
 import com.lti.exception.StudentPaymentRecordNotFoundException;
 import com.lti.exception.UnableToViewStudentGradesException;
 import com.lti.exception.StudentCourseRegistrationNotFoundException;
@@ -361,7 +361,9 @@ public class CRSStudentMenu {
 					
 					try {
 						studentService.payFee(student, paymentMethod);
-					} catch (StudentPayFeeFailureException e) {
+					} catch (StudentMissingFeePaymentException e) {
+						e.printStackTrace();
+					} catch(StudentPaymentRecordNotFoundException e) {
 						e.printStackTrace();
 					}
 						

@@ -18,7 +18,7 @@ import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentDropCourseException;
 import com.lti.exception.StudentNotFoundException;
-import com.lti.exception.StudentPayFeeFailureException;
+import com.lti.exception.StudentMissingFeePaymentException;
 import com.lti.exception.StudentPaymentRecordNotFoundException;
 import com.lti.exception.StudentCourseRegistrationNotFoundException;
 import com.lti.exception.UnableToViewStudentGradesException;
@@ -73,9 +73,9 @@ public interface StudentServiceOperation {
 	 * This method makes a payment for the courses that the student is registered for
 	 * @param Student student
 	 * @param String paymentMethod
-	 * @exception StudentPayFeeFailureException
+	 * @exception StudentMissingFeePaymentException, StudentPaymentRecordNotFoundException
 	 */
-	public void payFee(Student student, String paymentMethod) throws StudentPayFeeFailureException;
+	public void payFee(Student student, String paymentMethod) throws StudentMissingFeePaymentException, StudentPaymentRecordNotFoundException;
 	
 	/**
 	 * This method gets the student data 

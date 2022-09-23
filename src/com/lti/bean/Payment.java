@@ -15,6 +15,8 @@ public class Payment {
 	private int paymentAmount;
 	private LocalDate dueDate;
 	private String semester;
+	private int isPaid;
+	private String paymentMethod;
 	
 	public Payment(int studentId, int paymentAmount, LocalDate dueDate, String semester) {
 
@@ -22,6 +24,34 @@ public class Payment {
 		this.paymentAmount = paymentAmount;
 		this.dueDate = dueDate;
 		this.semester = semester;
+	}
+	
+	/**
+	 * @return the isPaid
+	 */
+	public int getIsPaid() {
+		return isPaid;
+	}
+
+	/**
+	 * @param isPaid the isPaid to set
+	 */
+	public void setIsPaid(int isPaid) {
+		this.isPaid = isPaid;
+	}
+
+	/**
+	 * @return the paymentMethod
+	 */
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	/**
+	 * @param paymentMethod the paymentMethod to set
+	 */
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 	/**

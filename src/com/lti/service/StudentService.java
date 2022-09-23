@@ -22,7 +22,9 @@ import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentCourseRegistrationNotFoundException;
 import com.lti.exception.StudentDropCourseException;
+import com.lti.exception.StudentMissingFeePaymentException;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.StudentPaymentRecordNotFoundException;
 
 /**
  * @author Sebastian
@@ -100,10 +102,24 @@ public class StudentService implements StudentServiceOperation {
 		return grades;
 	}
 	
-	public void payFee(Student student, String paymentMethod) {
+	public void payFee(Student student, String paymentMethod) throws StudentMissingFeePaymentException, StudentPaymentRecordNotFoundException {
 		
 		System.out.println("\nYou have opted to pay: " + paymentMethod);
-		studentDao.payFeeDAO(student, paymentMethod);
+		
+		Payment payment = studentDao.getFeeDAO(student.getId());
+		if(payment != null) {
+			
+			studentDao.payFeeDAO(student, paymentMethod);
+			
+			if(payment.getIsPaid() == 0) {
+				
+				throw new StudentMissingFeePaymentException("Failed to pay fee");
+			}
+		} 
+		else {
+			
+			throw new StudentPaymentRecordNotFoundException("No payment due for this student");
+		}
 	}
 	
 	@Override
@@ -112,7 +128,7 @@ public class StudentService implements StudentServiceOperation {
 		Student student = studentDao.getStudentDAO(studentId);
 		
 		if(student == null) {			
-			throw new StudentNotFoundException();
+			throw new StudentNotFoundException("Student not found");
 		}
 		return student;
 	}
