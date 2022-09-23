@@ -1,7 +1,10 @@
 package com.lti.service;
 
+import com.lti.bean.SemesterRegistration;
 import com.lti.bean.Student;
 import com.lti.bean.User;
+import com.lti.dao.AdminDAO;
+import com.lti.dao.AdminDAOImpl;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOImpl;
 import com.lti.exception.IncorrectPasswordException;
@@ -15,15 +18,18 @@ import com.lti.exception.UserNotFoundException;
 public class UserService implements UserServiceOperation {
 	
 	private UserDAO userdao;
+	private AdminDAO admindao;
 	
 	public UserService() {
 		
 		userdao = new UserDAOImpl();
+		admindao = new AdminDAOImpl();
 	}
 		
 	public User Login(String username, String password) throws UserNotFoundException, IncorrectPasswordException
 	{		
 		User user = userdao.LoginDAO(username);
+		SemesterRegistration registration = admindao.getSemesterRegistration(user.getId());
 		if(user == null) {
 			
 			throw new UserNotFoundException();
@@ -32,7 +38,10 @@ public class UserService implements UserServiceOperation {
 			
 			throw new IncorrectPasswordException();
 		}
-		System.out.println("\n--You have logged in--");
+		else if(registration.isApprovalStatus()) {
+			
+			System.out.println("\n--You have logged in--");
+		}
 		return user;
 	}
 	

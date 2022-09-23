@@ -164,7 +164,7 @@ public class CRSStudentMenu {
 					}
 					
 					// add student semester registration
-					studentService.addStudentSemesterRegistration(student.getId());
+//					studentService.addStudentSemesterRegistration(student.getId());
 					
 					break;
 				case "add course":

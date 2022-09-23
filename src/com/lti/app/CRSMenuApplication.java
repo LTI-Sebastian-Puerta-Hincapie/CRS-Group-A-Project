@@ -15,6 +15,9 @@ import com.lti.service.UserService;
 public class CRSMenuApplication {
 
 	
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		String username = "";
@@ -89,9 +92,7 @@ public class CRSMenuApplication {
 					// menus
 					CRSStudentMenu studentMenu = new CRSStudentMenu(scan, user);
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu(scan, user);
-					CRSAdminMenu adminMenu = new CRSAdminMenu(scan);
-					
-					// TODO: login credential validation method here						
+					CRSAdminMenu adminMenu = new CRSAdminMenu(scan);					
 					
 					// Role Selection Loop
 					while(true) {
@@ -146,6 +147,7 @@ public class CRSMenuApplication {
 					}	
 					break;  	// login switch case
 				case "student registration": 
+					
 					AdminServiceOperation admin = new AdminService();
 					System.out.println("Enter Student ID: ");
 					int studentId = Integer.parseInt(scan.nextLine());
@@ -157,10 +159,11 @@ public class CRSMenuApplication {
 					admin.createStudentRegistration(semesterRegistration);
 					break;
 				case "update password": 
-					System.out.println("Enter UserName");
+					
+					System.out.print("Enter UserName: ");
 					String userName = scan.nextLine();
 
-					System.out.println("Enter current password");
+					System.out.print("Enter current password: ");
 					String currentPassword = scan.nextLine();
 
 					//save new password
@@ -175,7 +178,7 @@ public class CRSMenuApplication {
 					}
 
 					if (userForPasswordUpdate != null) {
-					System.out.println("Enter new password");
+					System.out.print("Enter new password: ");
 					String newPassword = scan.nextLine();
 					passwordSerive.updatePassword(userName, newPassword);
 					}
