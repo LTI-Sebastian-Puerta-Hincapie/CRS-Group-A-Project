@@ -8,6 +8,8 @@ import com.lti.exception.IncorrectPasswordException;
 import com.lti.exception.UserNotFoundException;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceOperation;
+import com.lti.service.PasswordService;
+import com.lti.service.PasswordServiceOperation;
 import com.lti.service.UserService;
 
 public class CRSMenuApplication {
@@ -155,7 +157,28 @@ public class CRSMenuApplication {
 					admin.createStudentRegistration(semesterRegistration);
 					break;
 				case "update password": 
-					System.out.println("Updating Password...");
+					System.out.println("Enter UserName");
+					String userName = scan.nextLine();
+
+					System.out.println("Enter current password");
+					String currentPassword = scan.nextLine();
+
+					//save new password
+					PasswordServiceOperation passwordSerive = new PasswordService();
+					User userForPasswordUpdate = null;
+					try {
+					userForPasswordUpdate = passwordSerive.validateUser(userName, currentPassword);
+					} catch (UserNotFoundException e) {
+					e.printStackTrace();
+					} catch (IncorrectPasswordException e) {
+					e.printStackTrace();
+					}
+
+					if (userForPasswordUpdate != null) {
+					System.out.println("Enter new password");
+					String newPassword = scan.nextLine();
+					passwordSerive.updatePassword(userName, newPassword);
+					}
 					break;
 				case "exit": 
 					exit = true;

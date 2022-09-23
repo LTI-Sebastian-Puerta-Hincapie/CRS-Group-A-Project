@@ -83,6 +83,8 @@ public class SQLQueries {
 			+ " ON rc.StudentId = s.Id "
 			+ "WHERE pc.CourseId = ?";
 	
+	public static final String UPDATE_USER_PASSWORD =
+			"UPDATE users SET Password = ? WHERE Username = ? ";
 	
 	// ADMIN
 }
