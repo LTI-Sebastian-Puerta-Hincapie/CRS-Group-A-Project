@@ -11,10 +11,11 @@ import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.exception.PaymentBillNotCreatedException;
-import com.lti.exception.RegisteredCourseNotFound;
+import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.CourseNotRegisteredException;
 import com.lti.exception.StudentAddCourseException;
 import com.lti.exception.StudentCourseNotFoundException;
-import com.lti.exception.StudentDropCourseFailureException;
+import com.lti.exception.StudentDropCourseException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.StudentPayFeeFailureException;
 import com.lti.exception.StudentPaymentRecordNotFoundException;
@@ -129,9 +130,12 @@ public class CRSStudentMenu {
 					
 					try {
 						studentService.registerForCourse(student, courseId);
-					} catch (StudentCourseRegistrationNotFoundException e) {
+					} catch(CourseNotRegisteredException e) {
+						e.printStackTrace();
+					} catch(StudentCourseNotFoundException e) {
 						e.printStackTrace();
 					}
+					
 					System.out.println("\n-- You have registered for a course --");	
 					
 					System.out.println("\nCourses you have registered for:");
@@ -142,7 +146,7 @@ public class CRSStudentMenu {
 
 					try {
 						rcourses = studentService.getStudentRegisteredCourses(student.getId());
-					} catch (RegisteredCourseNotFound e) {
+					} catch (CourseNotRegisteredException e) {
 						e.printStackTrace();
 					}
 					
@@ -240,16 +244,18 @@ public class CRSStudentMenu {
 					
 					try {
 						studentService.dropCourse(student, course_id_selected);
-					} catch (StudentDropCourseFailureException e) {
+					} catch (StudentDropCourseException e) {
 						e.printStackTrace();
+					} catch(StudentCourseNotFoundException e) {
+						e.printStackTrace();
+					} finally {
+						
+						System.out.println("\nRemaining Courses:");
 					}
-					System.out.println("\n-- Course has been dropped --");
 					
-					System.out.println("\nCourses added:");
 					System.out.format("%16s%16s\n", 
 							"ID",
 							"NAME");
-					
 					try {
 						courses = studentService.getStudentCourses(student.getId());
 					} catch (StudentCourseNotFoundException e) {
@@ -267,7 +273,7 @@ public class CRSStudentMenu {
 					List<Grade> grades = null;
 					try {
 						grades = studentService.viewGrades(student);
-					} catch (UnableToViewStudentGradesException e) {
+					} catch (StudentCourseNotFoundException e) {
 						e.printStackTrace();
 					}
 					
@@ -288,7 +294,7 @@ public class CRSStudentMenu {
 					
 					try {
 						rcourses = studentService.getStudentRegisteredCourses(student.getId());
-					} catch (RegisteredCourseNotFound e) {
+					} catch (CourseNotRegisteredException e) {
 						e.printStackTrace();
 					}
 					if(rcourses.size() == 0) {

@@ -16,8 +16,12 @@ import com.lti.bean.RegisteredCourse;
 import com.lti.bean.Student;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOImpl;
+import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.CourseNotRegisteredException;
 import com.lti.exception.StudentAddCourseException;
+import com.lti.exception.StudentCourseNotFoundException;
 import com.lti.exception.StudentCourseRegistrationNotFoundException;
+import com.lti.exception.StudentDropCourseException;
 import com.lti.exception.StudentNotFoundException;
 
 /**
@@ -34,33 +38,66 @@ public class StudentService implements StudentServiceOperation {
 		studentDao = new StudentDAOImpl();
 	}
 	
-	public void registerForCourse(Student student, int courseId) {
+	public void registerForCourse(Student student, int courseId) throws CourseNotRegisteredException, StudentCourseNotFoundException 
+	{
 		
-		studentDao.registerForCourseDAO(student, courseId);
+		RegisteredCourse course = studentDao.getCourseDAO(student, courseId);
+		if(course != null) {
+			
+			studentDao.registerForCourseDAO(student, courseId);
+			
+			course = studentDao.getCourseDAO(student, courseId);
+			
+			if(course.getRegisteredStatus() == 0) {
+				throw new CourseNotRegisteredException("Failed to registered course");
+			}
+		}
+		else {
+			
+			throw new StudentCourseNotFoundException("Course Not Found");
+		}
 	}
 	
 	public void addCourse(Student student, int courseId) throws StudentAddCourseException {
 		
-		RegisteredCourse course = studentDao.getCourseDAO(student, courseId);
-		
+		RegisteredCourse course = studentDao.getCourseDAO(student, courseId);	
 		if(course == null) {
 			int _courseId = studentDao.addCourseDAO(student, courseId);
 			if(_courseId < 0) {
-				throw new StudentAddCourseException();
+				throw new StudentAddCourseException("Failure when adding course");
 			}
-			System.out.println("\n-- Course has been added --");
+			System.out.println("\n--Course has been added --");
 		}
-		System.out.println("\nCourse has already been added for this student, select another course");
+		System.out.println("\nCourse has already been added for this student");
 	}
 	
-	public void dropCourse(Student student, int courseId) {
+	public void dropCourse(Student student, int courseId) throws StudentDropCourseException, StudentCourseNotFoundException {
 		
-		studentDao.dropCourseDAO(student, courseId);
+		RegisteredCourse course = studentDao.getCourseDAO(student, courseId);
+		if(course != null) {
+			
+			studentDao.dropCourseDAO(student, courseId);
+			
+			course = studentDao.getCourseDAO(student, courseId);
+			if(course != null) {
+				throw new StudentDropCourseException("Failed to drop course");
+			}
+			else {
+				System.out.println("\nCourse has been dropped");
+			}
+		}
+		else {
+			throw new StudentCourseNotFoundException("Course not found");
+		}
 	}
 
-	public List<Grade> viewGrades(Student student) {
+	public List<Grade> viewGrades(Student student) throws StudentCourseNotFoundException {
 		
-		return studentDao.viewGradesDAO(student);
+		List<Grade> grades = studentDao.viewGradesDAO(student);
+		if(grades == null) {
+			throw new StudentCourseNotFoundException("Courses not found");
+		}
+		return grades;
 	}
 	
 	public void payFee(Student student, String paymentMethod) {
