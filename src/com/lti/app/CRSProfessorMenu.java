@@ -1,5 +1,7 @@
 package com.lti.app;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +38,10 @@ public class CRSProfessorMenu {
 		List<CourseCatalog> courses = null;
 		List<CourseEnrollment> courseEnrollment = null;
 		
-		System.out.println("\nWelcome back " + professor.getName() + " (Professor)\n");
+		LocalDateTime t = LocalDateTime.now();
+		String pattern = "MMMM dd yyyy hh:mm:ss a";
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(pattern);
+		System.out.println("\nWelcome back " + professor.getName() + " (Professor) ---" + t.format(dateFormat));
 
 		// menu
 		while(true)

@@ -1,5 +1,7 @@
 package com.lti.app;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import com.lti.bean.Course;
@@ -22,7 +24,10 @@ public class CRSAdminMenu {
 	
 	public void menu() {
 		
-		System.out.println("\nWelcome back Administrator\n");
+		LocalDateTime t = LocalDateTime.now();
+		String pattern = "MMMM dd yyyy hh:mm:ss a";
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(pattern);
+		System.out.println("\nWelcome back Administrator ---" + t.format(dateFormat));
 		
 		// menu
 		while(true)
