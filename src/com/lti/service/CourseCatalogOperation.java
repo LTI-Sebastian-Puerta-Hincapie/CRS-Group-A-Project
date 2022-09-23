@@ -16,7 +16,7 @@ public interface CourseCatalogOperation {
 	
 	/**
 	 * This method list all available courses in the course catalog
-	 * @return List<CourseCatalog> 
+	 * @return List<CourseCatalog> this returns a list of courses with details
 	 */
 	public List<CourseCatalog> ListOfAllCourses();
 }

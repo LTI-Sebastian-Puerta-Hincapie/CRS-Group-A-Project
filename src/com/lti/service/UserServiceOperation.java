@@ -16,18 +16,18 @@ public interface UserServiceOperation {
 	
 	/**
 	 * This method validates the user login credentials 
-	 * @param String username
-	 * @param String password
+	 * @param username of type integer
+	 * @param password of type integer
 	 * @exception UserNotFoundException
 	 * @exception IncorrectPasswordException
 	 * @exception SemesterRegistrationNotApprovedExceptionS
-	 * @return User 
+	 * @return User returns a user
 	 */
 	public User Login(String username, String password) throws UserNotFoundException, IncorrectPasswordException, SemesterRegistrationNotApprovedException;
 	
 	/**
 	 * This method validates the user logout
-	 * @param String username
+	 * @param username of type String
 	 */
 	public void Logout(String username);
 }

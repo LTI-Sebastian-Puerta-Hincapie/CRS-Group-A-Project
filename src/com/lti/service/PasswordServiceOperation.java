@@ -12,8 +12,8 @@ public interface PasswordServiceOperation {
 	
 	/**
 	 * This method validates the user login credentials 
-	 * @param String username
-	 * @param String password
+	 * @param username of type String
+	 * @param password of type String
 	 * @exception UserNotFoundException
 	 * @exception IncorrectPasswordException
 	 * @return User 
@@ -22,11 +22,10 @@ public interface PasswordServiceOperation {
 	
 	/**
 	 * This method validates the user login credentials 
-	 * @param String username
-	 * @param String password
+	 * @param username of type String
+	 * @param password of type String
 	 * @exception UserNotFoundException
 	 * @exception IncorrectPasswordException
-	 * @return  
 	 */
 	public void updatePassword(String username, String password) ;
 }
